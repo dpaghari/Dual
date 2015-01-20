@@ -4,6 +4,7 @@
 	<meta charset="UTF-8" />
     <title>Phaser - Making your first game, part 9</title>
 	<script type="text/javascript" src="js/phaser.min.js"></script>
+    <script type="text/javascript" src="hello.js"></script>
     <style type="text/css">
         body {
             margin: 0;
@@ -13,9 +14,11 @@
 <body>
 
 <script type="text/javascript">
-
+// Create Game Object
 var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
 
+
+// Preload all assets
 function preload() {
 
     game.load.image('sky', 'assets/sky.png');
@@ -119,6 +122,7 @@ function update() {
 
     if (cursors.left.isDown)
     {
+        sayHello();
         //  Move to the left
         player.body.velocity.x = -150;
 
@@ -130,6 +134,7 @@ function update() {
         player.body.velocity.x = 150;
 
         player.animations.play('right');
+        
     }
     else
     {
@@ -155,7 +160,6 @@ function collectStar (player, star) {
     //  Add and update the score
     score += 10;
     scoreText.text = 'Score: ' + score;
-
 }
 
 </script>
