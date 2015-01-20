@@ -18,6 +18,7 @@
 var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
 
 
+
 // Preload all assets
 function preload() {
 
@@ -44,6 +45,12 @@ function create() {
     //  A simple background for our game
     game.add.sprite(0, 0, 'sky');
 
+    //Adjust screen size
+    this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+    this.scale.pageAlignHorizontally = true;
+    this.scale.pageAlignVertically = true;
+    this.scale.setScreenSize(true);
+    
     //  The platforms group contains the ground and the 2 ledges we can jump on
     platforms = game.add.group();
 
