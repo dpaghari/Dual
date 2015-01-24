@@ -41,6 +41,12 @@ var player1_dir = 'down';
 var p1bullets;
 var p2bullets;
 
+var p1shootDelay = 10;
+var p1shootTimer = 0;
+var p2shootDelay = 10;
+var p2shootTimer = 0;
+
+    
 var player2;
 var player2_dir = 'down';
 var platforms;
@@ -152,8 +158,8 @@ function update() {
     player1.body.velocity.x = 0;
     player2.body.velocity.x = 0;
 
-
-
+    p1shootTimer++;
+    p2shootTimer++;
     moveChar();
     shootBullet();
 

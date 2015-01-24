@@ -4,21 +4,24 @@ function shootBullet(){
 	// Player 1 Shooting
 	var Ekey = game.input.keyboard.addKey(Phaser.Keyboard.E);
     var Okey = game.input.keyboard.addKey(Phaser.Keyboard.O);
-    
+   
 	if (Ekey.isDown)				// When E is pressed / Shoot Button
     {
-        
+        if(p1shootTimer >= p1shootDelay){
         Shoot(player1, player1_dir);
         console.log("Shooting");
+        p1shootTimer = 0;
+        }
 
     }
     
     if (Okey.isDown)                // When E is pressed / Shoot Button
     {
-        
+        if(p2shootTimer >= p2shootDelay){
         Shoot(player2, player2_dir);
         console.log("Shooting");
-
+        p2shootTimer = 0;
+        }
     }
 }
 
