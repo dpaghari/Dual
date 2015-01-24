@@ -11,32 +11,55 @@ function moveChar(){
     {
         //player.body.velocity.x = -100;
         
-        player.x += -5;
-        player.animations.play('left');
+        player1.x += -5;
+        player1.animations.play('left');
+        if (Wkey.isDown) {
+            player1.y += -5;
+        }
+
+        if (Skey.isDown) {
+            player1.y += 5;
+        }
     }
     else if (Dkey.isDown)			// Move Right
     {
         
-        //player.body.velocity.x = 100;
-        player.x += 5;
-        player.animations.play('right');
-        
+        //player1.body.velocity.x = 100;
+        player1.x += 5;
+        player1.animations.play('right');
+        if (Skey.isDown) {
+            player1.y += 5;
+        }
+
+        if (Wkey.isDown) {
+            player1.y += -5;
+        }
+
     }
     else if(Skey.isDown)			// Move South
     {  
-    	//player.body.velocity.y = 100;
-    	player.y += 5;
+    	//player1.body.velocity.y = 100;
+    	player1.y += 5;
+        player1.animations.play('left');
+        if (Akey.isDown) {
+            player1.x += -5;
+        }
     }
    
     else if (Wkey.isDown)			// Move North
     {
-        player.y += -5;
-        //player.body.velocity.y = -100;
+        player1.y += -5;
+        //player1.body.velocity.y = -100;
+        player1.animations.play('right');
+        if (Dkey.isDown) {
+            player1.x += +5;
+        }
     }
-    else{							// If player doesn't press a button/at rest
-    	player.body.velocity.y = 0;
-    	player.body.velocity.x = 0;
-    	player.animations.stop();
+
+    else{							// If player1 doesn't press a button/at rest
+    	player1.body.velocity.y = 0;
+    	player1.body.velocity.x = 0;
+    	player1.animations.stop();
     }
 
     // Player 2 Movement
@@ -51,6 +74,14 @@ function moveChar(){
         //player2.body.velocity.x = -100;
         player2.x += -5;
         player2.animations.play('left');
+
+        if (Ikey.isDown) {
+            player2.y += -5;
+        }
+
+        if (Kkey.isDown) {
+            player2.y += 5;
+        }
     }
     else if (Lkey.isDown)			// Move Right
     {
@@ -58,6 +89,14 @@ function moveChar(){
         //player2.body.velocity.x = 100;
         player2.x += 5;
         player2.animations.play('right');
+
+        if (Kkey.isDown) {
+            player2.y += 5;
+        }
+
+        if (Ikey.isDown) {
+            player2.y += -5;
+        }
         
     }
     else if(Kkey.isDown)			// Move South
@@ -65,12 +104,20 @@ function moveChar(){
         player2.y += 5;
     	//player2.body.velocity.y = 100;
 
+        if (Jkey.isDown) {
+            player2.x += -5;
+        }
+
     }
     
     else if (Ikey.isDown)			// Move North
     {
         player2.y += -5;
         //player2.body.velocity.y = -100;
+
+        if (Lkey.isDown) {
+            player2.x += +5;
+        }
     }
     else{							// Player doesn't press a button/At rest
     	player2.body.velocity.y = 0;
