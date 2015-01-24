@@ -6,6 +6,7 @@
 	<script type="text/javascript" src="js/phaser.min.js"></script>
     <script type="text/javascript" src="hello.js"></script>
     <script type="text/javascript" src="moveChar.js"></script>
+    <script type="text/javascript" src="shootBullet.js"></script>
     <style type="text/css">
         body {
             margin: 0;
@@ -31,7 +32,12 @@ function preload() {
 }
 
 var player1;
+var player1_dir = 'down';
+var p1bullets;
+var p2bullets;
+
 var player2;
+var player2_dir = 'down';
 var platforms;
 var cursors;
 
@@ -96,6 +102,8 @@ function create() {
 
     //  Finally some stars to collect
     stars = game.add.group();
+    p1bullets = game.add.group();
+    p2bullets = game.add.group();
 
     //  We will enable physics for any star that is created in this group
     stars.enableBody = true;
@@ -135,6 +143,7 @@ function update() {
 
 
     moveChar();
+    shootBullet();
 
     
 
