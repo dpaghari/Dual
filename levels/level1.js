@@ -82,16 +82,15 @@ gameStates.level1.prototype = {
         //game.physics.arcade.collide(exits, platforms);
         //game.physics.arcade.collide(player1, exits);
         //game.physics.arcade.collide(player2, exits);
-        game.physics.arcade.collide(p1bullets, player2, shootPlayer);
-        game.physics.arcade.collide(p2bullets, player1, shootPlayer);
+        game.physics.arcade.collide(p1bullets, player2, collectStar);
+        game.physics.arcade.collide(p2bullets, player1, collectStar);
 
         //  Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
-        game.physics.arcade.overlap(player1, stars, collectStar, null, this);
-        game.physics.arcade.overlap(player2, stars, collectStar, null, this);
+      
         game.physics.arcade.overlap(player1, exits, hitExit, null, this);
         game.physics.arcade.overlap(player2, exits, hitExit, null, this);
-        game.physics.arcade.overlap(player1, p2bullets, shootPlayer, null, this);
-        game.physics.arcade.overlap(player2, p1bullets, shootPlayer, null, this);
+        //game.physics.arcade.overlap(player1, p2bullets, collectStar, null, this);
+        //game.physics.arcade.overlap(player2, p1bullets, collectStar, null, this);
 
         //  Reset the players velocity (movement)
         //player1.body.velocity.x = 0;

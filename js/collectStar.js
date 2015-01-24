@@ -1,7 +1,7 @@
-function collectStar (player, star) {
+function collectStar (player, bullet) {
     
     // Removes the star from the screen
-    star.kill();
+    bullet.kill();
 
     score += 500;
     scoreText.text = 'Score: ' + score;
