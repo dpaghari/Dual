@@ -10,6 +10,8 @@
     <script type="text/javascript" src="js/hitExit.js"></script>
     <script type="text/javascript" src="shootBullet.js"></script>
     <script type="text/javascript" src="js/shootPlayer.js"></script>
+    <script type="text/javascript" src="levels/level1.js"></script>
+    <script type="text/javascript" src="levels/level2.js"></script>
 
     <style type="text/css">
         body {
@@ -20,22 +22,13 @@
 <body>
 
 <script type="text/javascript">
+
+
 // Create Game Object
-var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update, collectStar: collectStar, hitExit: hitExit });
+var game = new Phaser.Game(800, 600, Phaser.AUTO, '', gameStates.level1);
 
-
-
-// Preload all assets
-function preload() {
-
-    game.load.image('background', 'assets/background.png');
-    game.load.image('ground', 'assets/ground.png');
-    game.load.image('star', 'assets/star.png');
-    game.load.image('exit', 'assets/exit.png');
-    game.load.image('player1', 'assets/player1.png');
-    game.load.image('player2', 'assets/player2.png');
-
-}
+game.state.add('level1', gameStates.level1);
+game.state.add('level2', gameStates.level2);
 
 var player1;
 var player1_dir = 'down';
@@ -58,125 +51,6 @@ var score = 0;
 var scoreText;
 
 var exits;
-
-function create() {
-
-    //  We're going to be using physics, so enable the Arcade Physics system
-    game.physics.startSystem(Phaser.Physics.ARCADE);
-
-    //  A simple background for our game
-    game.add.sprite(0, 0, 'background');
-
-    //Adjust screen size
-    this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-    this.scale.pageAlignHorizontally = true;
-    this.scale.pageAlignVertically = true;
-    this.scale.setScreenSize(true);
-    
-    //  The platforms group contains the ground and the 2 ledges we can jump on
-    platforms = game.add.group();
-
-    //  We will enable physics for any object that is created in this group
-    platforms.enableBody = true;
-
-    // Here we create the ground.
-    //var ground = platforms.create(0, game.world.height - 64, 'ground');
-
-    //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
-    //ground.scale.setTo(2, 2);
-
-    //  This stops it from falling away when you jump on it
-    //ground.body.immovable = true;
-
-    //  Now let's create two ledges
-    /*
-    var ledge = platforms.create(400, 400, 'ground');
-    ledge.body.immovable = true;
-
-    ledge = platforms.create(-150, 250, 'ground');
-    ledge.body.immovable = true;
-    */
-
-    // The player and its settings
-    player1 = game.add.sprite(32, game.world.height - 150, 'player1');
-    player2 = game.add.sprite(128, game.world.height - 150, 'player2');
-
-    // Place the exit door in the world
-    //exit = game.add.sprite(150, 5, 'exit');
-
-    //  We need to enable physics on the player
-    game.physics.arcade.enable(player1);
-    game.physics.arcade.enable(player2);
-    //  Player physics properties. Give the little guy a slight bounce.
-    //player.body.bounce.y = 0;
-    //player.body.gravity.y = 1000;
-    player1.body.collideWorldBounds = true;
-    player2.body.collideWorldBounds = true;
-
-    //  Finally some stars to collect
-    stars = game.add.group();
-    p1bullets = game.add.group();
-    p2bullets = game.add.group();
-    exits = game.add.group();
-
-    //  We will enable physics for any star that is created in this group
-    stars.enableBody = true;
-    p1bullets.enableBody = true;
-    p2bullets.enableBody = true;
-    exits.enableBody = true;
-    var exit = exits.create(400, 400, 'exit');
-
-    //  Here we'll create 12 of them evenly spaced apart
-    for (var i = 0; i < 12; i++)
-    {
-        //  Create a star inside of the 'stars' group
-        //var star = stars.create(i * 70, 0, 'star');
-
-        //  Let gravity do its thing
-        //star.body.gravity.y = 300;
-
-        //  This just gives each star a slightly random bounce value
-        //star.body.bounce.y = 0.7 + Math.random() * 0.2;
-    }
-
-    //  The score
-    scoreText = game.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
-
-    //  Our controls.
-    cursors = game.input.keyboard.createCursorKeys();
-    
-}
-
-function update() {
-
-    //  Collide the player and the stars with the platforms
-    game.physics.arcade.collide(player1, platforms);
-    game.physics.arcade.collide(player2, platforms);
-    game.physics.arcade.collide(player1, player2);
-    game.physics.arcade.collide(stars, platforms);
-    //game.physics.arcade.collide(exits, platforms);
-    //game.physics.arcade.collide(player1, exits);
-    //game.physics.arcade.collide(player2, exits);
-    game.physics.arcade.collide(p1bullets, player2, shootPlayer);
-    game.physics.arcade.collide(p2bullets, player1, shootPlayer);
-
-    //  Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
-    game.physics.arcade.overlap(player1, stars, collectStar, null, this);
-    game.physics.arcade.overlap(player2, stars, collectStar, null, this);
-    game.physics.arcade.overlap(player1, exits, hitExit, null, this);
-    game.physics.arcade.overlap(player2, exits, hitExit, null, this);
-    game.physics.arcade.overlap(player1, p2bullets, shootPlayer, null, this);
-    game.physics.arcade.overlap(player2, p1bullets, shootPlayer, null, this);
-
-    //  Reset the players velocity (movement)
-    //player1.body.velocity.x = 0;
-    //player2.body.velocity.x = 0;
-
-    p1shootTimer++;
-    p2shootTimer++;
-    moveChar();
-    shootBullet();
-}
 
 
 
