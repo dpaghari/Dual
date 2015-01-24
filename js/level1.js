@@ -1,53 +1,4 @@
-<!doctype html> 
-<html lang="en"> 
-<head> 
-	<meta charset="UTF-8" />
-    <title>Phaser - Making your first game, part 9</title>
-	<script type="text/javascript" src="js/phaser.min.js"></script>
-    <script type="text/javascript" src="hello.js"></script>
-    <script type="text/javascript" src="moveChar.js"></script>
-    <script type="text/javascript" src="js/collectStar.js"></script>
-    <script type="text/javascript" src="js/hitExit.js"></script>
-
-    <style type="text/css">
-        body {
-            margin: 0;
-        }
-    </style>
-</head>
-<body>
-
-<script type="text/javascript">
-// Create Game Object
-var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update, collectStar: collectStar, hitExit: hitExit });
-
-
-
-// Preload all assets
-function preload() {
-
-    game.load.image('sky', 'assets/sky.png');
-    game.load.image('ground', 'assets/platform.png');
-    game.load.image('star', 'assets/star.png');
-    game.load.image('exit', 'assets/exit.png');
-    game.load.spritesheet('dude', 'assets/dude.png', 32, 48);
-
-}
-
-var player1;
-var player2;
-var platforms;
-var cursors;
-
-var stars;
-var score = 0;
-var scoreText;
-
-function create() {
-
-    //  We're going to be using physics, so enable the Arcade Physics system
-    game.physics.startSystem(Phaser.Physics.ARCADE);
-
+function level1 (game, player1, player2, cursors, stars, score, scoreText ) {    
     //  A simple background for our game
     game.add.sprite(0, 0, 'sky');
 
@@ -117,42 +68,9 @@ function create() {
         star.body.bounce.y = 0.7 + Math.random() * 0.2;
     }
 
-    exit = game.add.group();
-
-    exit.enableBody = true;
-
     //  The score
     scoreText = game.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
 
     //  Our controls.
-    cursors = game.input.keyboard.createCursorKeys();
-    
+    cursors = game.input.keyboard.createCursorKeys(); 
 }
-
-function update() {
-
-    //  Collide the player and the stars with the platforms
-    game.physics.arcade.collide(player1, platforms);
-    game.physics.arcade.collide(player2, platforms);
-    game.physics.arcade.collide(stars, platforms);
-    game.physics.arcade.collide(exit, platforms);
-
-    //  Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
-    game.physics.arcade.overlap(player1, stars, collectStar, null, this);
-    game.physics.arcade.overlap(player2, stars, collectStar, null, this);
-    game.physics.arcade.overlap(player1, exit, hitExit, null, this);
-    game.physics.arcade.overlap(player2, exit, hitExit, null, this);
-
-    //  Reset the players velocity (movement)
-    player1.body.velocity.x = 0;
-    player2.body.velocity.x = 0;
-
-
-    moveChar();    
-
-}
-
-</script>
-
-</body>
-</html>
