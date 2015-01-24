@@ -27,26 +27,57 @@ function Shoot(player,playerDir){
     var shoot_playerDir = playerDir;
     switch(shoot_playerDir){
         case 'left':
-        createBullet(player);
+        createBullet(player, playerDir);
         break;
         case 'right':
-        createBullet(player);
+        createBullet(player, playerDir);
         break;
         case 'up':
-        createBullet(player);
+        createBullet(player, playerDir);
         break;
         case 'down':
-        createBullet(player);
+        createBullet(player, playerDir);
         break;
 
     }
 }
-function createBullet(player){
+function createBullet(player, playerDir){
     if(player == player1){
+
     var bullet = p1bullets.create(player1.x, player1.y, 'star');
+        switch(playerDir){
+            case 'left':
+            bullet.body.velocity.x -= 500;
+            break;
+            case 'right':
+            bullet.body.velocity.x += 500;
+            break;
+            case 'up':
+            bullet.body.velocity.y -= 500;
+            break;
+            case 'down':
+            bullet.body.velocity.y += 500;
+            break;
+
+        }
     }
     if(player == player2){
     var bullet = p2bullets.create(player2.x, player2.y, 'star');
+     switch(playerDir){
+            case 'left':
+            bullet.body.velocity.x -= 500;
+            break;
+            case 'right':
+            bullet.body.velocity.x += 500;
+            break;
+            case 'up':
+            bullet.body.velocity.y -= 500;
+            break;
+            case 'down':
+            bullet.body.velocity.y += 500;
+            break;
+
+        }
     }
 }
 
