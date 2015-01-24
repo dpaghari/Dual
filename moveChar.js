@@ -9,24 +9,29 @@ function moveChar(){
 
 	if (Akey.isDown)				// Move Left
     {
-        player.body.velocity.x = -100;
+        //player.body.velocity.x = -100;
+        
+        player.x += -5;
         player.animations.play('left');
     }
     else if (Dkey.isDown)			// Move Right
     {
         
-        player.body.velocity.x = 100;
+        //player.body.velocity.x = 100;
+        player.x += 5;
         player.animations.play('right');
         
     }
     else if(Skey.isDown)			// Move South
     {  
-    	player.body.velocity.y = 100;
+    	//player.body.velocity.y = 100;
+    	player.y += 5;
     }
    
     else if (Wkey.isDown)			// Move North
     {
-        player.body.velocity.y = -100;
+        player.y += -5;
+        //player.body.velocity.y = -100;
     }
     else{							// If player doesn't press a button/at rest
     	player.body.velocity.y = 0;
@@ -43,27 +48,29 @@ function moveChar(){
 	if (Jkey.isDown)				// Move Left
     {
         //  Move to the left
-        player2.body.velocity.x = -100;
+        //player2.body.velocity.x = -100;
+        player2.x += -5;
         player2.animations.play('left');
     }
     else if (Lkey.isDown)			// Move Right
     {
         //  Move to the right
-        player2.body.velocity.x = 100;
-
+        //player2.body.velocity.x = 100;
+        player2.x += 5;
         player2.animations.play('right');
         
     }
     else if(Kkey.isDown)			// Move South
     {
-        
-    	player2.body.velocity.y = 100;
+        player2.y += 5;
+    	//player2.body.velocity.y = 100;
 
     }
     
     else if (Ikey.isDown)			// Move North
     {
-        player2.body.velocity.y = -100;
+        player2.y += -5;
+        //player2.body.velocity.y = -100;
     }
     else{							// Player doesn't press a button/At rest
     	player2.body.velocity.y = 0;
