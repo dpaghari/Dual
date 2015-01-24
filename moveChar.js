@@ -1,5 +1,7 @@
 function moveChar(){
 
+    var accel = 200;
+    var speed = 200;
 	// Player 1 Movement
 	
 	var Wkey = game.input.keyboard.addKey(Phaser.Keyboard.W);
@@ -9,59 +11,64 @@ function moveChar(){
 
 	if (Akey.isDown)				// Move Left
     {
-        //player.body.velocity.x = -100;
+        player1.body.velocity.x = -speed;
         player1_dir = 'left';
-        player1.x += -5;
         player1.animations.play('left');
         if (Wkey.isDown) {
-            player1.y += -5;
+            player1.body.velocity.y = -speed;
+            //player1.y += -5;
         }
 
         if (Skey.isDown) {
-            player1.y += 5;
+            player1.body.velocity.y = speed;
+            //player1.y += 5;
         }
     }
     else if (Dkey.isDown)			// Move Right
     {
-        
-        //player1.body.velocity.x = 100;
+        player1.body.velocity.x = speed;
+        //player1.body.acceleration.x = accel;
         player1_dir = 'right';
-        player1.x += 5;
         player1.animations.play('right');
-        if (Skey.isDown) {
-            player1.y += 5;
-        }
-
         if (Wkey.isDown) {
-            player1.y += -5;
+            player1.body.velocity.y = -speed;
+            //player1.y += -5;
+        } 
+        
+        if (Skey.isDown) {
+            player1.body.velocity.y = speed;
+            //player1.y += 5;
         }
-
     }
-    else if(Skey.isDown)			// Move South
+    else if(Skey.isDown)			// Move Down
     {  
-    	//player1.body.velocity.y = 100;
+    	player1.body.velocity.y = speed;
     	player1_dir = 'down';
-        player1.y += 5;
+        //player1.y += 5;
         player1.animations.play('left');
+        if (Dkey.isDown) {
+            player1.body.velocity.x = speed;
+        }
         if (Akey.isDown) {
-            player1.x += -5;
+            player1.body.velocity.x = -speed;
         }
     }
    
-    else if (Wkey.isDown)			// Move North
+    else if (Wkey.isDown)			// Move Up
     {
+        player1.body.velocity.y = -speed;
         player1_dir = 'up';
-        player1.y += -5;
-        //player1.body.velocity.y = -100;
         player1.animations.play('right');
         if (Dkey.isDown) {
-            player1.x += +5;
+            player1.body.velocity.x = speed;
+        }
+        if (Akey.isDown) {
+            player1.body.velocity.x = -speed    ;
         }
     }
 
     else{							// If player1 doesn't press a button/at rest
-    	player1.body.velocity.y = 0;
-    	player1.body.velocity.x = 0;
+        player1.body.drag.set(500, 500);
     	player1.animations.stop();
     }
 
@@ -73,63 +80,62 @@ function moveChar(){
 
 	if (Jkey.isDown)				// Move Left
     {
-        //  Move to the left
-        //player2.body.velocity.x = -100;
+        player2.body.velocity.x = -speed;
         player2_dir = 'left';
-        player2.x += -5;
         player2.animations.play('left');
 
         if (Ikey.isDown) {
-            player2.y += -5;
+            player2.body.velocity.y = -speed;
         }
 
         if (Kkey.isDown) {
-            player2.y += 5;
+            player2.body.velocity.y = speed;
         }
     }
     else if (Lkey.isDown)			// Move Right
     {
-        //  Move to the right
-        //player2.body.velocity.x = 100;
+        player2.body.velocity.x = speed;
         player2_dir = 'right';
-        player2.x += 5;
         player2.animations.play('right');
 
-        if (Kkey.isDown) {
-            player2.y += 5;
+        if (Ikey.isDown) {
+            player2.body.velocity.y = -speed;
         }
 
-        if (Ikey.isDown) {
-            player2.y += -5;
+        if (Kkey.isDown) {
+            player2.body.velocity.y = speed;
         }
         
     }
     else if(Kkey.isDown)			// Move South
     {
+        player2.body.velocity.y = speed;
         player2_dir = 'down';
-        player2.y += 5;
-    	//player2.body.velocity.y = 100;
 
         if (Jkey.isDown) {
-            player2.x += -5;
+            player2.body.velocity.x = -speed;
+        }
+        if (Lkey.isDown) {
+            player2.body.velocity.x = speed;
         }
 
     }
     
     else if (Ikey.isDown)			// Move North
     {
+        player2.body.velocity.y = -speed;
         player2_dir = 'up';
-        player2.y += -5;
-        //player2.body.velocity.y = -100;
 
+        if (Jkey.isDown) {
+            player2.body.velocity.x = -speed;
+        }
         if (Lkey.isDown) {
-            player2.x += +5;
+            player2.body.velocity.x = speed;
         }
     }
     else{							// Player doesn't press a button/At rest
-    	player2.body.velocity.y = 0;
-    	player2.body.velocity.x = 0;
-    	player2.animations.stop();
+        player2.body.drag.set(500, 500);
+        player2.animations.stop();
     }
 	
 }
