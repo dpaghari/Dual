@@ -9,11 +9,22 @@ function moveChar(){
 	var Skey = game.input.keyboard.addKey(Phaser.Keyboard.S);
 	var Dkey = game.input.keyboard.addKey(Phaser.Keyboard.D);
 
+    // Sound for player movement
+    //Assign it so we can reference it 
+    // Parameters: song, volume (0-1), loop (boolean)
+    var moving = game.add.audio('moving', .05, false);
+
 	if (Akey.isDown)				// Move Left
     {
         player1.body.velocity.x = -speed;
         player1_dir = 'left';
         player1.animations.play('left');
+
+        // Play sound effect
+        moving.loop = false;
+        moving.duration = .01;
+        //moving.play();
+
         if (Wkey.isDown) {
             player1.body.velocity.y = -speed;
             //player1.y += -5;
@@ -30,6 +41,13 @@ function moveChar(){
         //player1.body.acceleration.x = accel;
         player1_dir = 'right';
         player1.animations.play('right');
+
+        // Play sound effect
+        moving.loop = false;
+        moving.duration = .01;
+        //moving.play();
+
+
         if (Wkey.isDown) {
             player1.body.velocity.y = -speed;
             //player1.y += -5;
@@ -46,6 +64,13 @@ function moveChar(){
     	player1_dir = 'down';
         //player1.y += 5;
         player1.animations.play('left');
+
+        // Play sound effect
+        moving.loop = false;
+        moving.duration = .01;
+        //moving.play();
+
+
         if (Dkey.isDown) {
             player1.body.velocity.x = speed;
         }
@@ -59,6 +84,13 @@ function moveChar(){
         player1.body.velocity.y = -speed;
         player1_dir = 'up';
         player1.animations.play('right');
+
+        // Play sound effect
+        moving.loop = false;
+        moving.duration = .01;
+        //moving.play();
+
+
         if (Dkey.isDown) {
             player1.body.velocity.x = speed;
         }
@@ -84,6 +116,11 @@ function moveChar(){
         player2_dir = 'left';
         player2.animations.play('left');
 
+        // Play sound effect
+        moving.loop = false;
+        moving.duration = .01;
+        //moving.play();
+
         if (Ikey.isDown) {
             player2.body.velocity.y = -speed;
         }
@@ -97,6 +134,11 @@ function moveChar(){
         player2.body.velocity.x = speed;
         player2_dir = 'right';
         player2.animations.play('right');
+
+        // Play sound effect
+        moving.loop = false;
+        moving.duration = .01;
+        //moving.play();
 
         if (Ikey.isDown) {
             player2.body.velocity.y = -speed;
@@ -112,6 +154,11 @@ function moveChar(){
         player2.body.velocity.y = speed;
         player2_dir = 'down';
 
+        // Play sound effect
+        moving.loop = false;
+        moving.duration = .01;
+        //moving.play();
+
         if (Jkey.isDown) {
             player2.body.velocity.x = -speed;
         }
@@ -125,6 +172,11 @@ function moveChar(){
     {
         player2.body.velocity.y = -speed;
         player2_dir = 'up';
+
+        // Play sound effect
+        moving.loop = false;
+        moving.duration = .01;
+        //moving.play();
 
         if (Jkey.isDown) {
             player2.body.velocity.x = -speed;

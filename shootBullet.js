@@ -4,23 +4,31 @@ function shootBullet(){
 	// Player 1 Shooting
 	var Ekey = game.input.keyboard.addKey(Phaser.Keyboard.E);
     var Okey = game.input.keyboard.addKey(Phaser.Keyboard.O);
+    var shoot = game.add.audio('shoot', .1, false);
    
 	if (Ekey.isDown)				// When E is pressed / Shoot Button
     {
+        shoot.loop = false;
+        shoot.play();
+        shoot.totalDuration = .2;
+
         if(p1shootTimer >= p1shootDelay){
-        Shoot(player1, player1_dir);
-        console.log("Shooting");
-        p1shootTimer = 0;
+            Shoot(player1, player1_dir);
+            console.log("Shooting");
+            p1shootTimer = 0;
         }
 
     }
     
     if (Okey.isDown)                // When E is pressed / Shoot Button
     {
+        shoot.loop = false;
+        shoot.play();
+
         if(p2shootTimer >= p2shootDelay){
-        Shoot(player2, player2_dir);
-        console.log("Shooting");
-        p2shootTimer = 0;
+            Shoot(player2, player2_dir);
+            console.log("Shooting");
+            p2shootTimer = 0;
         }
     }
 }
