@@ -1,11 +1,9 @@
-function collectStar (player1, player2, star) {
+function collectStar (player, star) {
     
     // Removes the star from the screen
-    //star.kill();
+    star.kill();
 
-    //  Add and update the score
-    score += 10;
+    score += 500;
     scoreText.text = 'Score: ' + score;
 
-    console.log ('rekt');
 }
