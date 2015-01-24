@@ -57,6 +57,8 @@ var stars;
 var score = 0;
 var scoreText;
 
+var exits;
+
 function create() {
 
     //  We're going to be using physics, so enable the Arcade Physics system
@@ -100,7 +102,7 @@ function create() {
     player2 = game.add.sprite(128, game.world.height - 150, 'player2');
 
     // Place the exit door in the world
-    exit = game.add.sprite(150, 5, 'exit');
+    //exit = game.add.sprite(150, 5, 'exit');
 
     //  We need to enable physics on the player
     game.physics.arcade.enable(player1);
@@ -115,14 +117,14 @@ function create() {
     stars = game.add.group();
     p1bullets = game.add.group();
     p2bullets = game.add.group();
-    exit = game.add.group();
+    exits = game.add.group();
 
     //  We will enable physics for any star that is created in this group
     stars.enableBody = true;
     p1bullets.enableBody = true;
     p2bullets.enableBody = true;
-    exit.enableBody = true;
-
+    exits.enableBody = true;
+    var exit = exits.create(400, 400, 'exit');
 
     //  Here we'll create 12 of them evenly spaced apart
     for (var i = 0; i < 12; i++)
@@ -152,17 +154,17 @@ function update() {
     game.physics.arcade.collide(player2, platforms);
     game.physics.arcade.collide(player1, player2);
     game.physics.arcade.collide(stars, platforms);
-    game.physics.arcade.collide(exit, platforms);
-    game.physics.arcade.collide(player1, exit);
-    game.physics.arcade.collide(player2, exit);
+    //game.physics.arcade.collide(exits, platforms);
+    //game.physics.arcade.collide(player1, exits);
+    //game.physics.arcade.collide(player2, exits);
     game.physics.arcade.collide(p1bullets, player2, shootPlayer);
     game.physics.arcade.collide(p2bullets, player1, shootPlayer);
 
     //  Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
     game.physics.arcade.overlap(player1, stars, collectStar, null, this);
     game.physics.arcade.overlap(player2, stars, collectStar, null, this);
-    game.physics.arcade.overlap(player1, exit, hitExit, null, this);
-    game.physics.arcade.overlap(player2, exit, hitExit, null, this);
+    game.physics.arcade.overlap(player1, exits, hitExit, null, this);
+    game.physics.arcade.overlap(player2, exits, hitExit, null, this);
     game.physics.arcade.overlap(player1, p2bullets, shootPlayer, null, this);
     game.physics.arcade.overlap(player2, p1bullets, shootPlayer, null, this);
 
