@@ -27,11 +27,12 @@ var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create
 // Preload all assets
 function preload() {
 
-    game.load.image('sky', 'assets/sky.png');
+    game.load.image('background', 'assets/background.png');
     game.load.image('ground', 'assets/platform.png');
     game.load.image('star', 'assets/star.png');
     game.load.image('exit', 'assets/exit.png');
-    game.load.spritesheet('dude', 'assets/dude.png', 32, 48);
+    game.load.image('player1', 'assets/player1.png');
+    game.load.image('player2', 'assets/player2.png');
 
 }
 
@@ -55,7 +56,7 @@ function create() {
     game.physics.startSystem(Phaser.Physics.ARCADE);
 
     //  A simple background for our game
-    game.add.sprite(0, 0, 'sky');
+    game.add.sprite(0, 0, 'background');
 
     //Adjust screen size
     this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
@@ -86,8 +87,8 @@ function create() {
     ledge.body.immovable = true;
 
     // The player and its settings
-    player1 = game.add.sprite(32, game.world.height - 150, 'dude');
-    player2 = game.add.sprite(128, game.world.height - 150, 'dude');
+    player1 = game.add.sprite(32, game.world.height - 150, 'player1');
+    player2 = game.add.sprite(128, game.world.height - 150, 'player2');
 
     //  We need to enable physics on the player
     game.physics.arcade.enable(player1);
@@ -97,12 +98,6 @@ function create() {
     //player.body.gravity.y = 1000;
     player1.body.collideWorldBounds = true;
     player2.body.collideWorldBounds = true;
-    //  Our two animations, walking left and right.
-    player1.animations.add('left', [0, 1, 2, 3], 10, true);
-    player1.animations.add('right', [5, 6, 7, 8], 10, true);
-
-    player2.animations.add('left', [0, 1, 2, 3], 10, true);
-    player2.animations.add('right', [5, 6, 7, 8], 10, true);
 
     //  Finally some stars to collect
     stars = game.add.group();
