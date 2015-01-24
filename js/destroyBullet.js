@@ -1,4 +1,4 @@
-function collectStar (player, bullet) {
+function destroyBullet (player, bullet) {
     
     // Removes the star from the screen
     bullet.kill();
