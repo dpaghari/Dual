@@ -1,9 +1,5 @@
-function hitExit (exit) {j
+function hitExit (player, exit) {
+	console.log ('Go to Level 2');
 	exit.kill();
-
-    //  Add and update the score
-    score += 10;
-    scoreText.text = 'Score: ' + score;
-
-    console.log ('Go to Level 2');
+    game.state.start('level2');
 }
