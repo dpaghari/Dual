@@ -11,6 +11,7 @@ gameStates.level2.prototype = {
         game.load.image('exit', 'assets/exit.png');
         game.load.image('player1', 'assets/player1.png');
         game.load.image('player2', 'assets/player2.png');
+        game.load.image('pushblock', 'assets/firstaid.png');
 
     },
 
@@ -38,6 +39,7 @@ gameStates.level2.prototype = {
         // The player and its settings
         player1 = game.add.sprite(0, game.world.height - 150, 'player1');
         player2 = game.add.sprite(500, game.world.height - 150, 'player2');
+        pushblock = game.add.sprite(game.world.width/2, game.world.height/2, 'pushblock');
 
         // Place the exit door in the world
         //exit = game.add.sprite(150, 5, 'exit');
@@ -45,9 +47,11 @@ gameStates.level2.prototype = {
         //  We need to enable physics on the player
         game.physics.arcade.enable(player1);
         game.physics.arcade.enable(player2);
+        game.physics.arcade.enable(pushblock);
 
         player1.body.collideWorldBounds = true;
         player2.body.collideWorldBounds = true;
+        pushblock.body.collideWorldBounds = true;
 
         //  Finally some stars to collect
         stars = game.add.group();
@@ -72,28 +76,20 @@ gameStates.level2.prototype = {
 
     update : function() {
 
-        //  Collide the player and the stars with the platforms
+         //  Collide the player and the stars with the platforms
         game.physics.arcade.collide(player1, platforms);
         game.physics.arcade.collide(player2, platforms);
         game.physics.arcade.collide(player1, player2);
         game.physics.arcade.collide(stars, platforms);
-        //game.physics.arcade.collide(exits, platforms);
-        //game.physics.arcade.collide(player1, exits);
-        //game.physics.arcade.collide(player2, exits);
-        game.physics.arcade.collide(p1bullets, player2, shootPlayer);
-        game.physics.arcade.collide(p2bullets, player1, shootPlayer);
-
+        game.physics.arcade.collide(p1bullets, player2, destroyBullet);
+        game.physics.arcade.collide(p2bullets, player1, destroyBullet);
+        game.physics.arcade.collide(player1, pushblock);
+        game.physics.arcade.collide(player2, pushblock);
         //  Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
-        game.physics.arcade.overlap(player1, stars, collectStar, null, this);
-        game.physics.arcade.overlap(player2, stars, collectStar, null, this);
+      
         game.physics.arcade.overlap(player1, exits, hitExit, null, this);
         game.physics.arcade.overlap(player2, exits, hitExit, null, this);
-        game.physics.arcade.overlap(player1, p2bullets, shootPlayer, null, this);
-        game.physics.arcade.overlap(player2, p1bullets, shootPlayer, null, this);
-
-        //  Reset the players velocity (movement)
-        //player1.body.velocity.x = 0;
-        //player2.body.velocity.x = 0;
+        
 
         p1shootTimer++;
         p2shootTimer++;
