@@ -10,7 +10,7 @@ function moveChar(){
 	if (Akey.isDown)				// Move Left
     {
         //player.body.velocity.x = -100;
-        
+        player1_dir = 'left';
         player1.x += -5;
         player1.animations.play('left');
         if (Wkey.isDown) {
@@ -25,6 +25,7 @@ function moveChar(){
     {
         
         //player1.body.velocity.x = 100;
+        player1_dir = 'right';
         player1.x += 5;
         player1.animations.play('right');
         if (Skey.isDown) {
@@ -39,7 +40,8 @@ function moveChar(){
     else if(Skey.isDown)			// Move South
     {  
     	//player1.body.velocity.y = 100;
-    	player1.y += 5;
+    	player1_dir = 'down';
+        player1.y += 5;
         player1.animations.play('left');
         if (Akey.isDown) {
             player1.x += -5;
@@ -48,6 +50,7 @@ function moveChar(){
    
     else if (Wkey.isDown)			// Move North
     {
+        player1_dir = 'up';
         player1.y += -5;
         //player1.body.velocity.y = -100;
         player1.animations.play('right');
@@ -72,6 +75,7 @@ function moveChar(){
     {
         //  Move to the left
         //player2.body.velocity.x = -100;
+        player2_dir = 'left';
         player2.x += -5;
         player2.animations.play('left');
 
@@ -87,6 +91,7 @@ function moveChar(){
     {
         //  Move to the right
         //player2.body.velocity.x = 100;
+        player2_dir = 'right';
         player2.x += 5;
         player2.animations.play('right');
 
@@ -101,6 +106,7 @@ function moveChar(){
     }
     else if(Kkey.isDown)			// Move South
     {
+        player2_dir = 'down';
         player2.y += 5;
     	//player2.body.velocity.y = 100;
 
@@ -112,6 +118,7 @@ function moveChar(){
     
     else if (Ikey.isDown)			// Move North
     {
+        player2_dir = 'up';
         player2.y += -5;
         //player2.body.velocity.y = -100;
 
