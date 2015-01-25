@@ -121,6 +121,11 @@ gameStates.level6.prototype = {
 
                 game.state.start('level7');
             }
+            var levelComplete = game.add.audio('levelComplete', .1, false);
+            levelComplete.loop = false;
+            levelComplete.play();
+            levelComplete.totalDuration = .2;
+            game.state.start('level7');
         }
         
     }

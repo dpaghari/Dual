@@ -1,5 +1,5 @@
 gameStates.level7 = function(){};
-
+var exit;
 gameStates.level7.prototype = {
 
     // Preload all assets
@@ -40,7 +40,7 @@ gameStates.level7.prototype = {
 
         exits = game.add.group();
         exits.enableBody = true;
-        var exit = exits.create(400, 300, 'exit');
+        exit = exits.create(400, 300, 'exit');
         
         //Assign it so we can reference it 
         // Parameters: song, volume (0-1), loop (boolean)
@@ -180,7 +180,6 @@ gameStates.level7.prototype = {
                 p2Touched = false;
                 levelTimer = 0;
                 
-
                 game.state.start('level9');
             }
         }

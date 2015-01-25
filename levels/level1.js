@@ -169,10 +169,10 @@ gameStates.level1.prototype = {
         }
         
 
-        p1shootTimer++;
-        p2shootTimer++;
+        //p1shootTimer++;
+        //p2shootTimer++;
         moveChar();
-        shootBullet();
+        //shootBullet();
     }
 }
 

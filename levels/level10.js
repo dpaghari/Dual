@@ -108,9 +108,9 @@ gameStates.level10.prototype = {
         
         if(buttonActivated == true){
             if(doorMade == false){
-            var exitDoor;
-            exitDoor = game.add.sprite(300, 10, 'exit');
-            doorMade == true;
+                var exitDoor;
+                exitDoor = game.add.sprite(300, 10, 'exit');
+                doorMade == true;
             }
             buttonActivated = false;
 
@@ -148,16 +148,13 @@ gameStates.level10.prototype = {
         }
 
         if(p1Touched == true || p2Touched == true){
-            levelTimer++;
-            if( levelTimer >= levelDelay){
-                if(p1Touched == true){
-                    player1Score += 50;
-
-                }
-                else{
-                    player2Score += 50;
-                }
-                if (clear.y >= game.height/2 - 50){
+            if(p1Touched == true){
+                player1Score += 50;
+            }
+            else{
+                player2Score += 50;
+            }
+            if (clear.y >= game.height/2 - 50){
                 clear.body.velocity.y = 0;
                 clear.body.acceleration.y = 0;
             }
@@ -185,12 +182,8 @@ gameStates.level10.prototype = {
 
                 game.state.start('level11');
             }
-            }
         }
-        p1shootTimer++;
-        p2shootTimer++;
         moveChar();
-        shootBullet();
     }
 }
 

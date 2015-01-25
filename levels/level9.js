@@ -163,8 +163,7 @@ gameStates.level9.prototype = {
 
 		 if(p1Touched == true && p2Touched == true){
             levelTimer++;
-            if( levelTimer >= levelDelay){
-                if (clear.y >= game.height/2 - 50){
+            if (clear.y >= game.height/2 - 50){
                 clear.body.velocity.y = 0;
                 clear.body.acceleration.y = 0;
             }
@@ -173,13 +172,11 @@ gameStates.level9.prototype = {
             }
 
             
-            levelTimer++;
             if ( levelTimer == 60 ) {
                 var levelComplete = game.add.audio('levelComplete', .1, false);
                 levelComplete.loop = false;
                 levelComplete.play();
-                levelComplete.totalDuration = .3;
-                
+                levelComplete.totalDuration = .3;     
             }
             
             if( levelTimer >= levelDelay){
@@ -193,11 +190,10 @@ gameStates.level9.prototype = {
                 game.state.start('level10');
             }
         }
-        p1shootTimer++;
-        p2shootTimer++;
+        //p1shootTimer++;
+        //p2shootTimer++;
         moveChar();
         shootBullet();
-        }
     }
 }
 

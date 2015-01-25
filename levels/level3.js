@@ -217,13 +217,27 @@ gameStates.level3.prototype = {
                 
 
                 game.state.start('level4');
+            if(p1Touched == true) {
+                player2Score += 50;
+            } else {
+                player1Score += 50;
+            }
+            p1Touched = false;
+            p2Touched = false;
+            levelTimer = 0;
+            var levelComplete = game.add.audio('levelComplete', .1, false);
+            levelComplete.loop = false;
+            levelComplete.play();
+            levelComplete.totalDuration = .3;
+            game.state.start('level4');
+            
             }
         }
 
-        p1shootTimer++;
-        p2shootTimer++;
+        //p1shootTimer++;
+        //p2shootTimer++;
         moveChar();
-        shootBullet();
+        //shootBullet();
         pushblock.body.velocity.x = 0;
         pushblock.body.velocity.y = 0;
     }
