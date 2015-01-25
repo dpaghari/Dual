@@ -49,8 +49,8 @@ gameStates.level1.prototype = {
         this.scale.setScreenSize(true);
 
         // The player and its settings
-        player1 = game.add.sprite(32, game.world.height - 150, 'player1');
-        player2 = game.add.sprite(128, game.world.height - 150, 'player2');
+        player1 = game.add.sprite(game.world.width / 2 - 50, game.world.height / 2, 'player1');
+        player2 = game.add.sprite(game.world.width / 2, game.world.height / 2, 'player2');
 
         // Place the exit door in the world
         //exit = game.add.sprite(150, 5, 'exit');
