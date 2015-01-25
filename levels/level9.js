@@ -10,7 +10,7 @@ gameStates.level9.prototype = {
         game.load.image('background', 'assets/background.png');
         game.load.image('ground', 'assets/ground.png');
         game.load.image('star', 'assets/star.png');
-		game.load.image('star', 'assets/star.png');
+		//game.load.image('star', 'assets/star.png');
         game.load.image('exit', 'assets/exit.png');
         game.load.image('player1', 'assets/player1.png');
         game.load.image('player2', 'assets/player2.png');
@@ -111,11 +111,6 @@ gameStates.level9.prototype = {
         game.physics.arcade.overlap(player1, exits, hitExit, touchedExit, this);
         game.physics.arcade.overlap(player2, exits, hitExit, touchedExit, this);
         
-        //if(game.time.now - timeCheck > 2000) {
-        //    p1Touched = false;
-        //    p2Touched = false;
-        //    game.state.start('level1');
-        //}
 		
 		if(stars.length < 5) {
 			createRandomCoin();
@@ -124,7 +119,17 @@ gameStates.level9.prototype = {
 		if(Math.random() < 0.004) {
 			createRandomCoin();
 		}
-		
+		 if(p1Touched == true && p2Touched == true){
+            levelTimer++;
+            console.log(levelTimer);
+            if( levelTimer >= levelDelay){
+            p1Touched = false;
+            p2Touched = false;
+            levelTimer = 0;
+            game.state.start('level1');
+            
+            }
+        }
         p1shootTimer++;
         p2shootTimer++;
         moveChar();

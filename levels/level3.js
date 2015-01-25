@@ -104,7 +104,7 @@ gameStates.level3.prototype = {
             p1Touched = false;
             p2Touched = false;
             levelTimer = 0;
-            game.state.start('level1');
+            game.state.start('level9');
             
             }
         }
