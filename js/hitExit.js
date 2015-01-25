@@ -5,11 +5,11 @@ function hitExit (player, exit) {
     levelComplete.totalDuration = .2;
 
 	console.log ('Go to Level 2');
+    
     if (player == player1)
         p1Touched = true;
     else
         p2Touched = true;
-	timeCheck = game.time.now;
 }
 
 function touchedExit (player, exit) {
