@@ -98,14 +98,11 @@ gameStates.level1.prototype = {
             if( levelTimer >= levelDelay){
             p1Touched = false;
             p2Touched = false;
-<<<<<<< HEAD
-            game.state.start('level1');
-=======
+
             levelTimer = 0;
             game.state.start('level2');
             
             }
->>>>>>> 8bc523e0bc815f201887abc33deeabaabbaf02f0
         }
         
 
