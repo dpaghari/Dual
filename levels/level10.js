@@ -40,10 +40,10 @@ gameStates.level10.prototype = {
         this.scale.setScreenSize(true);
         
         //  The platforms group contains the ground and the 2 ledges we can jump on
-        platforms = game.add.group();
+        //platforms = game.add.group();
 
         //  We will enable physics for any object that is created in this group
-        platforms.enableBody = true;
+        //platforms.enableBody = true;
 
 
         // The player and its settings
@@ -91,10 +91,8 @@ gameStates.level10.prototype = {
     update : function() {
 
          //  Collide the player and the stars with the platforms
-        game.physics.arcade.collide(player1, platforms);
-        game.physics.arcade.collide(player2, platforms);
+        
         game.physics.arcade.collide(player1, player2);
-        game.physics.arcade.collide(stars, platforms);
         game.physics.arcade.collide(p1bullets, player2, destroyBullet);
         game.physics.arcade.collide(p2bullets, player1, destroyBullet);
         //game.physics.arcade.collide(player1, pushblock);

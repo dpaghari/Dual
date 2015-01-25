@@ -130,7 +130,7 @@ gameStates.level11.prototype = {
         pushblock.body.velocity.x = 0;
         pushblock.body.velocity.y = 0;
 
-             if(p1Touched == true && p2Touched == true){
+        if(p1Touched == true && p2Touched == true){
             levelTimer++;
             //console.log(levelTimer);
             if( levelTimer >= levelDelay){
