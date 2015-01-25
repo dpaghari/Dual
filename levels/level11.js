@@ -2,6 +2,7 @@
 //var doorMade;
 var movementTimer;
 var movementType;
+var exitDoor;
 
 gameStates.level11 = function(){};
 
@@ -12,7 +13,7 @@ gameStates.level11.prototype = {
     // Preload all assets
     preload : function() {
 
-        game.load.image('background', 'assets/background/Cyan.jpg');
+        game.load.image('background', 'assets/backgrounds/Cyan.jpg');
         game.load.image('ground', 'assets/ground.png');
         game.load.image('star', 'assets/star.png');
         game.load.image('bullet', 'assets/bullet.png');
@@ -147,14 +148,14 @@ gameStates.level11.prototype = {
         pushblock.body.velocity.y = 0;
 
           if(p1Touched == true){
-            game.physics.arcade.moveToXY(player1, exit.x + 9, exit.y + 3, 300, 300) ;
+            game.physics.arcade.moveToXY(player1, exitDoor.x + 15, exitDoor.y + 3, 300, 300) ;
             this.game.world.addAt(player1, 10);
-            this.game.world.addAt(exit, 1);
+            this.game.world.addAt(exitDoor, 1);
         }
         if(p2Touched == true){
-            game.physics.arcade.moveToXY(player2, exit.x + 9, exit.y + 3, 300, 300) ;
+            game.physics.arcade.moveToXY(player2, exitDoor.x - 15, exitDoor.y + 3, 300, 300) ;
             this.game.world.addAt(player2, 9);
-            this.game.world.addAt(exit, 2);
+            this.game.world.addAt(exitDoor, 2);
         }
 
             if(p1Touched == true && p2Touched == true){

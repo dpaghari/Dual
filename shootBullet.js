@@ -41,7 +41,7 @@ function shootBullet(){
 
         if(p2shootTimer >= p2shootDelay){
             Shoot(player2, player2_dir);
-            console.log("Shooting");
+            //console.log("Shooting");
             p2shootTimer = 0;
         }  
     }, this);
