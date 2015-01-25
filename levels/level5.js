@@ -1,5 +1,5 @@
 gameStates.level5 = function(){};
-
+var exit;
 gameStates.level5.prototype = {
 
     // Preload all assets
@@ -39,7 +39,7 @@ gameStates.level5.prototype = {
 
         exits = game.add.group();
         exits.enableBody = true;
-        var exit = exits.create(600, 250, 'exit');
+        exit = exits.create(600, 250, 'exit');
         
         //Assign it so we can reference it 
         // Parameters: song, volume (0-1), loop (boolean)

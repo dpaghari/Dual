@@ -1,5 +1,5 @@
 gameStates.level7 = function(){};
-
+var exit;
 gameStates.level7.prototype = {
 
     // Preload all assets
@@ -38,7 +38,7 @@ gameStates.level7.prototype = {
 
         exits = game.add.group();
         exits.enableBody = true;
-        var exit = exits.create(400, 300, 'exit');
+        exit = exits.create(400, 300, 'exit');
         
         //Assign it so we can reference it 
         // Parameters: song, volume (0-1), loop (boolean)
@@ -137,12 +137,12 @@ gameStates.level7.prototype = {
          if(p1Touched == true){
             game.physics.arcade.moveToXY(player1, exit.x -20, exit.y + 3, 300, 300) ;
             this.game.world.addAt(player1, 10);
-            this.game.world.addAt exit, 1);
+            this.game.world.addAt(exit, 1);
         }
         if(p2Touched == true){
             game.physics.arcade.moveToXY(player2, exit.x + 20, exit.y + 3, 300, 300) ;
             this.game.world.addAt(player2, 9);
-            this.game.world.addAt exit, 2);
+            this.game.world.addAt(exit, 2);
         }
 
 
