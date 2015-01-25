@@ -109,9 +109,12 @@ gameStates.level2.prototype = {
         game.physics.arcade.overlap(player2, exits, hitExit, touchedExit, this);
         
         if(buttonActivated == true){
+            var randX = Math.random();
+            var randY = Math.random();
+
             if(doorMade == false){
             
-            exitDoor = exits.create(30, 300, 'exit');
+            exitDoor = exits.create(randX, randY, 'exit');
             doorMade = true;
             }
             buttonActivated = false;

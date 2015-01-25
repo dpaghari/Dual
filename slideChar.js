@@ -2,8 +2,7 @@
 
 function slideChar(){
 
-    var accel = 200;
-    var speed = 200;
+    var accel = 300;
 	// Player 1 Movement
 	
 	var Wkey = game.input.keyboard.addKey(Phaser.Keyboard.W);
@@ -14,9 +13,10 @@ function slideChar(){
     //Assign it so we can reference it 
     // Parameters: song, volume (0-1), loop (boolean)
     var moving = game.add.audio('moving', .05, false);
-
-    if (p1Touched == false && player1.body.acceleration == 0) {
-       
+    if (p1Touched == false && player1.body.velocity.x == 0 && player1.body.velocity.y == 0) {
+    
+        player1.body.acceleration.x = 0;
+        player1.body.acceleration.y = 0;
 
         if (Akey.isDown)				// Move Left
         {
@@ -40,7 +40,7 @@ function slideChar(){
 
         else if(Skey.isDown)			// Move Down
         {  
-            player1.body.acceleration.y = -accel;
+            player1.body.acceleration.y = accel;
 
             // Play sound effect
             moving.loop = false;
@@ -62,13 +62,21 @@ function slideChar(){
             player1.body.drag.set(700, 700);
         }
     }
+    if (p1Touched == true){
+        player1.body.velocity.x = 0;
+        player1.body.velocity.y = 0;
+    }
 
     // Player 2 Movement
     var Ikey = game.input.keyboard.addKey(Phaser.Keyboard.I);
 	var Jkey = game.input.keyboard.addKey(Phaser.Keyboard.J);
 	var Kkey = game.input.keyboard.addKey(Phaser.Keyboard.K);
 	var Lkey = game.input.keyboard.addKey(Phaser.Keyboard.L);
-    if (p2Touched == false && player2.body.acceleration == 0) {
+    if (p2Touched == false && player2.body.velocity.x == 0 && player2.body.velocity.y == 0) {
+    
+        player2.body.acceleration.x = 0;
+        player2.body.acceleration.y = 0;
+        
         if (Jkey.isDown)				// Move Left
         {
             player2.body.acceleration.x = -accel;
@@ -102,8 +110,7 @@ function slideChar(){
         else if (Ikey.isDown)			// Move North
         {
             player2.body.acceleration.y = -accel;
-            player2_dir = 'up';
-
+            
             // Play sound effect
             moving.loop = false;
             moving.duration = .01;
@@ -112,5 +119,9 @@ function slideChar(){
         else{							// Player doesn't press a button/At rest
             player2.body.drag.set(700, 700);
         }
+    }
+    if (p2Touched == true){
+        player2.body.velocity.x = 0;
+        player2.body.velocity.y = 0;
     }
 }	

@@ -50,17 +50,31 @@ gameStates.level5.prototype = {
 
         blocks = game.add.group();
         blocks.enableBody = true;
-        var block = blocks.create(200, 200, 'block');
-        block = blocks.create(300, 300, 'block');
-        block = blocks.create(100, 0, 'block');
+        
+        var block = blocks.create(168, 450, 'block');
+        block.body.immovable = true;
+        block = blocks.create(736, 482, 'block');
+        block.body.immovable = true;
+        block = blocks.create(200, 186, 'block');
+        block.body.immovable = true;
+        block = blocks.create(0, 154, 'block');
+        block.body.immovable = true;
+        block = blocks.create(672, 90, 'block');
+        block.body.immovable = true;
+        block = blocks.create(400, 122, 'block');
+        block.body.immovable = true;
+        block = blocks.create(168, 418, 'block');
+        block.body.immovable = true;
 
         //  We need to enable physics on the players
         game.physics.arcade.enable(player1);
         game.physics.arcade.enable(player2);
-
+        
         player1.body.collideWorldBounds = true;
         player2.body.collideWorldBounds = true;
-
+        
+       
+        
         //  The score
         scoreText = game.add.text(16, 16, 'Player 1 Score: ' + player1Score, { fontSize: '32px', fill: '#000' });
 		scoreText = game.add.text(game.world.width - 260, 16, 'Player 2 Score: ' + player2Score, { fontSize: '32px', fill: '#000' });
@@ -71,8 +85,43 @@ gameStates.level5.prototype = {
 
     update : function() {
 
-        //  Collide the player and the stars with the platforms
-        game.physics.arcade.collide(player1, player2);
+        //  Collide the players
+        game.physics.arcade.collide(player1, player2, stap);
+        player1.body.blocked.player2 = true;
+        player2.body.blocked.player1 = true;
+        
+        if (player1.body.velocity.x == 0 && player1.body.velocity.y == 0) {
+            player1.body.immovable = true;
+        }
+        else {
+            player1.body.immovable = false;
+        }
+        if (player2.body.velocity.x == 0 && player2.body.velocity.y == 0) {
+            player2.body.immovable = true;
+        }
+        else {
+            player2.body.immovable = false;
+        }
+        
+        function stap() {
+            player1.body.overlapX;
+            player1.body.overlapY;
+            player2.body.overlapX;
+            player2.body.overlapY;
+            
+            player1.body.velocity.x = 0;
+            player1.body.velocity.y = 0;
+            player2.body.velocity.x = 0;
+            player2.body.velocity.y = 0;
+            player2.body.acceleration.x = 0;
+            player2.body.acceleration.y = 0;
+            player1.body.acceleration.x = 0;
+            player1.body.acceleration.y = 0;
+        }
+        
+        //Collide with the Blocks
+        game.physics.arcade.collide(player1, blocks);
+        game.physics.arcade.collide(player2, blocks);
 
         // Collide with exit, set exit flags
         game.physics.arcade.overlap(player1, exits, hitExit, touchedExit, this);
@@ -85,16 +134,18 @@ gameStates.level5.prototype = {
                 p1Touched = false;
                 p2Touched = false;
                 levelTimer = 0;
-                game.state.start('menu');
+                
+                var levelComplete = game.add.audio('levelComplete', .1, false);
+                levelComplete.loop = false;
+                levelComplete.play();
+                levelComplete.totalDuration = .2;
+            
+                game.state.start('level6');
             }
 
-            var levelComplete = game.add.audio('levelComplete', .1, false);
-            levelComplete.loop = false;
-            levelComplete.play();
-            levelComplete.totalDuration = .2;
+
         }
         
-
         slideChar();
     }
 }
