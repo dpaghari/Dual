@@ -41,6 +41,8 @@ gameStates.level2.prototype = {
         player2 = game.add.sprite(500, game.world.height - 150, 'player2');
         pushblock = game.add.sprite(game.world.width/2, game.world.height/2, 'pushblock');
 
+
+
         // Place the exit door in the world
         //exit = game.add.sprite(150, 5, 'exit');
 
@@ -71,6 +73,8 @@ gameStates.level2.prototype = {
 
         //  Our controls.
         cursors = game.input.keyboard.createCursorKeys();
+
+
         
     },
 
@@ -86,15 +90,21 @@ gameStates.level2.prototype = {
         game.physics.arcade.collide(player1, pushblock);
         game.physics.arcade.collide(player2, pushblock);
         //  Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
-      
+        
+
+        game.physics.arcade.overlap(pushblock, exits, hitExit, null, this);
+        /*
         game.physics.arcade.overlap(player1, exits, hitExit, null, this);
         game.physics.arcade.overlap(player2, exits, hitExit, null, this);
-        
+        */
 
         p1shootTimer++;
         p2shootTimer++;
         moveChar();
         shootBullet();
+        pushblock.body.velocity.x = 0;
+        
+        pushblock.body.velocity.y = 0;
     }
 }
 
