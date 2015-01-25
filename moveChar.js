@@ -13,15 +13,41 @@ function moveChar(){
     // Parameters: song, volume (0-1), loop (boolean)
     var moving = game.add.audio('moving', .05, false);
 
+    Wkey.onDown.add(function(Wkey) {
+        // Set Anchor to the center of your sprite
+        player1.anchor.setTo(1, 1);
+
+        // Invert scale.x to flip left/right
+        player1.scale.x = -1;
+
+        // Invert scale.y to flip up/down
+        player1.scale.y = -1;
+
+    }, this);
+
+    Skey.onDown.add(function(Skey) {
+        // Set Anchor to the center of your sprite
+        player1.anchor.setTo(0, 0);
+
+        // Invert scale.x to flip left/right
+        player1.scale.x = 1;
+
+        // Invert scale.y to flip up/down
+        player1.scale.y = 1;
+
+    }, this);
+
+    Akey.onDown.add(function(Akey) {
+
+    }, this);
+
     if (p1Touched == false) {
-       
 
         if (Akey.isDown)				// Move Left
         {
             player1.body.velocity.x = -speed;
             player1_dir = 'left';
             player1.animations.play('left');
-
             // Play sound effect
             moving.loop = false;
             moving.duration = .01;
