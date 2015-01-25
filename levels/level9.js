@@ -169,10 +169,10 @@ gameStates.level9.prototype = {
                 game.state.start('level10');
             }
         }
-        p1shootTimer++;
-        p2shootTimer++;
+        //p1shootTimer++;
+        //p2shootTimer++;
         moveChar();
-        shootBullet();
+        //shootBullet();
     }
 }
 

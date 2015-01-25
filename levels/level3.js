@@ -205,10 +205,10 @@ gameStates.level3.prototype = {
             }
         }
 
-        p1shootTimer++;
-        p2shootTimer++;
+        //p1shootTimer++;
+        //p2shootTimer++;
         moveChar();
-        shootBullet();
+        //shootBullet();
         pushblock.body.velocity.x = 0;
         pushblock.body.velocity.y = 0;
     }

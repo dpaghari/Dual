@@ -133,8 +133,8 @@ gameStates.level11.prototype = {
             }
         }
 
-        p1shootTimer++;
-        p2shootTimer++;
+        //p1shootTimer++;
+        //p2shootTimer++;
 		movementTimer++;
 		if(movementTimer > 180) {		
 			movementType = Math.floor((Math.random() * 4));
@@ -142,7 +142,7 @@ gameStates.level11.prototype = {
 		}
 
         moveCharInverted(movementType);
-        shootBullet();
+        //shootBullet();
         pushblock.body.velocity.x = 0;
         pushblock.body.velocity.y = 0;
 
