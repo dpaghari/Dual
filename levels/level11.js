@@ -107,8 +107,8 @@ gameStates.level11.prototype = {
         //  Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
         game.physics.arcade.overlap(pushblock, buttons, blockExit, null, this);
         
-        game.physics.arcade.overlap(player1, exits, hitExit, null, this);
-        game.physics.arcade.overlap(player2, exits, hitExit, null, this);
+        game.physics.arcade.overlap(player1, exits, hitExit, touchedExit, this);
+        game.physics.arcade.overlap(player2, exits, hitExit, touchedExit, this);
         
         if(buttonActivated == true){
             if(doorMade == false){
