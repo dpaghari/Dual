@@ -1,5 +1,6 @@
 gameStates = {};
-
+var p1exit;
+var p2exit;
 gameStates.level1 = function(){};
 
 gameStates.level1.prototype = {
@@ -12,6 +13,8 @@ gameStates.level1.prototype = {
         game.load.image('star', 'assets/star.png');
         game.load.image('bullet', 'assets/bullet.png');
         game.load.image('exit', 'assets/exit.png');
+        game.load.spritesheet('p1exit', 'assets/p1exit.png', 45, 45);
+        game.load.spritesheet('p2exit', 'assets/p2exit.png', 45, 45);
         game.load.image('player1', 'assets/player1.png');
         game.load.image('player2', 'assets/player2.png');
         game.load.audio('collect', 'assets/sounds/collect.mp3');
@@ -45,7 +48,15 @@ gameStates.level1.prototype = {
         this.scale.pageAlignVertically = true;
         this.scale.setScreenSize(true);
         
-
+        
+        //p1exit
+        p1exit = game.add.sprite(100, 100, 'p1exit');
+        p1exit.animations.add('active', [0, 1, 2, 3, 4], 10, true);
+        
+        //p2exit
+        p2exit = game.add.sprite(500, 500, 'p2exit');
+        p2exit.animations.add('active', [0, 1, 2, 3, 4], 10, true);
+        
 
         // The player and its settings
         player1 = game.add.sprite(32, game.world.height - 150, 'player1');
@@ -83,6 +94,9 @@ gameStates.level1.prototype = {
 
     update : function() {
 
+        p1exit.animations.play('active');
+        p2exit.animations.play('active');
+        
         //  Collide the player and the stars with the platforms
         game.physics.arcade.collide(player1, player2);
         game.physics.arcade.collide(p1bullets, player2, destroyBullet);
