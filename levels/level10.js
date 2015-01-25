@@ -1,14 +1,6 @@
-var buttonActivated;
-var doorMade;
-var lightTimer;
-var dark;
-var exit;
-
 gameStates.level10 = function(){};
 
 gameStates.level10.prototype = {
-
-
 
     // Preload all assets
     preload : function() {
@@ -84,8 +76,6 @@ gameStates.level10.prototype = {
 		lightTimer = 0;
 		dark = false;
         cursors = game.input.keyboard.createCursorKeys();
-
-
         
     },
 
