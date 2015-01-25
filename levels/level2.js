@@ -21,6 +21,7 @@ gameStates.level2.prototype = {
         game.load.image('player2', 'assets/player2.png');
         game.load.image('pushblock', 'assets/pushblock.png');
         game.load.image('button', 'assets/switch.png');
+        game.load.image('clear', 'assets/clear.png');
         
         game.load.audio('collect', 'assets/sounds/collect.mp3');
         game.load.audio('death', 'assets/sounds/death.mp3');
@@ -102,6 +103,9 @@ gameStates.level2.prototype = {
 
         //  Our controls.
         cursors = game.input.keyboard.createCursorKeys();
+
+        clear = game.add.sprite(game.width/2-100, -200, 'clear');       
+        game.physics.enable(clear, Phaser.Physics.ARCADE);
         
     },
 
@@ -153,22 +157,33 @@ gameStates.level2.prototype = {
 
         if(p1Touched == true || p2Touched == true){
 
-            levelTimer++;
-            if( levelTimer >= levelDelay){
-			if(p1Touched == true) {
-				player1Score += 50;
-			} else {
-				player2Score += 50;
-			}
-            p1Touched = false;
-            p2Touched = false;
-            levelTimer = 0;
-            var levelComplete = game.add.audio('levelComplete', .1, false);
-            levelComplete.loop = false;
-            levelComplete.play();
-            levelComplete.totalDuration = .3;
-            game.state.start('level3');
+            if (clear.y >= game.height/2 - 50){
+                clear.body.velocity.y = 0;
+                clear.body.acceleration.y = 0;
+            }
+            else {
+                clear.body.acceleration.y = 1000;
+            }
+
             
+            levelTimer++;
+            if ( levelTimer == 60 ) {
+                var levelComplete = game.add.audio('levelComplete', .1, false);
+                levelComplete.loop = false;
+                levelComplete.play();
+                levelComplete.totalDuration = .3;
+                
+            }
+            
+            if( levelTimer >= levelDelay){
+                player1Score += 50;
+                player2Score += 50;
+                p1Touched = false;
+                p2Touched = false;
+                levelTimer = 0;
+                
+
+                game.state.start('level3');
             }
         }
 

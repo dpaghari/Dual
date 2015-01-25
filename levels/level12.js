@@ -27,6 +27,7 @@ gameStates.level12.prototype = {
         game.load.image('player2_tank', 'assets/player2_tank.png');
         game.load.image('pushblock', 'assets/firstaid.png');
         game.load.image('block', 'assets/block.png');
+        game.load.image('clear', 'assets/clear.png');
 
         game.load.audio('collect', 'assets/sounds/collect.mp3');
         game.load.audio('death', 'assets/sounds/death.mp3');
@@ -141,6 +142,9 @@ gameStates.level12.prototype = {
 
         //  Our controls.
         cursors = game.input.keyboard.createCursorKeys();
+
+        clear = game.add.sprite(game.width/2-100, -200, 'clear');       
+        game.physics.enable(clear, Phaser.Physics.ARCADE);
     },
 
     update : function() {

@@ -14,6 +14,7 @@ gameStates.level6.prototype = {
         game.load.image('player1', 'assets/player1_tank.png');
         game.load.image('player2', 'assets/player2_tank.png');
         game.load.image('lvl6platforms', 'assets/lvl6platforms.png');
+        game.load.image('clear', 'assets/clear.png');
 
         game.load.audio('collect', 'assets/sounds/collect.mp3');
         game.load.audio('death', 'assets/sounds/death.mp3');
@@ -73,6 +74,9 @@ gameStates.level6.prototype = {
         player2ScoreText = game.add.text(game.world.width - 160, 16, 'P2: ' + player2Score, { fontSize: '32px', fill: '#FFF'});
         player2ScoreText.font = 'Lato';
 
+        clear = game.add.sprite(game.width/2-100, -200, 'clear');       
+        game.physics.enable(clear, Phaser.Physics.ARCADE);
+
     },
 
     update : function() {
@@ -89,11 +93,34 @@ gameStates.level6.prototype = {
         shootBullet();
 
         if(numPlayers < 2){
-            var levelComplete = game.add.audio('levelComplete', .1, false);
-            levelComplete.loop = false;
-            levelComplete.play();
-            levelComplete.totalDuration = .2;
-            game.state.start('level9');
+            if (clear.y >= game.height/2 - 50){
+                clear.body.velocity.y = 0;
+                clear.body.acceleration.y = 0;
+            }
+            else {
+                clear.body.acceleration.y = 1000;
+            }
+
+            
+            levelTimer++;
+            if ( levelTimer == 60 ) {
+                var levelComplete = game.add.audio('levelComplete', .1, false);
+                levelComplete.loop = false;
+                levelComplete.play();
+                levelComplete.totalDuration = .3;
+                
+            }
+            
+            if( levelTimer >= levelDelay){
+                player1Score += 50;
+                player2Score += 50;
+                p1Touched = false;
+                p2Touched = false;
+                levelTimer = 0;
+                
+
+                game.state.start('level7');
+            }
         }
         
     }

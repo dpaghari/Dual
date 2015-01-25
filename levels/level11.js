@@ -21,6 +21,7 @@ gameStates.level11.prototype = {
         game.load.image('player2', 'assets/player2.png');
         game.load.image('pushblock', 'assets/pushblock.png');
         game.load.image('button', 'assets/switch.png');
+        game.load.image('clear', 'assets/clear.png');
 
         //  Load the Google WebFont Loader script
         game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
@@ -96,7 +97,8 @@ gameStates.level11.prototype = {
         //  Our controls.
         cursors = game.input.keyboard.createCursorKeys();
 
-
+        clear = game.add.sprite(game.width/2-100, -200, 'clear');       
+        game.physics.enable(clear, Phaser.Physics.ARCADE);
         
     },
 
@@ -160,14 +162,34 @@ gameStates.level11.prototype = {
             if(p1Touched == true && p2Touched == true){
                 levelTimer++;
             if( levelTimer >= levelDelay){
-                p1Touched = false;
-                p2Touched = false;
-                levelTimer = 0;
+                if (clear.y >= game.height/2 - 50){
+                clear.body.velocity.y = 0;
+                clear.body.acceleration.y = 0;
+            }
+            else {
+                clear.body.acceleration.y = 1000;
+            }
+
+            
+            levelTimer++;
+            if ( levelTimer == 60 ) {
                 var levelComplete = game.add.audio('levelComplete', .1, false);
                 levelComplete.loop = false;
                 levelComplete.play();
-                levelComplete.totalDuration = .2;
+                levelComplete.totalDuration = .3;
+                
+            }
+            
+            if( levelTimer >= levelDelay){
+                player1Score += 50;
+                player2Score += 50;
+                p1Touched = false;
+                p2Touched = false;
+                levelTimer = 0;
+                
+
                 game.state.start('level12');
+            }
             }
     }
 }
