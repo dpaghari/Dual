@@ -110,9 +110,11 @@ gameStates.level3.prototype = {
        
 
        if(buttonActivated == true){
+        var randX = Math.random();
+        var randY = Math.random();
             if(doorMade == false){
-            
-            exitDoor = exits.create(30, 300, 'exit');
+                
+            exitDoor = exits.create(randX, randY, 'exit');
             doorMade = true;
             }
             buttonActivated = false;
