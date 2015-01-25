@@ -15,6 +15,8 @@ gameStates.level1.prototype = {
         game.load.image('exit', 'assets/exit.png');
         game.load.spritesheet('p1exit', 'assets/p1exit.png', 45, 45);
         game.load.spritesheet('p2exit', 'assets/p2exit.png', 45, 45);
+        game.load.image('wasd', 'assets/wasd.png');
+        game.load.image('ijkl', 'assets/ijkl.png');
         game.load.image('player1', 'assets/player1.png');
         game.load.image('player2', 'assets/player2.png');
         game.load.audio('collect', 'assets/sounds/collect.mp3');
