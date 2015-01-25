@@ -40,10 +40,10 @@ gameStates.level10.prototype = {
         this.scale.setScreenSize(true);
         
         //  The platforms group contains the ground and the 2 ledges we can jump on
-        platforms = game.add.group();
+        //platforms = game.add.group();
 
         //  We will enable physics for any object that is created in this group
-        platforms.enableBody = true;
+        //platforms.enableBody = true;
 
 
         // The player and its settings
@@ -77,7 +77,8 @@ gameStates.level10.prototype = {
         exit = exits.create(400, 400, 'exit');
 
         //  The score
-        scoreText = game.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+        scoreText = game.add.text(16, 16, 'Player 1 Score: 0', { fontSize: '32px', fill: '#000' });
+		scoreText = game.add.text(game.world.width - 260, 16, 'Player 2 Score: 0', { fontSize: '32px', fill: '#000' });
 
         //  Our controls.
 		lightTimer = 0;
@@ -91,10 +92,8 @@ gameStates.level10.prototype = {
     update : function() {
 
          //  Collide the player and the stars with the platforms
-        game.physics.arcade.collide(player1, platforms);
-        game.physics.arcade.collide(player2, platforms);
+        
         game.physics.arcade.collide(player1, player2);
-        game.physics.arcade.collide(stars, platforms);
         game.physics.arcade.collide(p1bullets, player2, destroyBullet);
         game.physics.arcade.collide(p2bullets, player1, destroyBullet);
         //game.physics.arcade.collide(player1, pushblock);
@@ -121,7 +120,7 @@ gameStates.level10.prototype = {
 			lightTimer = 0;
 			darkness = game.add.sprite(0, 0, 'darkness');
 		} else if(lightTimer > 120 && dark == true) {
-			console.log("Lights On");
+			//console.log("Lights On");
 			dark = false;
 			lightTimer = 0;
 			darkness.kill();
@@ -133,11 +132,14 @@ gameStates.level10.prototype = {
         if(p1Touched == true && p2Touched == true){
             levelTimer++;
             if( levelTimer >= levelDelay){
-            p1Touched = false;
-            p2Touched = false;
-            levelTimer = 0;
-            game.state.start('level11');
-            
+                p1Touched = false;
+                p2Touched = false;
+                levelTimer = 0;
+                var levelComplete = game.add.audio('levelComplete', .1, false);
+                levelComplete.loop = false;
+                levelComplete.play();
+                levelComplete.totalDuration = .2;
+                game.state.start('level11');
             }
         }
         p1shootTimer++;

@@ -72,7 +72,8 @@ gameStates.level1.prototype = {
         var exit = exits.create(400, 400, 'exit');
 
         //  The score
-        scoreText = game.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+        scoreText = game.add.text(16, 16, 'Player 1 Score: ' + player1Score, { fontSize: '32px', fill: '#000' });
+		scoreText = game.add.text(game.world.width - 260, 16, 'Player 2 Score: ' + player2Score, { fontSize: '32px', fill: '#000' });
 
         //  Our controls.
         cursors = game.input.keyboard.createCursorKeys();
@@ -97,12 +98,17 @@ gameStates.level1.prototype = {
         if(p1Touched == true && p2Touched == true){
             levelTimer++;
             if( levelTimer >= levelDelay){
-            p1Touched = false;
-            p2Touched = false;
-
-            levelTimer = 0;
-            game.state.start('level2');
-            
+    			player1Score += 50;
+    			player2Score += 50;
+                p1Touched = false;
+                p2Touched = false;
+                levelTimer = 0;
+                
+                var levelComplete = game.add.audio('levelComplete', .1, false);
+                levelComplete.loop = false;
+                levelComplete.play();
+                levelComplete.totalDuration = .2;
+                game.state.start('level2');
             }
         }
         
