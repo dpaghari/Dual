@@ -117,6 +117,8 @@ gameStates.level4.prototype = {
         game.physics.arcade.collide(player2, platforms);
         game.physics.arcade.collide(player1, player2);
         game.physics.arcade.collide(stars, platforms);
+        game.physics.arcade.collide(player1, p2bullets, destroyBullet);
+        game.physics.arcade.collide(player2, p1bullets, destroyBullet);
         game.physics.arcade.collide(p1bullets, block1, hitBlock);
         game.physics.arcade.collide(p2bullets, block1, hitBlock);
         game.physics.arcade.collide(p1bullets, block2, hitBlock);
