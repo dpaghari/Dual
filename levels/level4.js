@@ -182,7 +182,7 @@ gameStates.level4.prototype = {
             levelComplete.loop = false;
             levelComplete.play();
             levelComplete.totalDuration = .2;
-            game.state.start('level6');
+            game.state.start('level5');
         }    
     }
 }

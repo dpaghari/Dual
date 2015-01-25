@@ -140,7 +140,7 @@ gameStates.level5.prototype = {
                 levelComplete.play();
                 levelComplete.totalDuration = .2;
             
-                game.state.start('menu');
+                game.state.start('level6');
             }
 
 
