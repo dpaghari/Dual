@@ -3,7 +3,10 @@ function destroyBullet (player, bullet) {
     // Removes the bullet from the screen
     bullet.kill();
 
-    score += 500;
-    scoreText.text = 'Score: ' + score;
+    if(player == player1) {
+		player2Score += 10;
+	} else {
+		player1Score += 10;
+	}
 
 }
