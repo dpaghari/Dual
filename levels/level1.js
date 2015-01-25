@@ -42,11 +42,6 @@ gameStates.level1.prototype = {
         this.scale.pageAlignVertically = true;
         this.scale.setScreenSize(true);
         
-        //  The platforms group contains the ground and the 2 ledges we can jump on
-        platforms = game.add.group();
-
-        //  We will enable physics for any object that is created in this group
-        platforms.enableBody = true;
 
 
         // The player and its settings
@@ -64,13 +59,11 @@ gameStates.level1.prototype = {
         player2.body.collideWorldBounds = true;
 
         //  Finally some stars to collect
-        stars = game.add.group();
         p1bullets = game.add.group();
         p2bullets = game.add.group();
         exits = game.add.group();
 
         //  We will enable physics for any star that is created in this group
-        stars.enableBody = true;
         p1bullets.enableBody = true;
         p2bullets.enableBody = true;
         exits.enableBody = true;
@@ -100,8 +93,9 @@ gameStates.level1.prototype = {
       
         game.physics.arcade.overlap(player1, exits, hitExit, touchedExit, this);
         game.physics.arcade.overlap(player2, exits, hitExit, touchedExit, this);
+        
+        // Changes level after short delay
         if(p1Touched == true && p2Touched == true){
-
             levelTimer++;
             console.log(levelTimer);
             if( levelTimer >= levelDelay){
