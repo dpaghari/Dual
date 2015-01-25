@@ -26,6 +26,9 @@ gameStates.level9.prototype = {
         game.load.audio('song', 'assets/sounds/song.mp3');
         game.load.audio('shoot', 'assets/sounds/shoot.mp3');
         game.load.audio('moving', 'assets/sounds/moving.mp3');
+
+        //  Load the Google WebFont Loader script
+        game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
     },
 
     create : function() {
@@ -93,8 +96,10 @@ gameStates.level9.prototype = {
 		}
 
         //  The score
-        player1ScoreText = game.add.text(100, 16, 'P1: ' + player1Score, { fontSize: '32px', fill: '#000' });
-		player2ScoreText = game.add.text(game.world.width - 160, 16, 'P2: ' + player2Score, { fontSize: '32px', fill: '#000' });
+        player1ScoreText = game.add.text(100, 16, 'P1: ' + player1Score, { fontSize: '32px', fill: '#FFF'});
+        player1ScoreText.font = 'Lato';
+        player2ScoreText = game.add.text(game.world.width - 160, 16, 'P2: ' + player2Score, { fontSize: '32px', fill: '#FFF'});
+        player2ScoreText.font = 'Lato';
 
         //  Our controls.
         cursors = game.input.keyboard.createCursorKeys();

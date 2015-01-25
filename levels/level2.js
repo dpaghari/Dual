@@ -29,6 +29,9 @@ gameStates.level2.prototype = {
         game.load.audio('song', 'assets/sounds/song.mp3');
         game.load.audio('shoot', 'assets/sounds/shoot.mp3');
         game.load.audio('moving', 'assets/sounds/moving.mp3');
+
+        //  Load the Google WebFont Loader script
+        game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
     },
 
     create : function() {
@@ -92,8 +95,10 @@ gameStates.level2.prototype = {
         //var exit = exits.create(400, 400, 'exit');
 
         //  The score
-        scoreText = game.add.text(100, 16, 'P1: ' + player1Score, { fontSize: '32px', fill: '#000' });
-		scoreText = game.add.text(game.world.width - 160, 16, 'P2: ' + player2Score, { fontSize: '32px', fill: '#000' });
+        scoreText = game.add.text(100, 16, 'P1: ' + player1Score, { fontSize: '32px', fill: '#FFF'});
+        scoreText.font = 'Lato';
+        scoreText = game.add.text(game.world.width - 160, 16, 'P2: ' + player2Score, { fontSize: '32px', fill: '#FFF'});
+        scoreText.font = 'Lato';
 
         //  Our controls.
         cursors = game.input.keyboard.createCursorKeys();
@@ -148,6 +153,10 @@ gameStates.level2.prototype = {
             p1Touched = false;
             p2Touched = false;
             levelTimer = 0;
+            var levelComplete = game.add.audio('levelComplete', .1, false);
+            levelComplete.loop = false;
+            levelComplete.play();
+            levelComplete.totalDuration = .3;
             game.state.start('level3');
             
             }

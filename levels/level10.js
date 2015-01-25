@@ -16,6 +16,9 @@ gameStates.level10.prototype = {
         game.load.image('pushblock', 'assets/pushblock.png');
 		game.load.image('darkness', 'assets/darkness.png');
 
+        //  Load the Google WebFont Loader script
+        game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
+
     },
 
     create : function() {
@@ -71,8 +74,10 @@ gameStates.level10.prototype = {
         exit = exits.create(400, 400, 'exit');
 
         //  The score
-        scoreText = game.add.text(100, 16, 'P1: ' + player1Score, { fontSize: '32px', fill: '#000' });
-		scoreText = game.add.text(game.world.width - 160, 16, 'P2: ' + player2Score, { fontSize: '32px', fill: '#000' });
+        scoreText = game.add.text(100, 16, 'P1: ' + player1Score, { fontSize: '32px', fill: '#FFF'});
+        scoreText.font = 'Lato';
+        scoreText = game.add.text(game.world.width - 160, 16, 'P2: ' + player2Score, { fontSize: '32px', fill: '#FFF'});
+        scoreText.font = 'Lato';
 
         //  Our controls.
 		lightTimer = 0;

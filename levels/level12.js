@@ -36,6 +36,9 @@ gameStates.level12.prototype = {
         game.load.audio('shoot', 'assets/sounds/shoot.mp3');
         game.load.audio('moving', 'assets/sounds/moving.mp3');
 
+        //  Load the Google WebFont Loader script
+        game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
+
     },
 
     create : function() {
@@ -129,11 +132,19 @@ gameStates.level12.prototype = {
         exits.enableBody = true;
 
         //  The score
+<<<<<<< HEAD
         player1ScoreText = game.add.text(100, 16, 'P1: ' + player1Score, { fontSize: '32px', fill: '#000' });
 		player2ScoreText = game.add.text(game.world.width - 160, 16, 'P2: ' + player2Score, { fontSize: '32px', fill: '#000' });
 		player1HealthText = game.add.text(100, 46, 'P1HP: ' + player1HP, { fontSize: '32px', fill: '#000' });
 		player2HealthText = game.add.text(game.world.width - 160, 46, 'P2HP: ' + player2HP, { fontSize: '32px', fill: '#000' });
 		boss.body.velocity.y += 20;
+=======
+        scoreText = game.add.text(100, 16, 'P1: ' + player1Score, { fontSize: '32px', fill: '#FFF'});
+        scoreText.font = 'Lato';
+        scoreText = game.add.text(game.world.width - 160, 16, 'P2: ' + player2Score, { fontSize: '32px', fill: '#FFF'});
+        scoreText.font = 'Lato';
+
+>>>>>>> f35316a63ec005a81dc9318b88c1e319ce55c31b
         //  Our controls.
         cursors = game.input.keyboard.createCursorKeys();
     },
