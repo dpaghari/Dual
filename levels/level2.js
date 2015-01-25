@@ -1,6 +1,6 @@
 var buttonActivated;
 var doorMade;
-
+var exitDoor;
 gameStates.level2 = function(){};
 
 gameStates.level2.prototype = {
@@ -110,12 +110,20 @@ gameStates.level2.prototype = {
         
         if(buttonActivated == true){
             if(doorMade == false){
-            var exitDoor;
-            exitDoor = exits.create(300, 10, 'exit');
-            doorMade == true;
+            
+            exitDoor = exits.create(30, 300, 'exit');
+            doorMade = true;
             }
             buttonActivated = false;
         }
+        else{
+            if(doorMade == true){
+                exitDoor.destroy();
+                doorMade = false;
+            }
+        }
+        console.log(buttonActivated);
+
 
         if(p1Touched == true || p2Touched == true){
 

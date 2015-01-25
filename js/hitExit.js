@@ -20,7 +20,8 @@ function touchedExit (player, exit) {
 }
 
 function blockExit(){
-    
+        
     buttonActivated = true;
+    
 }
 
