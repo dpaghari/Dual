@@ -12,6 +12,8 @@
     <script type="text/javascript" src="levels/level1.js"></script>
     <script type="text/javascript" src="levels/level2.js"></script>
     <script type="text/javascript" src="levels/level3.js"></script>
+	<script type="text/javascript" src="levels/level9.js"></script>
+	<script type="text/javascript" src="levels/level10.js"></script>
 
 
     <style type="text/css">
@@ -29,6 +31,8 @@ var game = new Phaser.Game(800, 600, Phaser.AUTO, '', gameStates.level1);
 game.state.add('level1', gameStates.level1);
 game.state.add('level2', gameStates.level2);
 game.state.add('level3', gameStates.level3);
+game.state.add('level9', gameStates.level9);
+game.state.add('level10', gameStates.level10);
 
 var player1;
 var player1_dir = 'down';
