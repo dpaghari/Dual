@@ -2,8 +2,8 @@ gameStates.level9 = function(){};
 var player1ScoreText;
 var player2ScoreText;
 var updateTimer;
-
-
+var p1exit;
+var p2exit;
 
 gameStates.level9.prototype = {
 
@@ -14,10 +14,11 @@ gameStates.level9.prototype = {
         game.load.image('ground', 'assets/ground.png');
         game.load.image('star', 'assets/star.png');
 		game.load.image('bullet', 'assets/bullet.png');
-        game.load.image('exit', 'assets/exit.png');
+        //game.load.image('exit', 'assets/exit.png');
         game.load.image('player1', 'assets/player1.png');
         game.load.image('player2', 'assets/player2.png');
-        
+        game.load.spritesheet('p1exit', 'assets/p1exit.png', 45, 45);
+        game.load.spritesheet('p2exit', 'assets/p2exit.png', 45, 45);
         game.load.audio('collect', 'assets/sounds/collect.mp3');
         game.load.audio('death', 'assets/sounds/death.mp3');
         game.load.audio('interact', 'assets/sounds/interact.mp3');
@@ -76,13 +77,19 @@ gameStates.level9.prototype = {
         p1bullets = game.add.group();
         p2bullets = game.add.group();
         exits = game.add.group();
-
+        p1exits = game.add.group();
+        p2exits = game.add.group();
         //  We will enable physics for any star that is created in this group
         stars.enableBody = true;
         p1bullets.enableBody = true;
         p2bullets.enableBody = true;
-        exits.enableBody = true;
-        var exit = exits.create(400, 400, 'exit');
+        p1exits.enableBody = true;
+        p2exits.enableBody = true;
+        
+        p1exit = p1exits.create(400, 400, 'p1exit');
+        p1exit.animations.add('active', [0, 1, 2, 3, 4], 10, true);
+        p2exit = p2exits.create(200, 500, 'p2exit');
+        p2exit.animations.add('active', [0, 1, 2, 3, 4], 10, true);
 		
 		for(var i = 0; i < 10; i++) {
 			createRandomCoin();
@@ -100,7 +107,8 @@ gameStates.level9.prototype = {
     },
 
     update : function() {
-
+        p1exit.animations.play('active');
+        p2exit.animations.play('active');
         //  Collide the player and the stars with the platforms
         //game.physics.arcade.collide(player1, platforms);
         //game.physics.arcade.collide(player2, platforms);
@@ -118,8 +126,8 @@ gameStates.level9.prototype = {
         game.physics.arcade.collide(p2bullets, player1, destroyBullet);
 		
 
-        game.physics.arcade.overlap(player1, exits, hitExit, touchedExit, this);
-        game.physics.arcade.overlap(player2, exits, hitExit, touchedExit, this);
+        game.physics.arcade.overlap(player1, p1exits, hitExit, touchedExit, this);
+        game.physics.arcade.overlap(player2, p2exits, hitExit, touchedExit, this);
         
 		updateTimer++;
 		if(updateTimer >= 10) {

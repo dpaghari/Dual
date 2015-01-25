@@ -173,7 +173,7 @@ gameStates.level4.prototype = {
 		updateTimer++;
 		if(updateTimer >= 10) {
 			player1ScoreText.setText('P1: ' + player1Score);
-			player2ScoreTextdd.setText('P2: ' + player2Score);
+			player2ScoreText.setText('P2: ' + player2Score);
 			updateTimer = 0;
 		}
 		

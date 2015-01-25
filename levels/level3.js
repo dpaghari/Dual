@@ -184,6 +184,10 @@ gameStates.level3.prototype = {
             p1Touched = false;
             p2Touched = false;
             levelTimer = 0;
+            var levelComplete = game.add.audio('levelComplete', .1, false);
+            levelComplete.loop = false;
+            levelComplete.play();
+            levelComplete.totalDuration = .3;
             game.state.start('level4');
             
             }
