@@ -23,3 +23,8 @@ function touchedExit (player, exit) {
     }
 
 }
+
+function blockExit(){
+game.state.start('level2');
+
+}
