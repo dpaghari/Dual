@@ -80,11 +80,8 @@ gameStates.level3.prototype = {
         block3 = blocks.create(710, 50, 'block');
         block4 = blocks.create(590, 100, 'block');
         block5 = blocks.create(710, 100, 'block');
-        block6 = blocks.create(405, 380, 'block');
-        block7 = blocks.create(405, 230, 'block');
-        block8 = blocks.create(710, 50, 'block');
-        block9 = blocks.create(590, 100, 'block');
-        block10 = blocks.create(710, 100, 'block');
+        block6 = blocks.create(game.world.width / 2, 380, 'block');
+        block7 = blocks.create(game.world.width / 2, 230, 'block');
 
         game.physics.arcade.collide(player1, blocks);
         game.physics.arcade.collide(player2, blocks);
@@ -98,9 +95,6 @@ gameStates.level3.prototype = {
         block5.body.collideWorldBounds = true;
         block6.body.collideWorldBounds = true;
         block7.body.collideWorldBounds = true;
-        block8.body.collideWorldBounds = true;
-        block9.body.collideWorldBounds = true;
-        block10.body.collideWorldBounds = true;
 
         block1.body.immovable = true;
         block2.body.immovable = true;
@@ -109,9 +103,6 @@ gameStates.level3.prototype = {
         block5.body.immovable = true;
         block6.body.immovable = true;
         block7.body.immovable = true;
-        block8.body.immovable = true;
-        block9.body.immovable = true;
-        block10.body.immovable = true;
 
         // Place the exit door in the world
         //exit = game.add.sprite(150, 5, 'exit');
@@ -188,7 +179,7 @@ gameStates.level3.prototype = {
             p1Touched = false;
             p2Touched = false;
             levelTimer = 0;
-            game.state.start('level3');
+            game.state.start('level4');
             
             }
         }
