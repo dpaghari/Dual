@@ -13,7 +13,7 @@ gameStates.level10.prototype = {
     // Preload all assets
     preload : function() {
 
-        game.load.image('background', 'assets/background.png');
+        game.load.image('background', 'assets/background.jpg');
         game.load.image('ground', 'assets/ground.png');
         game.load.image('star', 'assets/star.png');
         game.load.image('exit', 'assets/exit.png');
