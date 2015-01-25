@@ -27,6 +27,7 @@ gameStates.level2.prototype = {
         game.load.audio('song', 'assets/sounds/song.mp3');
         game.load.audio('shoot', 'assets/sounds/shoot.mp3');
         game.load.audio('moving', 'assets/sounds/moving.mp3');
+        game.load.image('button', 'assets/switch.png');
 
     },
 
@@ -53,6 +54,20 @@ gameStates.level2.prototype = {
         //  We will enable physics for any object that is created in this group
         platforms.enableBody = true;
 
+        //  Finally some stars to collect
+        stars = game.add.group();
+        p1bullets = game.add.group();
+        p2bullets = game.add.group();
+        exits = game.add.group();
+        buttons = game.add.group();
+        //  We will enable physics for any star that is created in this group
+        stars.enableBody = true;
+        p1bullets.enableBody = true;
+        p2bullets.enableBody = true;
+        exits.enableBody = true;
+        buttons.enableBody = true;
+
+        var button = buttons.create(400, 400, 'button');
 
         // The player and its settings
         player1 = game.add.sprite(0, game.world.height - 150, 'player1');
@@ -73,20 +88,7 @@ gameStates.level2.prototype = {
         player2.body.collideWorldBounds = true;
         pushblock.body.collideWorldBounds = true;
 
-        //  Finally some stars to collect
-        stars = game.add.group();
-        p1bullets = game.add.group();
-        p2bullets = game.add.group();
-        exits = game.add.group();
-        buttons = game.add.group();
-        //  We will enable physics for any star that is created in this group
-        stars.enableBody = true;
-        p1bullets.enableBody = true;
-        p2bullets.enableBody = true;
-        exits.enableBody = true;
-        buttons.enableBody = true;
 
-        var button = buttons.create(400, 400, 'button');
         //var exit = exits.create(400, 400, 'exit');
 
         //  The score
@@ -95,8 +97,6 @@ gameStates.level2.prototype = {
 
         //  Our controls.
         cursors = game.input.keyboard.createCursorKeys();
-
-
         
     },
 

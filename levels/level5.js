@@ -135,7 +135,8 @@ gameStates.level5.prototype = {
                 p1Touched = false;
                 p2Touched = false;
                 levelTimer = 0;
-                
+                player1Score += 50;
+				player2Score += 50;
                 var levelComplete = game.add.audio('levelComplete', .1, false);
                 levelComplete.loop = false;
                 levelComplete.play();

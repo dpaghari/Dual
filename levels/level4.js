@@ -17,7 +17,7 @@ gameStates.level4.prototype = {
         game.load.image('player2', 'assets/player2.png');
         game.load.image('player1_tank', 'assets/player1_tank.png');
         game.load.image('player2_tank', 'assets/player2_tank.png');
-        game.load.image('pushblock', 'assets/firstaid.png');
+        game.load.image('pushblock', 'assets/pushblock.png');
         game.load.image('block', 'assets/block.png');
 
         game.load.audio('collect', 'assets/sounds/collect.mp3');
