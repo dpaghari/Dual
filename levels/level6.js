@@ -11,8 +11,8 @@ gameStates.level6.prototype = {
 
         game.load.image('background', 'assets/darkness.png');
         game.load.image('bullet', 'assets/bullet.png');
-        game.load.image('player1', 'assets/player1.png');
-        game.load.image('player2', 'assets/player2.png');
+        game.load.image('player1', 'assets/player1_tank.png');
+        game.load.image('player2', 'assets/player2_tank.png');
         game.load.image('lvl6platforms', 'assets/lvl6platforms.png');
 
         game.load.audio('collect', 'assets/sounds/collect.mp3');

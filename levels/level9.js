@@ -142,6 +142,20 @@ gameStates.level9.prototype = {
 		if(Math.random() < 0.004) {
 			createRandomCoin();
 		}
+
+         if(p1Touched == true){
+            game.physics.arcade.moveToXY(player1, p1exit.x + 9, p1exit.y + 3, 300, 300) ;
+            this.game.world.addAt(player1, 10);
+            this.game.world.addAt(p1exit, 1);
+        }
+        if(p2Touched == true){
+            game.physics.arcade.moveToXY(player2, p2exit.x + 9, p2exit.y + 3, 300, 300) ;
+            this.game.world.addAt(player2, 9);
+            this.game.world.addAt(p2exit, 2);
+        }
+
+
+
 		 if(p1Touched == true && p2Touched == true){
             levelTimer++;
             if( levelTimer >= levelDelay){

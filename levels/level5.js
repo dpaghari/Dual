@@ -133,6 +133,19 @@ gameStates.level5.prototype = {
         game.physics.arcade.overlap(player1, exits, hitExit, touchedExit, this);
         game.physics.arcade.overlap(player2, exits, hitExit, touchedExit, this);
 
+
+         if(p1Touched == true){
+            game.physics.arcade.moveToXY(player1, exit.x -20, exit.y + 3, 300, 300) ;
+            this.game.world.addAt(player1, 10);
+            this.game.world.addAt(exit, 1);
+        }
+        if(p2Touched == true){
+            game.physics.arcade.moveToXY(player2, exit.x + 20, exit.y + 3, 300, 300) ;
+            this.game.world.addAt(player2, 9);
+            this.game.world.addAt(exit, 2);
+        }
+
+
         // Changes level after short delay
         if(p1Touched == true || p2Touched == true){
             levelTimer++;

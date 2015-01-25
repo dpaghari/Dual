@@ -21,8 +21,8 @@ gameStates.level12.prototype = {
         game.load.image('star', 'assets/star.png');
         game.load.image('bullet', 'assets/bullet.png');
         game.load.image('exit', 'assets/exit.png');
-        game.load.image('player1', 'assets/player1.png');
-        game.load.image('player2', 'assets/player2.png');
+        game.load.image('player1', 'assets/player1_tank.png');
+        game.load.image('player2', 'assets/player2_tank.png');
         game.load.image('player1_tank', 'assets/player1_tank.png');
         game.load.image('player2_tank', 'assets/player2_tank.png');
         game.load.image('pushblock', 'assets/firstaid.png');

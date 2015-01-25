@@ -132,6 +132,17 @@ gameStates.level10.prototype = {
 			darkness.alpha += .1;		
 		}
 
+         if(p1Touched == true){
+            game.physics.arcade.moveToXY(player1, exit.x + 9, exit.y + 3, 300, 300) ;
+            this.game.world.addAt(player1, 10);
+            this.game.world.addAt(exit, 1);
+        }
+        if(p2Touched == true){
+            game.physics.arcade.moveToXY(player2, exit.x + 9, exit.y + 3, 300, 300) ;
+            this.game.world.addAt(player2, 9);
+            this.game.world.addAt(exit, 2);
+        }
+
         if(p1Touched == true || p2Touched == true){
             levelTimer++;
             if( levelTimer >= levelDelay){
