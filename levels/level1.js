@@ -9,7 +9,7 @@ gameStates.level1.prototype = {
     // Preload all assets
     preload : function() {
 
-        game.load.image('background', 'assets/background.jpg');
+        game.load.image('background', 'assets/backgrounds/Black.jpg');
         game.load.image('ground', 'assets/ground.png');
         game.load.image('star', 'assets/star.png');
         game.load.image('bullet', 'assets/bullet.png');
@@ -18,6 +18,7 @@ gameStates.level1.prototype = {
         game.load.spritesheet('p2exit', 'assets/p2exit.png', 45, 45);
         game.load.image('wasd', 'assets/wasd.png');
         game.load.image('ijkl', 'assets/ijkl.png');
+        game.load.image('clear', 'assets/clear.png');
         game.load.image('player1', 'assets/player1.png');
         game.load.image('player2', 'assets/player2.png');
         game.load.audio('collect', 'assets/sounds/collect.mp3');
@@ -42,6 +43,9 @@ gameStates.level1.prototype = {
         //  A simple background for our game
         game.add.sprite(0, 0, 'background');
 
+        game.add.sprite(100, 200, 'wasd');
+        game.add.sprite(600, 400, 'ijkl');
+        
         //Assign it so we can reference it 
         // Parameters: song, volume (0-1), loop (boolean)
         var song1 = game.add.audio('song', .1, true);
@@ -96,12 +100,16 @@ gameStates.level1.prototype = {
 
         //  Our controls.
         cursors = game.input.keyboard.createCursorKeys();
+        
+        clear = game.add.sprite(game.width/2-100, -200, 'clear');       
+        game.physics.enable(clear, Phaser.Physics.ARCADE);
+            
 	
         
     },
 
     update : function() {
-
+   
         p1exit.animations.play('active');
         p2exit.animations.play('active');
         
@@ -128,7 +136,26 @@ gameStates.level1.prototype = {
 		}
         // Changes level after short delay
         if(p1Touched == true && p2Touched == true){
+            //create level complete sprite + move it
+
+            if (clear.y >= game.height/2 - 50){
+                clear.body.velocity.y = 0;
+                clear.body.acceleration.y = 0;
+            }
+            else {
+                clear.body.acceleration.y = 1000;
+            }
+
+            
             levelTimer++;
+            if ( levelTimer == 60 ) {
+                var levelComplete = game.add.audio('levelComplete', .1, false);
+                levelComplete.loop = false;
+                levelComplete.play();
+                levelComplete.totalDuration = .3;
+                
+            }
+            
             if( levelTimer >= levelDelay){
     			player1Score += 50;
     			player2Score += 50;
@@ -136,10 +163,7 @@ gameStates.level1.prototype = {
                 p2Touched = false;
                 levelTimer = 0;
                 
-                var levelComplete = game.add.audio('levelComplete', .1, false);
-                levelComplete.loop = false;
-                levelComplete.play();
-                levelComplete.totalDuration = .3;
+
                 game.state.start('level2');
             }
         }
