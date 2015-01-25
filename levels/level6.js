@@ -9,7 +9,17 @@ gameStates.level6.prototype = {
         game.load.image('bullet', 'assets/bullet.png');
         game.load.image('player1', 'assets/player1.png');
         game.load.image('player2', 'assets/player2.png');
-     
+        game.load.image('pushblock', 'assets/pushblock.png');
+        game.load.image('button', 'assets/diamond.png');
+
+        game.load.audio('collect', 'assets/sounds/collect.mp3');
+        game.load.audio('death', 'assets/sounds/death.mp3');
+        game.load.audio('interact', 'assets/sounds/interact.mp3');
+        game.load.audio('levelComplete', 'assets/sounds/levelComplete.mp3');
+        game.load.audio('song', 'assets/sounds/song.mp3');
+        game.load.audio('shoot', 'assets/sounds/shoot.mp3');
+        game.load.audio('moving', 'assets/sounds/moving.mp3');     
+ 
     },
 
     create : function() {

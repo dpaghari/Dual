@@ -18,7 +18,17 @@ gameStates.level3.prototype = {
         game.load.image('player1', 'assets/player1.png');
         game.load.image('player2', 'assets/player2.png');
         game.load.image('pushblock', 'assets/pushblock.png');
+        game.load.image('block', 'assets/block.png');
         game.load.image('button', 'assets/diamond.png');
+        game.load.image('button', 'assets/switch.png');
+
+        game.load.audio('collect', 'assets/sounds/collect.mp3');
+        game.load.audio('death', 'assets/sounds/death.mp3');
+        game.load.audio('interact', 'assets/sounds/interact.mp3');
+        game.load.audio('levelComplete', 'assets/sounds/levelComplete.mp3');
+        game.load.audio('song', 'assets/sounds/song.mp3');
+        game.load.audio('shoot', 'assets/sounds/shoot.mp3');
+        game.load.audio('moving', 'assets/sounds/moving.mp3');
 
     },
 
@@ -45,26 +55,6 @@ gameStates.level3.prototype = {
         //  We will enable physics for any object that is created in this group
         platforms.enableBody = true;
 
-
-        // The player and its settings
-        player1 = game.add.sprite(0, game.world.height - 150, 'player1');
-        player2 = game.add.sprite(500, game.world.height - 150, 'player2');
-        pushblock = game.add.sprite(game.world.width/2, game.world.height/2, 'pushblock');
-
-
-
-        // Place the exit door in the world
-        //exit = game.add.sprite(150, 5, 'exit');
-
-        //  We need to enable physics on the player
-        game.physics.arcade.enable(player1);
-        game.physics.arcade.enable(player2);
-        game.physics.arcade.enable(pushblock);
-
-        player1.body.collideWorldBounds = true;
-        player2.body.collideWorldBounds = true;
-        pushblock.body.collideWorldBounds = true;
-
         //  Finally some stars to collect
         stars = game.add.group();
         p1bullets = game.add.group();
@@ -79,6 +69,43 @@ gameStates.level3.prototype = {
         buttons.enableBody = true;
 
         var button = buttons.create(400, 400, 'button');
+        
+        // The player and its settings
+        player1 = game.add.sprite(0, game.world.height - 150, 'player1');
+        player2 = game.add.sprite(500, game.world.height - 150, 'player2');
+        pushblock = game.add.sprite(game.world.width/2, game.world.height/2, 'pushblock');
+        block = game.add.sprite(game.world.width/2 + 50, game.world.height/2 + 50, 'block');
+
+
+
+        // Place the exit door in the world
+        //exit = game.add.sprite(150, 5, 'exit');
+
+        //  We need to enable physics on the player
+        game.physics.arcade.enable(player1);
+        game.physics.arcade.enable(player2);
+        game.physics.arcade.enable(pushblock);
+        game.physics.arcade.enable(block);
+
+        player1.body.collideWorldBounds = true;
+        player2.body.collideWorldBounds = true;
+        pushblock.body.collideWorldBounds = true;
+
+        block.body.immovable = true;
+
+        //  Finally some stars to collect
+        stars = game.add.group();
+        p1bullets = game.add.group();
+        p2bullets = game.add.group();
+        exits = game.add.group();
+        buttons = game.add.group();
+        //  We will enable physics for any star that is created in this group
+        stars.enableBody = true;
+        p1bullets.enableBody = true;
+        p2bullets.enableBody = true;
+        exits.enableBody = true;
+        buttons.enableBody = true;
+
         //var exit = exits.create(400, 400, 'exit');
 
         //  The score
@@ -95,9 +122,10 @@ gameStates.level3.prototype = {
     update : function() {
 
          //  Collide the player and the stars with the platforms
-        game.physics.arcade.collide(player1, platforms);
-        game.physics.arcade.collide(player2, platforms);
+        game.physics.arcade.collide(player1, block);
+        game.physics.arcade.collide(player2, block);
         game.physics.arcade.collide(player1, player2);
+        game.physics.arcade.collide(player2, player1);
         game.physics.arcade.collide(stars, platforms);
         game.physics.arcade.collide(p1bullets, player2, destroyBullet);
         game.physics.arcade.collide(p2bullets, player1, destroyBullet);
