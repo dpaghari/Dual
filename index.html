@@ -36,7 +36,7 @@
 
 <script type="text/javascript">
 // Create Game Object
-var game = new Phaser.Game(800, 600, Phaser.AUTO, '', gameStates.menu);
+var game = new Phaser.Game(800, 600, Phaser.AUTO, '', gameStates.level3);
 
 game.state.add('menu', gameStates.menu);
 game.state.add('level1', gameStates.level1);
@@ -74,6 +74,7 @@ var cursors;
 var player1Score = 0;
 var player2Score = 0;
 
+var blocks;
 var stars;
 var score = 0;
 var scoreText;

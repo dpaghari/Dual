@@ -1,5 +1,7 @@
 var buttonActivated;
 var doorMade;
+var block;
+var button;
 
 gameStates.level3 = function(){};
 
@@ -19,7 +21,6 @@ gameStates.level3.prototype = {
         game.load.image('player2', 'assets/player2.png');
         game.load.image('pushblock', 'assets/pushblock.png');
         game.load.image('block', 'assets/block.png');
-        game.load.image('button', 'assets/diamond.png');
         game.load.image('button', 'assets/switch.png');
 
         game.load.audio('collect', 'assets/sounds/collect.mp3');
@@ -61,22 +62,26 @@ gameStates.level3.prototype = {
         p2bullets = game.add.group();
         exits = game.add.group();
         buttons = game.add.group();
+        blocks = game.add.group();
+
         //  We will enable physics for any star that is created in this group
         stars.enableBody = true;
         p1bullets.enableBody = true;
         p2bullets.enableBody = true;
         exits.enableBody = true;
         buttons.enableBody = true;
-
-        var button = buttons.create(400, 400, 'button');
+        blocks.enableBody = true;
         
         // The player and its settings
         player1 = game.add.sprite(0, game.world.height - 150, 'player1');
         player2 = game.add.sprite(500, game.world.height - 150, 'player2');
         pushblock = game.add.sprite(game.world.width/2, game.world.height/2, 'pushblock');
-        block = game.add.sprite(game.world.width/2 + 50, game.world.height/2 + 50, 'block');
-
-
+        button = buttons.create(650, 90, 'button');
+        block1 = blocks.create(590, 50, 'block');
+        block2 = blocks.create(650, 50, 'block');
+        block3 = blocks.create(710, 50, 'block');
+        block4 = blocks.create(590, 100, 'block');
+        block5 = blocks.create(710, 100, 'block');
 
         // Place the exit door in the world
         //exit = game.add.sprite(150, 5, 'exit');
@@ -85,28 +90,33 @@ gameStates.level3.prototype = {
         game.physics.arcade.enable(player1);
         game.physics.arcade.enable(player2);
         game.physics.arcade.enable(pushblock);
-        game.physics.arcade.enable(block);
-
+        game.physics.arcade.enable(block1);
+        game.physics.arcade.enable(block2);
+        game.physics.arcade.enable(block3);
+        game.physics.arcade.enable(block4);
+        game.physics.arcade.enable(block5);
+        
         player1.body.collideWorldBounds = true;
         player2.body.collideWorldBounds = true;
         pushblock.body.collideWorldBounds = true;
+        block1.body.collideWorldBounds = true;
+        block2.body.collideWorldBounds = true;
+        block3.body.collideWorldBounds = true;
+        block4.body.collideWorldBounds = true;
+        block5.body.collideWorldBounds = true;
 
-        block.body.immovable = true;
+        block1.body.immovable = true;
+        block2.body.immovable = true;
+        block3.body.immovable = true;
+        block4.body.immovable = true;
+        block5.body.immovable = true;
 
-        //  Finally some stars to collect
         stars = game.add.group();
         p1bullets = game.add.group();
         p2bullets = game.add.group();
         exits = game.add.group();
         buttons = game.add.group();
-        //  We will enable physics for any star that is created in this group
-        stars.enableBody = true;
-        p1bullets.enableBody = true;
-        p2bullets.enableBody = true;
-        exits.enableBody = true;
-        buttons.enableBody = true;
-
-        //var exit = exits.create(400, 400, 'exit');
+        blocks = game.add.group();
 
         //  The score
         scoreText = game.add.text(16, 16, 'Player 1 Score: ' + player1Score, { fontSize: '32px', fill: '#000' });
@@ -115,34 +125,48 @@ gameStates.level3.prototype = {
         //  Our controls.
         cursors = game.input.keyboard.createCursorKeys();
 
-
-        
     },
 
     update : function() {
 
          //  Collide the player and the stars with the platforms
-        game.physics.arcade.collide(player1, block);
-        game.physics.arcade.collide(player2, block);
         game.physics.arcade.collide(player1, player2);
         game.physics.arcade.collide(player2, player1);
-        game.physics.arcade.collide(stars, platforms);
+
         game.physics.arcade.collide(p1bullets, player2, destroyBullet);
         game.physics.arcade.collide(p2bullets, player1, destroyBullet);
         game.physics.arcade.collide(player1, pushblock);
         game.physics.arcade.collide(player2, pushblock);
-        //  Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
+
+        game.physics.arcade.collide(player1, block1);
+        game.physics.arcade.collide(player2, block1);
+        game.physics.arcade.collide(player1, block2);
+        game.physics.arcade.collide(player2, block2);
+        game.physics.arcade.collide(player1, block3);
+        game.physics.arcade.collide(player2, block3);
+        game.physics.arcade.collide(player1, block4);
+        game.physics.arcade.collide(player2, block4);
+        game.physics.arcade.collide(player1, block5);
+        game.physics.arcade.collide(player2, block5);
+
+        game.physics.arcade.collide(pushblock, block1);
+        game.physics.arcade.collide(pushblock, block2);
+        game.physics.arcade.collide(pushblock, block3);
+        game.physics.arcade.collide(pushblock, block4);
+        game.physics.arcade.collide(pushblock, block5);
+
         game.physics.arcade.overlap(pushblock, buttons, blockExit, null, this);
+
         game.physics.arcade.overlap(player1, exits, hitExit, touchedExit, this);
         game.physics.arcade.overlap(player2, exits, hitExit, touchedExit, this);
-       
+
+        game.physics.arcade.collide(p1bullets, blocks, hitBlock);
+        game.physics.arcade.collide(p2bullets, blocks, hitBlock);
 
        if(buttonActivated == true){
-        
-            if(doorMade == false){
-                
-            exitDoor = exits.create(30, 300, 'exit');
-            doorMade = true;
+            if(doorMade == false){   
+                exitDoor = exits.create(30, 300, 'exit');
+                doorMade = true;
             }
             buttonActivated = false;
         }
