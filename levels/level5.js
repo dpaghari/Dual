@@ -5,7 +5,7 @@ gameStates.level5.prototype = {
     // Preload all assets
     preload : function() {
 
-        game.load.image('background', 'assets/background.jpg');
+        game.load.image('background', 'assets/backgrounds/White.jpg');
         game.load.image('exit', 'assets/exit.png');
         game.load.image('player1', 'assets/player1.png');
         game.load.image('player2', 'assets/player2.png');
