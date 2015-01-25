@@ -82,7 +82,7 @@ gameStates.level1.prototype = {
         p2exit = p2exits.create(500, 500, 'p2exit');
         p2exit.animations.add('active', [0, 1, 2, 3, 4], 10, true);
         //  The score
-        scoreText = game.add.text(16, 16, 'P1: ' + player1Score, { fontSize: '32px', fill: '#000' });
+        scoreText = game.add.text(100, 16, 'P1: ' + player1Score, { fontSize: '32px', fill: '#000' });
 		scoreText = game.add.text(game.world.width - 160, 16, 'P2: ' + player2Score, { fontSize: '32px', fill: '#000' });
 
         //  Our controls.
@@ -113,7 +113,7 @@ gameStates.level1.prototype = {
 			this.game.world.addAt(p1exit, 1);
 		}
 		if(p2Touched == true){
-			game.physics.arcade.moveToXY(player1, p1exit.x + 9, p1exit.y + 3, 300, 300) ;
+			game.physics.arcade.moveToXY(player2, p2exit.x + 9, p2exit.y + 3, 300, 300) ;
 			this.game.world.addAt(player2, 9);
 			this.game.world.addAt(p2exit, 2);
 		}

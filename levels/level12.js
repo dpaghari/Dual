@@ -125,7 +125,7 @@ gameStates.level12.prototype = {
         exits.enableBody = true;
 
         //  The score
-        player1ScoreText = game.add.text(16, 16, 'Player 1 Score: ' + player1Score, { fontSize: '32px', fill: '#000' });
+        player1ScoreText = game.add.text(100, 16, 'Player 1 Score: ' + player1Score, { fontSize: '32px', fill: '#000' });
 		player2ScoreText = game.add.text(game.world.width - 160, 16, 'Player 2 Score: ' + player2Score, { fontSize: '32px', fill: '#000' });
 
         //  Our controls.
@@ -203,6 +203,11 @@ gameStates.level12.prototype = {
 		bossShootTimer++;
         moveChar();
         shootBullet();    
+		
+		if(bossShootTimer > 20) {
+			bossShootTimer = 0;
+			bossShoot();
+		}
 
         if (bossHP <= 50) {
             var levelComplete = game.add.audio('levelComplete', .1, false);
