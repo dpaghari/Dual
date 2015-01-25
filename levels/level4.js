@@ -152,7 +152,7 @@ gameStates.level4.prototype = {
         shootBullet();    
 
         if (score >=5000) {
-            game.state.start('level1');
+            game.state.start('level9');
         }    
     }
 }
