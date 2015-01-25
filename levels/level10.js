@@ -129,7 +129,7 @@ gameStates.level10.prototype = {
 			exit.y = game.world.height * Math.random(); 
 		}
 
-        if(p1Touched == true && p2Touched == true){
+        if(p1Touched == true || p2Touched == true){
             levelTimer++;
             if( levelTimer >= levelDelay){
                 p1Touched = false;
