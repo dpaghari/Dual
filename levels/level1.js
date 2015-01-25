@@ -82,11 +82,14 @@ gameStates.level1.prototype = {
         game.physics.arcade.collide(p1bullets, player2, destroyBullet);
         game.physics.arcade.collide(p2bullets, player1, destroyBullet);
 
-        //  Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
-      
-        game.physics.arcade.overlap(player1, exits, hitExit, null, this);
-        game.physics.arcade.overlap(player2, exits, hitExit, null, this);
+        game.physics.arcade.overlap(player1, exits, hitExit, touchedExit, this);
+        game.physics.arcade.overlap(player2, exits, hitExit, touchedExit, this);
         
+        if(game.time.now - timeCheck > 2000) {
+            p1Touched = false;
+            p2Touched = false;
+            game.state.start('level2');
+        }
 
         p1shootTimer++;
         p2shootTimer++;
