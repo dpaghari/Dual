@@ -12,7 +12,7 @@ gameStates.level10.prototype = {
         game.load.image('exit', 'assets/exit.png');
         game.load.image('player1', 'assets/player1.png');
         game.load.image('player2', 'assets/player2.png');
-        game.load.image('pushblock', 'assets/firstaid.png');
+        game.load.image('pushblock', 'assets/pushblock.png');
 		game.load.image('darkness', 'assets/darkness.png');
 
     },
@@ -70,8 +70,8 @@ gameStates.level10.prototype = {
         exit = exits.create(400, 400, 'exit');
 
         //  The score
-        scoreText = game.add.text(16, 16, 'Player 1 Score: ' + player1Score, { fontSize: '32px', fill: '#000' });
-		scoreText = game.add.text(game.world.width - 260, 16, 'Player 2 Score: ' + player2Score, { fontSize: '32px', fill: '#000' });
+        scoreText = game.add.text(16, 16, 'P1: ' + player1Score, { fontSize: '32px', fill: '#000' });
+		scoreText = game.add.text(game.world.width - 160, 16, 'P2: ' + player2Score, { fontSize: '32px', fill: '#000' });
 
         //  Our controls.
 		lightTimer = 0;

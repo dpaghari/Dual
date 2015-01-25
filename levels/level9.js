@@ -17,13 +17,14 @@ gameStates.level9.prototype = {
         game.load.image('exit', 'assets/exit.png');
         game.load.image('player1', 'assets/player1.png');
         game.load.image('player2', 'assets/player2.png');
-        //game.load.audio('collect', 'assets/sounds/collect.mp3');
-        //game.load.audio('death', 'assets/sounds/death.mp3');
-        //game.load.audio('interact', 'assets/sounds/interact.mp3');
-        //game.load.audio('levelComplete', 'assets/sounds/levelComplete.mp3');
-        //game.load.audio('song', 'assets/sounds/song.mp3');
-        //game.load.audio('shoot', 'assets/sounds/shoot.mp3');
-        //game.load.audio('moving', 'assets/sounds/moving.mp3');
+        
+        game.load.audio('collect', 'assets/sounds/collect.mp3');
+        game.load.audio('death', 'assets/sounds/death.mp3');
+        game.load.audio('interact', 'assets/sounds/interact.mp3');
+        game.load.audio('levelComplete', 'assets/sounds/levelComplete.mp3');
+        game.load.audio('song', 'assets/sounds/song.mp3');
+        game.load.audio('shoot', 'assets/sounds/shoot.mp3');
+        game.load.audio('moving', 'assets/sounds/moving.mp3');
     },
 
     create : function() {
@@ -85,8 +86,8 @@ gameStates.level9.prototype = {
 		}
 
         //  The score
-        player1ScoreText = game.add.text(16, 16, 'Player 1 Score: ' + player1Score, { fontSize: '32px', fill: '#000' });
-		player2ScoreText = game.add.text(game.world.width - 260, 16, 'Player 2 Score: ' + player2Score, { fontSize: '32px', fill: '#000' });
+        player1ScoreText = game.add.text(16, 16, 'P1: ' + player1Score, { fontSize: '32px', fill: '#000' });
+		player2ScoreText = game.add.text(game.world.width - 160, 16, 'P2: ' + player2Score, { fontSize: '32px', fill: '#000' });
 
         //  Our controls.
         cursors = game.input.keyboard.createCursorKeys();

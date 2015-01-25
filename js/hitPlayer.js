@@ -1,7 +1,12 @@
-function hitPlayer (player1, player2, bullet) {
+function hitPlayer (player, bullet) {
     
+	bulelt.kill();
     // Removes the bullet from the screen
-    player1.kill();
+    if(player == player1) {
+		player1HP -= 1;
+	} else {
+		player2HP -= 1;
+	}
 
     console.log('player hit!');
 }

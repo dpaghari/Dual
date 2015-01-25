@@ -11,6 +11,7 @@ gameStates.level5.prototype = {
         game.load.image('player2', 'assets/player2.png');
         game.load.image('block', 'assets/block.png');
         game.load.image('bullet', 'assets/bullet.png');
+        
         game.load.audio('collect', 'assets/sounds/collect.mp3');
         game.load.audio('death', 'assets/sounds/death.mp3');
         game.load.audio('interact', 'assets/sounds/interact.mp3');
@@ -76,8 +77,8 @@ gameStates.level5.prototype = {
        
         
         //  The score
-        scoreText = game.add.text(16, 16, 'Player 1 Score: ' + player1Score, { fontSize: '32px', fill: '#000' });
-		scoreText = game.add.text(game.world.width - 260, 16, 'Player 2 Score: ' + player2Score, { fontSize: '32px', fill: '#000' });
+        scoreText = game.add.text(16, 16, 'P1: ' + player1Score, { fontSize: '32px', fill: '#000' });
+		scoreText = game.add.text(game.world.width - 160, 16, 'P2: ' + player2Score, { fontSize: '32px', fill: '#000' });
 
         cursors = game.input.keyboard.createCursorKeys();
         
