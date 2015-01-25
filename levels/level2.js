@@ -1,6 +1,8 @@
 var buttonActivated;
 var doorMade;
 var exitDoor;
+var randX;
+var randY;
 gameStates.level2 = function(){};
 
 gameStates.level2.prototype = {
@@ -117,11 +119,12 @@ gameStates.level2.prototype = {
         game.physics.arcade.overlap(player2, exits, hitExit, touchedExit, this);
         
         if(buttonActivated == true){
-      
+        randX = Math.random() * 700;
+        randY = Math.random() * 500;
 
             if(doorMade == false){
             
-            exitDoor = exits.create(400, 50, 'exit');
+            exitDoor = exits.create(randX, randY, 'exit');
             doorMade = true;
             }
             buttonActivated = false;
