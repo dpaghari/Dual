@@ -24,8 +24,8 @@ gameStates.level6.prototype = {
 
         //  A simple background for our game
         game.add.sprite(0, 0, 'background');
-        p1Plat = game.add.sprite(game.world.width/2 - 200, game.world.height/2, 'lvl6platforms');
-        p2Plat = game.add.sprite(game.world.width/2 + 200, game.world.height/2, 'lvl6platforms');
+        p1Plat = game.add.sprite(game.world.width/2-300, game.world.height/2 -50, 'lvl6platforms');
+        p2Plat = game.add.sprite(game.world.width/2+150, game.world.height/2 -50, 'lvl6platforms');
 
         //Adjust screen size
         this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
@@ -34,8 +34,8 @@ gameStates.level6.prototype = {
         this.scale.setScreenSize(true);
 
         // The player and its settings
-        player1 = game.add.sprite(game.world.width/2 - 200, game.world.height/2, 'player1');
-        player2 = game.add.sprite(game.world.width/2 + 200, game.world.height/2, 'player2');
+        player1 = game.add.sprite(p1Plat.x + p1Plat.width/2, p1Plat.y + p1Plat.height/2, 'player1');
+        player2 = game.add.sprite(p2Plat.x + p2Plat.width/2, p2Plat.y + p2Plat.height/2, 'player2');
 
         //  We need to enable physics on the player
         game.physics.arcade.enable(player1);
