@@ -12,7 +12,7 @@ gameStates.level11.prototype = {
     // Preload all assets
     preload : function() {
 
-        game.load.image('background', 'assets/background.png');
+        game.load.image('background', 'assets/background.jpg');
         game.load.image('ground', 'assets/ground.png');
         game.load.image('star', 'assets/star.png');
         game.load.image('exit', 'assets/exit.png');
@@ -112,12 +112,13 @@ gameStates.level11.prototype = {
         
         if(buttonActivated == true){
             if(doorMade == false){
-            var exitDoor;
-            exitDoor = exits.create(300, 10, 'exit');
-            doorMade == true;
+                var exitDoor;
+                exitDoor = exits.create(300, 10, 'exit');
+                doorMade == true;
             }
             buttonActivated = false;
         }
+
         p1shootTimer++;
         p2shootTimer++;
 		movementTimer++;
@@ -125,21 +126,20 @@ gameStates.level11.prototype = {
 			movementType = Math.floor((Math.random() * 4));
 			movementTimer = 0;
 		}
+
         moveCharInverted(movementType);
         shootBullet();
         pushblock.body.velocity.x = 0;
         pushblock.body.velocity.y = 0;
 
              if(p1Touched == true && p2Touched == true){
-            levelTimer++;
-            console.log(levelTimer);
-            if( levelTimer >= levelDelay){
-            p1Touched = false;
-            p2Touched = false;
-            levelTimer = 0;
-            game.state.start('level1');
-            
-            }
+                levelTimer++;
+                if( levelTimer >= levelDelay){
+                    p1Touched = false;
+                    p2Touched = false;
+                    levelTimer = 0;
+                    game.state.start('menu');
+                }
         }
     }
 }

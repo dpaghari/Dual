@@ -7,7 +7,7 @@ gameStates.level9.prototype = {
     // Preload all assets
     preload : function() {
 
-        game.load.image('background', 'assets/background.png');
+        game.load.image('background', 'assets/background.jpg');
         game.load.image('ground', 'assets/ground.png');
         game.load.image('star', 'assets/star.png');
 		//game.load.image('star', 'assets/star.png');
@@ -121,7 +121,6 @@ gameStates.level9.prototype = {
 		}
 		 if(p1Touched == true && p2Touched == true){
             levelTimer++;
-            console.log(levelTimer);
             if( levelTimer >= levelDelay){
             p1Touched = false;
             p2Touched = false;

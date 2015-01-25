@@ -7,7 +7,7 @@ gameStates.level1.prototype = {
     // Preload all assets
     preload : function() {
 
-        game.load.image('background', 'assets/background.png');
+        game.load.image('background', 'assets/background.jpg');
         game.load.image('ground', 'assets/ground.png');
         game.load.image('star', 'assets/star.png');
         game.load.image('exit', 'assets/exit.png');
@@ -17,6 +17,8 @@ gameStates.level1.prototype = {
         game.load.audio('death', 'assets/sounds/death.mp3');
         game.load.audio('interact', 'assets/sounds/interact.mp3');
         game.load.audio('levelComplete', 'assets/sounds/levelComplete.mp3');
+        game.load.audio('main_menu', 'assets/sounds/main_menu.mp3');
+        game.load.audio('main_menu_select', 'assets/sounds/main_menu_select.mp3');
         game.load.audio('song', 'assets/sounds/song.mp3');
         game.load.audio('shoot', 'assets/sounds/shoot.mp3');
         game.load.audio('moving', 'assets/sounds/moving.mp3');
@@ -79,11 +81,7 @@ gameStates.level1.prototype = {
 
     update : function() {
 
-<<<<<<< HEAD
-        //  Collide the player and the stars with the platforms    
-=======
         //  Collide the player and the stars with the platforms
->>>>>>> 82037c7cbbd0bea967e0e57ae13b2292fd0b6148
         game.physics.arcade.collide(player1, player2);
         game.physics.arcade.collide(p1bullets, player2, destroyBullet);
         game.physics.arcade.collide(p2bullets, player1, destroyBullet);
@@ -98,7 +96,6 @@ gameStates.level1.prototype = {
         // Changes level after short delay
         if(p1Touched == true && p2Touched == true){
             levelTimer++;
-            console.log(levelTimer);
             if( levelTimer >= levelDelay){
             p1Touched = false;
             p2Touched = false;
