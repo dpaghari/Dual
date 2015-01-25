@@ -49,7 +49,6 @@ function Shoot(player,playerDir){
         case 'down':
         createBullet(player, playerDir);
         break;
-
     }
 }
 function createBullet(player, playerDir){

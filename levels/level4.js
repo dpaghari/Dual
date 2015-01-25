@@ -48,9 +48,16 @@ gameStates.level4.prototype = {
         // The player and its settings
         player1 = game.add.sprite(20, game.world.height - 325, 'player1');
         player2 = game.add.sprite(750, game.world.height - 325, 'player2');
-        for (var i = 0; i <12; i++) {
-            block = game.add.sprite(game.world.width/i, game.world.height/i, 'block');
-        }
+
+        block1 = game.add.sprite(200, 50, 'block');
+        block2 = game.add.sprite(200, 250, 'block');
+        block3 = game.add.sprite(200, 350, 'block');
+        block4 = game.add.sprite(200, 550, 'block');
+
+        block5 = game.add.sprite(500, 50, 'block');
+        block6 = game.add.sprite(500, 250, 'block');
+        block7 = game.add.sprite(500, 350, 'block');
+        block8 = game.add.sprite(500, 550, 'block');
 
         // Place the exit door in the world
         //exit = game.add.sprite(150, 5, 'exit');
@@ -58,11 +65,27 @@ gameStates.level4.prototype = {
         //  We need to enable physics on the player
         game.physics.arcade.enable(player1);
         game.physics.arcade.enable(player2);
-        game.physics.arcade.enable(block);
+
+        game.physics.arcade.enable(block1);
+        game.physics.arcade.enable(block2);
+        game.physics.arcade.enable(block3);
+        game.physics.arcade.enable(block4);
+        game.physics.arcade.enable(block5);
+        game.physics.arcade.enable(block6);
+        game.physics.arcade.enable(block7);
+        game.physics.arcade.enable(block8);
 
         player1.body.collideWorldBounds = true;
         player2.body.collideWorldBounds = true;
-        block.body.collideWorldBounds = true;
+
+        block1.body.immovable = true;
+        block2.body.immovable = true;
+        block3.body.immovable = true;
+        block4.body.immovable = true;
+        block5.body.immovable = true;
+        block6.body.immovable = true;
+        block7.body.immovable = true;
+        block8.body.immovable = true;
 
         //  Finally some stars to collect
         stars = game.add.group();
@@ -77,13 +100,10 @@ gameStates.level4.prototype = {
         exits.enableBody = true;
 
         //  The score
-        scoreText = game.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+        scoreText = game.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000', style: 'Nunito' });
 
         //  Our controls.
         cursors = game.input.keyboard.createCursorKeys();
-
-
-        
     },
 
     update : function() {
@@ -95,8 +115,24 @@ gameStates.level4.prototype = {
         game.physics.arcade.collide(stars, platforms);
         game.physics.arcade.collide(p1bullets, player2, destroyBullet);
         game.physics.arcade.collide(p2bullets, player1, destroyBullet);
-        game.physics.arcade.collide(player1, block);
-        game.physics.arcade.collide(player2, block);
+
+        game.physics.arcade.collide(player1, block1);
+        game.physics.arcade.collide(player2, block1);
+        game.physics.arcade.collide(player1, block2);
+        game.physics.arcade.collide(player2, block2);
+        game.physics.arcade.collide(player1, block3);
+        game.physics.arcade.collide(player2, block3);
+        game.physics.arcade.collide(player1, block4);
+        game.physics.arcade.collide(player2, block4);
+        game.physics.arcade.collide(player1, block5);
+        game.physics.arcade.collide(player2, block5);
+        game.physics.arcade.collide(player1, block6);
+        game.physics.arcade.collide(player2, block6);
+        game.physics.arcade.collide(player1, block7);
+        game.physics.arcade.collide(player2, block7);
+        game.physics.arcade.collide(player1, block8);
+        game.physics.arcade.collide(player2, block8);
+
         //  Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
         
 
@@ -109,7 +145,11 @@ gameStates.level4.prototype = {
         p1shootTimer++;
         p2shootTimer++;
         moveChar();
-        shootBullet();        
+        shootBullet();    
+
+        if (score >=5000) {
+            game.state.start('level1');
+        }    
     }
 }
 
