@@ -38,7 +38,6 @@ function moveChar(){
     }, this);
 
     Akey.onDown.add(function(Akey) {
-
     }, this);
 
     if (p1Touched == false) {
@@ -134,6 +133,31 @@ function moveChar(){
 	var Jkey = game.input.keyboard.addKey(Phaser.Keyboard.J);
 	var Kkey = game.input.keyboard.addKey(Phaser.Keyboard.K);
 	var Lkey = game.input.keyboard.addKey(Phaser.Keyboard.L);
+
+    Ikey.onDown.add(function(Ikey) {
+        // Set Anchor to the center of your sprite
+        player2.anchor.setTo(1, 1);
+
+        // Invert scale.x to flip left/right
+        player2.scale.x = -1;
+
+        // Invert scale.y to flip up/down
+        player2.scale.y = -1;
+
+    }, this);
+
+    Kkey.onDown.add(function(Kkey) {
+        // Set Anchor to the center of your sprite
+        player2.anchor.setTo(0, 0);
+
+        // Invert scale.x to flip left/right
+        player2.scale.x = 1;
+
+        // Invert scale.y to flip up/down
+        player2.scale.y = 1;
+
+    }, this);
+
     if (p2Touched == false) {
         if (Jkey.isDown)				// Move Left
         {
