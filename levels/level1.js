@@ -98,11 +98,17 @@ gameStates.level1.prototype = {
       
         game.physics.arcade.overlap(player1, exits, hitExit, touchedExit, this);
         game.physics.arcade.overlap(player2, exits, hitExit, touchedExit, this);
-        
-        if (game.time.now - timeCheck > 2000) {
+        if(p1Touched == true && p2Touched == true){
+
+            levelTimer++;
+            console.log(levelTimer);
+            if( levelTimer >= levelDelay){
             p1Touched = false;
             p2Touched = false;
+            levelTimer = 0;
             game.state.start('level2');
+            
+            }
         }
         
 

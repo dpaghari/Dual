@@ -8,11 +8,13 @@ function moveChar(){
 	var Akey = game.input.keyboard.addKey(Phaser.Keyboard.A);
 	var Skey = game.input.keyboard.addKey(Phaser.Keyboard.S);
 	var Dkey = game.input.keyboard.addKey(Phaser.Keyboard.D);
+    // Sound for player movement
+    //Assign it so we can reference it 
+    // Parameters: song, volume (0-1), loop (boolean)
+    var moving = game.add.audio('moving', .05, false);
+
     if (p1Touched == false) {
-        // Sound for player movement
-        //Assign it so we can reference it 
-        // Parameters: song, volume (0-1), loop (boolean)
-        var moving = game.add.audio('moving', .05, false);
+       
 
         if (Akey.isDown)				// Move Left
         {
