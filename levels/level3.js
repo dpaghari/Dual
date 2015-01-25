@@ -86,37 +86,10 @@ gameStates.level3.prototype = {
         block9 = blocks.create(590, 100, 'block');
         block10 = blocks.create(710, 100, 'block');
 
-        game.physics.arcade.collide(player1, block1);
-        game.physics.arcade.collide(player2, block1);
-        game.physics.arcade.collide(player1, block2);
-        game.physics.arcade.collide(player2, block2);
-        game.physics.arcade.collide(player1, block3);
-        game.physics.arcade.collide(player2, block3);
-        game.physics.arcade.collide(player1, block4);
-        game.physics.arcade.collide(player2, block4);
-        game.physics.arcade.collide(player1, block5);
-        game.physics.arcade.collide(player2, block5);
-        game.physics.arcade.collide(player1, block6);
-        game.physics.arcade.collide(player2, block6);
-        game.physics.arcade.collide(player1, block7);
-        game.physics.arcade.collide(player2, block7);
-        game.physics.arcade.collide(player1, block8);
-        game.physics.arcade.collide(player2, block8);
-        game.physics.arcade.collide(player1, block9);
-        game.physics.arcade.collide(player2, block9);
-        game.physics.arcade.collide(player1, block10);
-        game.physics.arcade.collide(player2, block10);
+        game.physics.arcade.collide(player1, blocks);
+        game.physics.arcade.collide(player2, blocks);
 
-        game.physics.arcade.collide(pushblock, block1);
-        game.physics.arcade.collide(pushblock, block2);
-        game.physics.arcade.collide(pushblock, block3);
-        game.physics.arcade.collide(pushblock, block4);
-        game.physics.arcade.collide(pushblock, block5);
-        game.physics.arcade.collide(pushblock, block6);
-        game.physics.arcade.collide(pushblock, block7);
-        game.physics.arcade.collide(pushblock, block8);
-        game.physics.arcade.collide(pushblock, block9);
-        game.physics.arcade.collide(pushblock, block10);
+        game.physics.arcade.collide(pushblock, blocks);
 
         block1.body.collideWorldBounds = true;
         block2.body.collideWorldBounds = true;
@@ -147,16 +120,7 @@ gameStates.level3.prototype = {
         game.physics.arcade.enable(player1);
         game.physics.arcade.enable(player2);
         game.physics.arcade.enable(pushblock);
-        game.physics.arcade.enable(block1);
-        game.physics.arcade.enable(block2);
-        game.physics.arcade.enable(block3);
-        game.physics.arcade.enable(block4);
-        game.physics.arcade.enable(block5);
-        game.physics.arcade.enable(block6);
-        game.physics.arcade.enable(block7);
-        game.physics.arcade.enable(block8);
-        game.physics.arcade.enable(block9);
-        game.physics.arcade.enable(block10);
+        game.physics.arcade.enable(blocks);
 
         player1.body.collideWorldBounds = true;
         player2.body.collideWorldBounds = true;
@@ -184,30 +148,13 @@ gameStates.level3.prototype = {
         game.physics.arcade.collide(p2bullets, player1, destroyBullet);
         game.physics.arcade.collide(player1, pushblock);
         game.physics.arcade.collide(player2, pushblock);
+        game.physics.arcade.collide(pushblock, blocks);
         //  Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
         game.physics.arcade.overlap(pushblock, buttons, blockExit, null, this);
         game.physics.arcade.overlap(player1, exits, hitExit, touchedExit, this);
         game.physics.arcade.overlap(player2, exits, hitExit, touchedExit, this);
-        game.physics.arcade.collide(player1, block1);
-        game.physics.arcade.collide(player2, block1);
-        game.physics.arcade.collide(player1, block2);
-        game.physics.arcade.collide(player2, block2);
-        game.physics.arcade.collide(player1, block3);
-        game.physics.arcade.collide(player2, block3);
-        game.physics.arcade.collide(player1, block4);
-        game.physics.arcade.collide(player2, block4);
-        game.physics.arcade.collide(player1, block5);
-        game.physics.arcade.collide(player2, block5);
-        game.physics.arcade.collide(player1, block6);
-        game.physics.arcade.collide(player2, block6);
-        game.physics.arcade.collide(player1, block7);
-        game.physics.arcade.collide(player2, block7);
-        game.physics.arcade.collide(player1, block8);
-        game.physics.arcade.collide(player2, block8);
-        game.physics.arcade.collide(player1, block9);
-        game.physics.arcade.collide(player2, block9);
-        game.physics.arcade.collide(player1, block10);
-        game.physics.arcade.collide(player2, block10);
+        game.physics.arcade.collide(player1, blocks);
+        game.physics.arcade.collide(player2, blocks);
         
         if(buttonActivated == true){
         randX = Math.random() * 700;

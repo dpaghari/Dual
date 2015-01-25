@@ -47,16 +47,6 @@ gameStates.level1.prototype = {
         this.scale.pageAlignHorizontally = true;
         this.scale.pageAlignVertically = true;
         this.scale.setScreenSize(true);
-        
-        
-        //p1exit
-        p1exit = game.add.sprite(100, 100, 'p1exit');
-        p1exit.animations.add('active', [0, 1, 2, 3, 4], 10, true);
-        
-        //p2exit
-        p2exit = game.add.sprite(500, 500, 'p2exit');
-        p2exit.animations.add('active', [0, 1, 2, 3, 4], 10, true);
-        
 
         // The player and its settings
         player1 = game.add.sprite(32, game.world.height - 150, 'player1');
@@ -75,14 +65,22 @@ gameStates.level1.prototype = {
         //  Finally some stars to collect
         p1bullets = game.add.group();
         p2bullets = game.add.group();
-        exits = game.add.group();
+        p1exits = game.add.group();
+        p2exits = game.add.group();
 
         //  We will enable physics for any star that is created in this group
         p1bullets.enableBody = true;
         p2bullets.enableBody = true;
-        exits.enableBody = true;
-        var exit = exits.create(400, 400, 'exit');
-
+        p1exits.enableBody = true;
+        p2exits.enableBody = true;
+        //var exit = exits.create(400, 400, 'exit');
+          //p1exit
+        p1exit = p1exits.create(100, 100, 'p1exit');
+        p1exit.animations.add('active', [0, 1, 2, 3, 4], 10, true);
+        
+        //p2exit
+        p2exit = p2exits.create(500, 500, 'p2exit');
+        p2exit.animations.add('active', [0, 1, 2, 3, 4], 10, true);
         //  The score
         scoreText = game.add.text(16, 16, 'P1: ' + player1Score, { fontSize: '32px', fill: '#000' });
 		scoreText = game.add.text(game.world.width - 160, 16, 'P2: ' + player2Score, { fontSize: '32px', fill: '#000' });
@@ -106,8 +104,8 @@ gameStates.level1.prototype = {
 
         //  Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
       
-        game.physics.arcade.overlap(player1, exits, hitExit, touchedExit, this);
-        game.physics.arcade.overlap(player2, exits, hitExit, touchedExit, this);
+        game.physics.arcade.overlap(player1, p1exits, hitExit, touchedExit, this);
+        game.physics.arcade.overlap(player2, p2exits, hitExit, touchedExit, this);
         
         // Changes level after short delay
         if(p1Touched == true && p2Touched == true){
