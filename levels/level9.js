@@ -1,4 +1,7 @@
 gameStates.level9 = function(){};
+var player1ScoreText;
+var player2ScoreText;
+var updateTimer;
 
 
 
@@ -10,7 +13,7 @@ gameStates.level9.prototype = {
         game.load.image('background', 'assets/background.jpg');
         game.load.image('ground', 'assets/ground.png');
         game.load.image('star', 'assets/star.png');
-		//game.load.image('star', 'assets/star.png');
+		game.load.image('bullet', 'assets/bullet.png');
         game.load.image('exit', 'assets/exit.png');
         game.load.image('player1', 'assets/player1.png');
         game.load.image('player2', 'assets/player2.png');
@@ -24,7 +27,7 @@ gameStates.level9.prototype = {
     },
 
     create : function() {
-
+		updateTimer = 0;
         //  We're going to be using physics, so enable the Arcade Physics system
         game.physics.startSystem(Phaser.Physics.ARCADE);
 
@@ -82,8 +85,8 @@ gameStates.level9.prototype = {
 		}
 
         //  The score
-        scoreText = game.add.text(16, 16, 'Player 1 Score: ' + player1Score, { fontSize: '32px', fill: '#000' });
-		scoreText = game.add.text(game.world.width - 260, 16, 'Player 2 Score: ' + player2Score, { fontSize: '32px', fill: '#000' });
+        player1ScoreText = game.add.text(16, 16, 'Player 1 Score: ' + player1Score, { fontSize: '32px', fill: '#000' });
+		player2ScoreText = game.add.text(game.world.width - 260, 16, 'Player 2 Score: ' + player2Score, { fontSize: '32px', fill: '#000' });
 
         //  Our controls.
         cursors = game.input.keyboard.createCursorKeys();
@@ -112,7 +115,12 @@ gameStates.level9.prototype = {
         game.physics.arcade.overlap(player1, exits, hitExit, touchedExit, this);
         game.physics.arcade.overlap(player2, exits, hitExit, touchedExit, this);
         
-		
+		updateTimer++;
+		if(updateTimer >= 10) {
+			player1ScoreText.setText('Player 1 Score: ' + player1Score);
+			player2ScoreText.setText('Player 2 Score: ' + player2Score);
+			updateTimer = 0;
+		}
 		if(stars.length < 5) {
 			createRandomCoin();
 		}		

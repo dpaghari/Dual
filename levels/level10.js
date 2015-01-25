@@ -1,14 +1,6 @@
-var buttonActivated;
-var doorMade;
-var lightTimer;
-var dark;
-var exit;
-
 gameStates.level10 = function(){};
 
 gameStates.level10.prototype = {
-
-
 
     // Preload all assets
     preload : function() {
@@ -16,6 +8,7 @@ gameStates.level10.prototype = {
         game.load.image('background', 'assets/background.jpg');
         game.load.image('ground', 'assets/ground.png');
         game.load.image('star', 'assets/star.png');
+        game.load.image('bullet', 'assets/bullet.png');
         game.load.image('exit', 'assets/exit.png');
         game.load.image('player1', 'assets/player1.png');
         game.load.image('player2', 'assets/player2.png');
@@ -77,15 +70,13 @@ gameStates.level10.prototype = {
         exit = exits.create(400, 400, 'exit');
 
         //  The score
-        scoreText = game.add.text(16, 16, 'Player 1 Score: 0', { fontSize: '32px', fill: '#000' });
-		scoreText = game.add.text(game.world.width - 260, 16, 'Player 2 Score: 0', { fontSize: '32px', fill: '#000' });
+        scoreText = game.add.text(16, 16, 'Player 1 Score: ' + player1Score, { fontSize: '32px', fill: '#000' });
+		scoreText = game.add.text(game.world.width - 260, 16, 'Player 2 Score: ' + player2Score, { fontSize: '32px', fill: '#000' });
 
         //  Our controls.
 		lightTimer = 0;
 		dark = false;
         cursors = game.input.keyboard.createCursorKeys();
-
-
         
     },
 
@@ -129,9 +120,16 @@ gameStates.level10.prototype = {
 			exit.y = game.world.height * Math.random(); 
 		}
 
-        if(p1Touched == true && p2Touched == true){
+        if(p1Touched == true || p2Touched == true){
             levelTimer++;
             if( levelTimer >= levelDelay){
+                if(p1Touched == true){
+                    player1Score += 50;
+
+                }
+                else{
+                    player2Score += 50;
+                }
                 p1Touched = false;
                 p2Touched = false;
                 levelTimer = 0;

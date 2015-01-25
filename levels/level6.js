@@ -1,11 +1,9 @@
-//var buttonActivated;
-//var doorMade;
-var movementTimer;
-var movementType;
+var buttonActivated;
+var doorMade;
 
-gameStates.level11 = function(){};
+gameStates.level6 = function(){};
 
-gameStates.level11.prototype = {
+gameStates.level6.prototype = {
 
 
 
@@ -25,6 +23,8 @@ gameStates.level11.prototype = {
     },
 
     create : function() {
+        
+        
         buttonActivated = false;
         doorMade = false;
         //  We're going to be using physics, so enable the Arcade Physics system
@@ -38,14 +38,12 @@ gameStates.level11.prototype = {
         this.scale.pageAlignHorizontally = true;
         this.scale.pageAlignVertically = true;
         this.scale.setScreenSize(true);
-		movementTimer = 0;
-		movementType = 1;
         
         //  The platforms group contains the ground and the 2 ledges we can jump on
-        //platforms = game.add.group();
+        platforms = game.add.group();
 
         //  We will enable physics for any object that is created in this group
-        //platforms.enableBody = true;
+        platforms.enableBody = true;
 
 
         // The player and its settings
@@ -73,7 +71,6 @@ gameStates.level11.prototype = {
         p2bullets = game.add.group();
         exits = game.add.group();
         buttons = game.add.group();
-
         //  We will enable physics for any star that is created in this group
         stars.enableBody = true;
         p1bullets.enableBody = true;
@@ -98,20 +95,20 @@ gameStates.level11.prototype = {
     update : function() {
 
          //  Collide the player and the stars with the platforms
-        //game.physics.arcade.collide(player1, platforms);
-        //game.physics.arcade.collide(player2, platforms);
+        game.physics.arcade.collide(player1, platforms);
+        game.physics.arcade.collide(player2, platforms);
         game.physics.arcade.collide(player1, player2);
-        //game.physics.arcade.collide(stars, platforms);
+        game.physics.arcade.collide(stars, platforms);
         game.physics.arcade.collide(p1bullets, player2, destroyBullet);
         game.physics.arcade.collide(p2bullets, player1, destroyBullet);
         game.physics.arcade.collide(player1, pushblock);
         game.physics.arcade.collide(player2, pushblock);
         //  Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
         game.physics.arcade.overlap(pushblock, buttons, blockExit, null, this);
-        
         game.physics.arcade.overlap(player1, exits, hitExit, touchedExit, this);
         game.physics.arcade.overlap(player2, exits, hitExit, touchedExit, this);
-        
+       
+
        if(buttonActivated == true){
             if(doorMade == false){
             
@@ -127,31 +124,34 @@ gameStates.level11.prototype = {
             }
         }
 
+        if(p1Touched == true || p2Touched == true){
+
+            levelTimer++;
+            if( levelTimer >= levelDelay){
+			if(p1Touched == true) {
+				player2Score += 50;
+			} else {
+				player1Score += 50;
+			}
+            p1Touched = false;
+            p2Touched = false;
+            levelTimer = 0;
+
+            var levelComplete = game.add.audio('levelComplete', .1, false);
+            levelComplete.loop = false;
+            levelComplete.play();
+            levelComplete.totalDuration = .2;
+            game.state.start('level9');
+            
+            }
+        }
+
         p1shootTimer++;
         p2shootTimer++;
-		movementTimer++;
-		if(movementTimer > 180) {		
-			movementType = Math.floor((Math.random() * 4));
-			movementTimer = 0;
-		}
-
-        moveCharInverted(movementType);
+        moveChar();
         shootBullet();
         pushblock.body.velocity.x = 0;
         pushblock.body.velocity.y = 0;
-
-            if(p1Touched == true && p2Touched == true){
-                levelTimer++;
-            if( levelTimer >= levelDelay){
-                p1Touched = false;
-                p2Touched = false;
-                levelTimer = 0;
-                var levelComplete = game.add.audio('levelComplete', .1, false);
-                levelComplete.loop = false;
-                levelComplete.play();
-                levelComplete.totalDuration = .2;
-                game.state.start('menu');
-            }
     }
 }
-}
+

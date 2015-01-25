@@ -84,7 +84,7 @@ function createBullet(player, playerDir){
     var bulletSpeed = 800;
     if(player == player1){
 
-        var bullet = p1bullets.create(player1.x, player1.y, 'star');
+        var bullet = p1bullets.create(player1.x, player1.y, 'bullet');
             switch(playerDir){
                 case 'left':
                 bullet.body.velocity.x -= bulletSpeed;
@@ -105,7 +105,7 @@ function createBullet(player, playerDir){
         
     }
     if(player == player2){
-        var bullet = p2bullets.create(player2.x, player2.y, 'star');
+        var bullet = p2bullets.create(player2.x, player2.y, 'bullet');
         switch(playerDir){
                 case 'left':
                 bullet.body.velocity.x -= bulletSpeed;

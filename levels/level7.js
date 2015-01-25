@@ -1,9 +1,6 @@
-gameStates.level4 = function(){};
-var player1ScoreText;
-var player2ScoreText;
-var updateTimer;
+gameStates.level7 = function(){};
 
-gameStates.level4.prototype = {
+gameStates.level7.prototype = {
 
     // Preload all assets
     preload : function() {
@@ -11,8 +8,8 @@ gameStates.level4.prototype = {
         game.load.image('background', 'assets/background.jpg');
         game.load.image('ground', 'assets/ground.png');
         game.load.image('star', 'assets/star.png');
-        game.load.image('bullet', 'assets/bullet.png');
         game.load.image('exit', 'assets/exit.png');
+        game.load.image('bullet', 'assets/bullet.png');
         game.load.image('player1', 'assets/player1.png');
         game.load.image('player2', 'assets/player2.png');
         game.load.image('player1_tank', 'assets/player1_tank.png');
@@ -31,7 +28,7 @@ gameStates.level4.prototype = {
     },
 
     create : function() {
-		updateTimer = 0;
+
         //  We're going to be using physics, so enable the Arcade Physics system
         game.physics.startSystem(Phaser.Physics.ARCADE);
 
@@ -107,8 +104,8 @@ gameStates.level4.prototype = {
         exits.enableBody = true;
 
         //  The score
-        player1ScoreText = game.add.text(16, 16, 'Player 1 Score: ' + player1Score, { fontSize: '32px', fill: '#000' });
-		player2ScoreText = game.add.text(game.world.width - 260, 16, 'Player 2 Score: ' + player2Score, { fontSize: '32px', fill: '#000' });
+        scoreText = game.add.text(16, 16, 'Player 1 Score: ' + player1Score, { fontSize: '32px', fill: '#000' });
+		scoreText = game.add.text(game.world.width - 260, 16, 'Player 2 Score: ' + player2Score, { fontSize: '32px', fill: '#000' });
 
         //  Our controls.
         cursors = game.input.keyboard.createCursorKeys();
@@ -165,24 +162,18 @@ gameStates.level4.prototype = {
         game.physics.arcade.overlap(player1, exits, hitExit, null, this);
         game.physics.arcade.overlap(player2, exits, hitExit, null, this);
         */
-		updateTimer++;
-		if(updateTimer >= 10) {
-			player1ScoreText.setText('Player 1 Score: ' + player1Score);
-			player2ScoreText.setText('Player 2 Score: ' + player2Score);
-			updateTimer = 0;
-		}
-		
+
         p1shootTimer++;
         p2shootTimer++;
         moveChar();
         shootBullet();    
 
-        if (player1Score >= 200 || player2Score >= 200) {
+        if (score >=5000) {
             var levelComplete = game.add.audio('levelComplete', .1, false);
             levelComplete.loop = false;
             levelComplete.play();
             levelComplete.totalDuration = .2;
-            game.state.start('level6');
+            game.state.start('level9');
         }    
     }
 }

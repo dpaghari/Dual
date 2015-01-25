@@ -4,8 +4,9 @@ function collectStar (player, star) {
     star.kill();
 
     //  Add and update the score
-    score += 10;
-    scoreText.text = 'Score: ' + score;
-
-    console.log ('rekt');
+    if(player == player1) {
+		player1Score += 10;
+	} else {
+		player2Score += 10;
+	}
 }

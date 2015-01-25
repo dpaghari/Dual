@@ -13,6 +13,7 @@ gameStates.level3.prototype = {
         game.load.image('background', 'assets/background.jpg');
         game.load.image('ground', 'assets/ground.png');
         game.load.image('star', 'assets/star.png');
+        game.load.image('bullet', 'assets/bullet.png');
         game.load.image('exit', 'assets/exit.png');
         game.load.image('player1', 'assets/player1.png');
         game.load.image('player2', 'assets/player2.png');
@@ -106,14 +107,21 @@ gameStates.level3.prototype = {
         game.physics.arcade.overlap(pushblock, buttons, blockExit, null, this);
         game.physics.arcade.overlap(player1, exits, hitExit, touchedExit, this);
         game.physics.arcade.overlap(player2, exits, hitExit, touchedExit, this);
-        
-        if(buttonActivated == true){
+       
+
+       if(buttonActivated == true){
             if(doorMade == false){
-            var exitDoor;
-            exitDoor = exits.create(300, 10, 'exit');
-            doorMade == true;
+            
+            exitDoor = exits.create(30, 300, 'exit');
+            doorMade = true;
             }
             buttonActivated = false;
+        }
+        else{
+            if(doorMade == true){
+                exitDoor.destroy();
+                doorMade = false;
+            }
         }
 
         if(p1Touched == true || p2Touched == true){
