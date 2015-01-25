@@ -128,15 +128,6 @@ gameStates.level2.prototype = {
             }
         }
 
-        /*
-        if (game.time.now - timeCheck > 2000) {
-            p1Touched = false;
-            p2Touched = false;
-            game.state.start('level3');
-        }
-        */
-
-        //levelTimer++;
         p1shootTimer++;
         p2shootTimer++;
         moveChar();
