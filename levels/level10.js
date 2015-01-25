@@ -132,6 +132,13 @@ gameStates.level10.prototype = {
         if(p1Touched == true || p2Touched == true){
             levelTimer++;
             if( levelTimer >= levelDelay){
+                if(p1Touched == true){
+                    player1Score += 50;
+
+                }
+                else{
+                    player2Score += 50;
+                }
                 p1Touched = false;
                 p2Touched = false;
                 levelTimer = 0;
