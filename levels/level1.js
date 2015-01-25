@@ -80,10 +80,7 @@ gameStates.level1.prototype = {
     update : function() {
 
         //  Collide the player and the stars with the platforms
-        game.physics.arcade.collide(player1, platforms);
-        game.physics.arcade.collide(player2, platforms);
         game.physics.arcade.collide(player1, player2);
-        game.physics.arcade.collide(stars, platforms);
         game.physics.arcade.collide(p1bullets, player2, destroyBullet);
         game.physics.arcade.collide(p2bullets, player1, destroyBullet);
         game.physics.arcade.collide(p1bullets, player2, hitPlayer);
