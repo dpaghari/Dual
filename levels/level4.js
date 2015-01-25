@@ -11,6 +11,8 @@ gameStates.level4.prototype = {
         game.load.image('exit', 'assets/exit.png');
         game.load.image('player1', 'assets/player1.png');
         game.load.image('player2', 'assets/player2.png');
+        game.load.image('player1_tank', 'assets/player1_tank.png');
+        game.load.image('player2_tank', 'assets/player2_tank.png');
         game.load.image('pushblock', 'assets/firstaid.png');
         game.load.image('block', 'assets/block.png');
 
@@ -46,8 +48,10 @@ gameStates.level4.prototype = {
 
 
         // The player and its settings
-        player1 = game.add.sprite(20, game.world.height - 325, 'player1');
-        player2 = game.add.sprite(750, game.world.height - 325, 'player2');
+        player1 = game.add.sprite(20, game.world.height - 325, 'player1_tank');
+        player2 = game.add.sprite(750, game.world.height - 325, 'player2_tank');
+        //player1.body.polygon.rotate.angle*Math.PI/180;
+        //player1.body.polygon.translate 0, player1.height;
 
         block1 = game.add.sprite(200, 50, 'block');
         block2 = game.add.sprite(200, 250, 'block');

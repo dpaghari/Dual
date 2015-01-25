@@ -56,43 +56,43 @@ function createBullet(player, playerDir){
     var bulletSpeed = 800;
     if(player == player1){
 
-    var bullet = p1bullets.create(player1.x, player1.y, 'star');
-        switch(playerDir){
-            case 'left':
-            bullet.body.velocity.x -= bulletSpeed;
-            break;
-            case 'right':
-            bullet.body.velocity.x += bulletSpeed;
-            break;
-            case 'up':
-            bullet.body.velocity.y -= bulletSpeed;
-            break;
-            case 'down':
-            bullet.body.velocity.y += bulletSpeed;
-            break;
+        var bullet = p1bullets.create(player1.x, player1.y, 'star');
+            switch(playerDir){
+                case 'left':
+                bullet.body.velocity.x -= bulletSpeed;
+                break;
+                case 'right':
+                bullet.body.velocity.x += bulletSpeed;
+                break;
+                case 'up':
+                bullet.body.velocity.y -= bulletSpeed;
+                break;
+                case 'down':
+                bullet.body.velocity.y += bulletSpeed;
+                break;
 
-        }
+            }
        
        
         
     }
     if(player == player2){
-    var bullet = p2bullets.create(player2.x, player2.y, 'star');
-    switch(playerDir){
-            case 'left':
-            bullet.body.velocity.x -= bulletSpeed;
-            break;
-            case 'right':
-            bullet.body.velocity.x += bulletSpeed;
-            break;
-            case 'up':
-            bullet.body.velocity.y -= bulletSpeed;
-            break;
-            case 'down':
-            bullet.body.velocity.y += bulletSpeed;
-            break;
+        var bullet = p2bullets.create(player2.x, player2.y, 'star');
+        switch(playerDir){
+                case 'left':
+                bullet.body.velocity.x -= bulletSpeed;
+                break;
+                case 'right':
+                bullet.body.velocity.x += bulletSpeed;
+                break;
+                case 'up':
+                bullet.body.velocity.y -= bulletSpeed;
+                break;
+                case 'down':
+                bullet.body.velocity.y += bulletSpeed;
+                break;
 
-    }
+        }
        
           
     }

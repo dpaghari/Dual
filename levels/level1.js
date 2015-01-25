@@ -95,6 +95,8 @@ gameStates.level1.prototype = {
         game.physics.arcade.collide(stars, platforms);
         game.physics.arcade.collide(p1bullets, player2, destroyBullet);
         game.physics.arcade.collide(p2bullets, player1, destroyBullet);
+        game.physics.arcade.collide(p1bullets, player2, hitPlayer);
+        game.physics.arcade.collide(p2bullets, player1, hitPlayer);
 
         //  Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
       
