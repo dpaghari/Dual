@@ -100,6 +100,8 @@ gameStates.level1.prototype = {
         game.physics.arcade.overlap(player2, exits, hitExit, touchedExit, this);
         
         if (game.time.now - timeCheck > 2000) {
+            p1Touched = false;
+            p2Touched = false;
             game.state.start('level2');
         }
         
