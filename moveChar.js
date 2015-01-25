@@ -185,7 +185,7 @@ function moveChar(){
             }
         }
         else{							// Player doesn't press a button/At rest
-            player2.body.drag.set(500, 500);
+            player2.body.drag.set(700, 700);
             player2.animations.stop();
         }
     }

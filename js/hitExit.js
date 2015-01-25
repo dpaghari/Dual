@@ -4,7 +4,7 @@ function hitExit (player, exit) {
     levelComplete.play();
     levelComplete.totalDuration = .2;
 
-	console.log ('Go to Level 2');
+	//console.log ('Go to Level 2');
     
     if (player == player1)
         p1Touched = true;
@@ -25,7 +25,7 @@ function touchedExit (player, exit) {
 }
 
 function blockExit(){
-    //game.state.start('level3');
+    
     buttonActivated = true;
 }
 

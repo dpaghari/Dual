@@ -10,7 +10,7 @@ gameStates.level2.prototype = {
     // Preload all assets
     preload : function() {
 
-        game.load.image('background', 'assets/background.png');
+        game.load.image('background', 'assets/background.jpg');
         game.load.image('ground', 'assets/ground.png');
         game.load.image('star', 'assets/star.png');
         game.load.image('exit', 'assets/exit.png');
@@ -116,11 +116,16 @@ gameStates.level2.prototype = {
             buttonActivated = false;
         }
 
-        if(p1Touched == true && p2Touched == true){
+        if(p1Touched == true || p2Touched == true){
 
             levelTimer++;
             console.log(levelTimer);
             if( levelTimer >= levelDelay){
+			if(p1Touched == true) {
+				player1Score += 50;
+			} else {
+				player2Score += 50;
+			}
             p1Touched = false;
             p2Touched = false;
             levelTimer = 0;
@@ -129,15 +134,6 @@ gameStates.level2.prototype = {
             }
         }
 
-        /*
-        if (game.time.now - timeCheck > 2000) {
-            p1Touched = false;
-            p2Touched = false;
-            game.state.start('level3');
-        }
-        */
-
-        //levelTimer++;
         p1shootTimer++;
         p2shootTimer++;
         moveChar();

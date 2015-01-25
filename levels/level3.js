@@ -1,22 +1,31 @@
+var buttonActivated;
+var doorMade;
+
 gameStates.level3 = function(){};
 
 gameStates.level3.prototype = {
 
+
+
     // Preload all assets
     preload : function() {
 
-        game.load.image('background', 'assets/background.png');
+        game.load.image('background', 'assets/background.jpg');
         game.load.image('ground', 'assets/ground.png');
         game.load.image('star', 'assets/star.png');
         game.load.image('exit', 'assets/exit.png');
         game.load.image('player1', 'assets/player1.png');
         game.load.image('player2', 'assets/player2.png');
         game.load.image('pushblock', 'assets/firstaid.png');
+        game.load.image('button', 'assets/diamond.png');
 
     },
 
     create : function() {
-
+        
+        
+        buttonActivated = false;
+        doorMade = false;
         //  We're going to be using physics, so enable the Arcade Physics system
         game.physics.startSystem(Phaser.Physics.ARCADE);
 
@@ -39,7 +48,7 @@ gameStates.level3.prototype = {
         // The player and its settings
         player1 = game.add.sprite(0, game.world.height - 150, 'player1');
         player2 = game.add.sprite(500, game.world.height - 150, 'player2');
-        //pushblock = game.add.sprite(game.world.width/2, game.world.height/2, 'pushblock');
+        pushblock = game.add.sprite(game.world.width/2, game.world.height/2, 'pushblock');
 
 
 
@@ -49,24 +58,27 @@ gameStates.level3.prototype = {
         //  We need to enable physics on the player
         game.physics.arcade.enable(player1);
         game.physics.arcade.enable(player2);
-        //game.physics.arcade.enable(pushblock);
+        game.physics.arcade.enable(pushblock);
 
         player1.body.collideWorldBounds = true;
         player2.body.collideWorldBounds = true;
-        //pushblock.body.collideWorldBounds = true;
+        pushblock.body.collideWorldBounds = true;
 
         //  Finally some stars to collect
         stars = game.add.group();
         p1bullets = game.add.group();
         p2bullets = game.add.group();
         exits = game.add.group();
-
+        buttons = game.add.group();
         //  We will enable physics for any star that is created in this group
         stars.enableBody = true;
         p1bullets.enableBody = true;
         p2bullets.enableBody = true;
         exits.enableBody = true;
-        var exit = exits.create(400, 400, 'exit');
+        buttons.enableBody = true;
+
+        var button = buttons.create(400, 400, 'button');
+        //var exit = exits.create(400, 400, 'exit');
 
         //  The score
         scoreText = game.add.text(16, 16, 'Player 1 Score: ' + player1Score, { fontSize: '32px', fill: '#000' });
@@ -88,33 +100,46 @@ gameStates.level3.prototype = {
         game.physics.arcade.collide(stars, platforms);
         game.physics.arcade.collide(p1bullets, player2, destroyBullet);
         game.physics.arcade.collide(p2bullets, player1, destroyBullet);
-        //game.physics.arcade.collide(player1, pushblock);
-        //game.physics.arcade.collide(player2, pushblock);
+        game.physics.arcade.collide(player1, pushblock);
+        game.physics.arcade.collide(player2, pushblock);
         //  Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
-        
-
-        //game.physics.arcade.overlap(pushblock, exits, blockExit, null, this);
-        
+        game.physics.arcade.overlap(pushblock, buttons, blockExit, null, this);
         game.physics.arcade.overlap(player1, exits, hitExit, touchedExit, this);
         game.physics.arcade.overlap(player2, exits, hitExit, touchedExit, this);
-          
-        if(p1Touched == true && p2Touched == true){
+        
+        if(buttonActivated == true){
+            if(doorMade == false){
+            var exitDoor;
+            exitDoor = exits.create(300, 10, 'exit');
+            doorMade == true;
+            }
+            buttonActivated = false;
+        }
+
+        if(p1Touched == true || p2Touched == true){
+
             levelTimer++;
             console.log(levelTimer);
             if( levelTimer >= levelDelay){
+			if(p1Touched == true) {
+				player2Score += 50;
+			} else {
+				player1Score += 50;
+			}
             p1Touched = false;
             p2Touched = false;
             levelTimer = 0;
-            game.state.start('level1');
+            game.state.start('level9');
             
             }
         }
-        
+
         p1shootTimer++;
         p2shootTimer++;
         moveChar();
         shootBullet();
-       
+        pushblock.body.velocity.x = 0;
+        pushblock.body.velocity.y = 0;
     }
 }
 

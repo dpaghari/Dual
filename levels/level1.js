@@ -7,7 +7,7 @@ gameStates.level1.prototype = {
     // Preload all assets
     preload : function() {
 
-        game.load.image('background', 'assets/background.png');
+        game.load.image('background', 'assets/background.jpg');
         game.load.image('ground', 'assets/ground.png');
         game.load.image('star', 'assets/star.png');
         game.load.image('exit', 'assets/exit.png');
@@ -81,9 +81,7 @@ gameStates.level1.prototype = {
     update : function() {
 
         //  Collide the player and the stars with the platforms
-      
         game.physics.arcade.collide(player1, player2);
-        
         game.physics.arcade.collide(p1bullets, player2, destroyBullet);
         game.physics.arcade.collide(p2bullets, player1, destroyBullet);
 

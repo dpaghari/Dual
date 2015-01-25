@@ -7,17 +7,18 @@
     <script type="text/javascript" src="hello.js"></script>
 	<script type="text/javascript" src="moveCharInverted.js"></script>
     <script type="text/javascript" src="moveChar.js"></script>
+    <script type="text/javascript" src="js/createRandomCoin.js"></script>
+    <script type="text/javascript" src="js/collectStar.js"></script>
     <script type="text/javascript" src="js/destroyBullet.js"></script>
     <script type="text/javascript" src="js/hitExit.js"></script>
     <script type="text/javascript" src="shootBullet.js"></script>
     <script type="text/javascript" src="levels/level1.js"></script>
     <script type="text/javascript" src="levels/level2.js"></script>
     <script type="text/javascript" src="levels/level3.js"></script>
+    <script type="text/javascript" src="levels/menu.js"></script>
 	<script type="text/javascript" src="levels/level9.js"></script>
 	<script type="text/javascript" src="levels/level10.js"></script>
 	<script type="text/javascript" src="levels/level11.js"></script>
-
-
     <style type="text/css">
         body {
             margin: 0;
@@ -28,8 +29,9 @@
 
 <script type="text/javascript">
 // Create Game Object
-var game = new Phaser.Game(800, 600, Phaser.AUTO, '', gameStates.level1);
+var game = new Phaser.Game(800, 600, Phaser.AUTO, '', gameStates.menu);
 
+game.state.add('menu', gameStates.menu);
 game.state.add('level1', gameStates.level1);
 game.state.add('level2', gameStates.level2);
 game.state.add('level3', gameStates.level3);
@@ -64,6 +66,8 @@ var player2Score = 0;
 var stars;
 var score = 0;
 var scoreText;
+
+        var box = new Phaser.Rectangle(0, 0, game.width/2, game.height/2);
 
 var exits;
 var buttons;

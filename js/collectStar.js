@@ -1,4 +1,4 @@
-function collectStar (player1, player2, star) {
+function collectStar (player, star) {
     
     // Removes the star from the screen
     star.kill();
