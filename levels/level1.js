@@ -80,7 +80,13 @@ gameStates.level1.prototype = {
     update : function() {
 
         //  Collide the player and the stars with the platforms
+<<<<<<< HEAD
         game.physics.arcade.collide(player1, player2);
+=======
+      
+        game.physics.arcade.collide(player1, player2);
+        
+>>>>>>> origin/master
         game.physics.arcade.collide(p1bullets, player2, destroyBullet);
         game.physics.arcade.collide(p2bullets, player1, destroyBullet);
 
@@ -96,6 +102,7 @@ gameStates.level1.prototype = {
             if( levelTimer >= levelDelay){
             p1Touched = false;
             p2Touched = false;
+
             levelTimer = 0;
             game.state.start('level2');
             
