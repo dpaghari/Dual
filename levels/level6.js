@@ -112,7 +112,7 @@ gameStates.level6.prototype = {
        if(buttonActivated == true){
             if(doorMade == false){
             
-            exitDoor = exits.create(30, 300, 'exit');
+            exitDoor = exits.create(600, 250, 'exit');
             doorMade = true;
             }
             buttonActivated = false;
