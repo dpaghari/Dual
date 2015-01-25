@@ -1,4 +1,5 @@
 gameStates.level10 = function(){};
+var darknessPhase;
 
 gameStates.level10.prototype = {
 
@@ -76,6 +77,7 @@ gameStates.level10.prototype = {
         //  Our controls.
 		lightTimer = 0;
 		dark = false;
+		darknessPhase = ((Math.random() + .5) * 130);
         cursors = game.input.keyboard.createCursorKeys();
         
     },
@@ -110,7 +112,8 @@ gameStates.level10.prototype = {
 			dark = true;
 			lightTimer = 0;
 			darkness = game.add.sprite(0, 0, 'darkness');
-		} else if(lightTimer > 120 && dark == true) {
+			darkness.alpha = 0.2;
+		} else if(lightTimer > darknessPhase && dark == true) {
 			//console.log("Lights On");
 			dark = false;
 			lightTimer = 0;
@@ -118,6 +121,10 @@ gameStates.level10.prototype = {
 			exits.enableBody = true;
 			exit.x = game.world.width * Math.random();
 			exit.y = game.world.height * Math.random(); 
+			darknessPhase = ((Math.random() + .5) * 130);
+		}
+		if(dark == true && lightTimer % 3 == 0 && darkness.alpha < 1) {
+			darkness.alpha += .1;		
 		}
 
         if(p1Touched == true || p2Touched == true){

@@ -108,7 +108,7 @@ gameStates.level1.prototype = {
                 var levelComplete = game.add.audio('levelComplete', .1, false);
                 levelComplete.loop = false;
                 levelComplete.play();
-                levelComplete.totalDuration = .2;
+                levelComplete.totalDuration = .3;
                 game.state.start('level2');
             }
         }
