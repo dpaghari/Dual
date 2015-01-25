@@ -123,7 +123,7 @@ gameStates.level2.prototype = {
             p1Touched = false;
             p2Touched = false;
             levelTimer = 0;
-            game.state.start('level3');
+            game.state.start('level4');
             
             }
         }
