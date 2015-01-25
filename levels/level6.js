@@ -14,6 +14,17 @@ gameStates.level6.prototype = {
         game.load.image('player1', 'assets/player1.png');
         game.load.image('player2', 'assets/player2.png');
         game.load.image('lvl6platforms', 'assets/lvl6platforms.png');
+
+        game.load.audio('collect', 'assets/sounds/collect.mp3');
+        game.load.audio('death', 'assets/sounds/death.mp3');
+        game.load.audio('interact', 'assets/sounds/interact.mp3');
+        game.load.audio('levelComplete', 'assets/sounds/levelComplete.mp3');
+        game.load.audio('song', 'assets/sounds/song.mp3');
+        game.load.audio('moving', 'assets/sounds/moving.mp3');
+
+
+        //  Load the Google WebFont Loader script
+        game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
     },
 
     create : function() {
@@ -55,9 +66,12 @@ gameStates.level6.prototype = {
        
         p1bullets.enableBody = true;
         p2bullets.enableBody = true;
+        
         //  The score
-        scoreText = game.add.text(100, 16, 'P1: ' + player1Score, { fontSize: '32px', fill: '#000' });
-		scoreText = game.add.text(game.world.width - 160, 16, 'P2: ' + player2Score, { fontSize: '32px', fill: '#000' });
+        player1ScoreText = game.add.text(100, 16, 'P1: ' + player1Score, { fontSize: '32px', fill: '#FFF'});
+        player1ScoreText.font = 'Lato';
+        player2ScoreText = game.add.text(game.world.width - 160, 16, 'P2: ' + player2Score, { fontSize: '32px', fill: '#FFF'});
+        player2ScoreText.font = 'Lato';
 
     },
 
