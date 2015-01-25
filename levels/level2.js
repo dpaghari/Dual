@@ -1,6 +1,11 @@
+var buttonActivated;
+var doorMade;
+
 gameStates.level2 = function(){};
 
 gameStates.level2.prototype = {
+
+
 
     // Preload all assets
     preload : function() {
@@ -12,11 +17,15 @@ gameStates.level2.prototype = {
         game.load.image('player1', 'assets/player1.png');
         game.load.image('player2', 'assets/player2.png');
         game.load.image('pushblock', 'assets/firstaid.png');
+        game.load.image('button', 'assets/diamond.png');
 
     },
 
     create : function() {
-
+        
+        
+        buttonActivated = false;
+        doorMade = false;
         //  We're going to be using physics, so enable the Arcade Physics system
         game.physics.startSystem(Phaser.Physics.ARCADE);
 
@@ -60,13 +69,16 @@ gameStates.level2.prototype = {
         p1bullets = game.add.group();
         p2bullets = game.add.group();
         exits = game.add.group();
-
+        buttons = game.add.group();
         //  We will enable physics for any star that is created in this group
         stars.enableBody = true;
         p1bullets.enableBody = true;
         p2bullets.enableBody = true;
         exits.enableBody = true;
-        var exit = exits.create(400, 400, 'exit');
+        buttons.enableBody = true;
+
+        var button = buttons.create(400, 400, 'button');
+        //var exit = exits.create(400, 400, 'exit');
 
         //  The score
         scoreText = game.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
@@ -90,20 +102,46 @@ gameStates.level2.prototype = {
         game.physics.arcade.collide(player1, pushblock);
         game.physics.arcade.collide(player2, pushblock);
         //  Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
+        game.physics.arcade.overlap(pushblock, buttons, blockExit, null, this);
+        game.physics.arcade.overlap(player1, exits, hitExit, touchedExit, this);
+        game.physics.arcade.overlap(player2, exits, hitExit, touchedExit, this);
         
+        if(buttonActivated == true){
+            if(doorMade == false){
+            var exitDoor;
+            exitDoor = exits.create(300, 10, 'exit');
+            doorMade == true;
+            }
+            buttonActivated = false;
+        }
 
-        game.physics.arcade.overlap(pushblock, exits, blockExit, null, this);
+        if(p1Touched == true && p2Touched == true){
+
+            levelTimer++;
+            console.log(levelTimer);
+            if( levelTimer >= levelDelay){
+            p1Touched = false;
+            p2Touched = false;
+            levelTimer = 0;
+            game.state.start('level3');
+            
+            }
+        }
+
         /*
-        game.physics.arcade.overlap(player1, exits, hitExit, null, this);
-        game.physics.arcade.overlap(player2, exits, hitExit, null, this);
+        if (game.time.now - timeCheck > 2000) {
+            p1Touched = false;
+            p2Touched = false;
+            game.state.start('level3');
+        }
         */
 
+        //levelTimer++;
         p1shootTimer++;
         p2shootTimer++;
         moveChar();
         shootBullet();
         pushblock.body.velocity.x = 0;
-        
         pushblock.body.velocity.y = 0;
     }
 }
