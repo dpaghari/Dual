@@ -1,6 +1,8 @@
 gameStates.level12 = function(){};
 var player1ScoreText;
 var player2ScoreText;
+var player1HealthText;
+var player2HealthText;
 var updateTimer;
 var player1HP;
 var player2HP;
@@ -42,7 +44,7 @@ gameStates.level12.prototype = {
         game.physics.startSystem(Phaser.Physics.ARCADE);
 		player1HP = 10;
 		player2HP = 10;
-		bossHP = 100;
+		bossHP = 60;
 		bossShootTimer = 0;
 
         //  A simple background for our game
@@ -64,7 +66,9 @@ gameStates.level12.prototype = {
         // The player and its settings
         player1 = game.add.sprite(20, game.world.height - 325, 'player1_tank');
         player2 = game.add.sprite(750, game.world.height - 325, 'player2_tank');
-		boss = game.add.sprite(350, game.world.height - 100, 'player2_tank');
+		boss = game.add.sprite(16, 16, 'player2_tank');
+		boss.width = 800;
+		
         //player1.body.polygon.rotate.angle*Math.PI/180;
         //player1.body.polygon.translate 0, player1.height;
 		/*
@@ -125,9 +129,11 @@ gameStates.level12.prototype = {
         exits.enableBody = true;
 
         //  The score
-        player1ScoreText = game.add.text(100, 16, 'Player 1 Score: ' + player1Score, { fontSize: '32px', fill: '#000' });
-		player2ScoreText = game.add.text(game.world.width - 160, 16, 'Player 2 Score: ' + player2Score, { fontSize: '32px', fill: '#000' });
-
+        player1ScoreText = game.add.text(100, 16, 'P1: ' + player1Score, { fontSize: '32px', fill: '#000' });
+		player2ScoreText = game.add.text(game.world.width - 160, 16, 'P2: ' + player2Score, { fontSize: '32px', fill: '#000' });
+		player1HealthText = game.add.text(100, 46, 'P1HP: ' + player1HP, { fontSize: '32px', fill: '#000' });
+		player2HealthText = game.add.text(game.world.width - 160, 46, 'P2HP: ' + player2HP, { fontSize: '32px', fill: '#000' });
+		boss.body.velocity.y += 20;
         //  Our controls.
         cursors = game.input.keyboard.createCursorKeys();
     },
@@ -144,6 +150,8 @@ gameStates.level12.prototype = {
 		
 		game.physics.arcade.collide(boss, p1bullets, hitBoss);
 		game.physics.arcade.collide(boss, p2bullets, hitBoss);
+		game.physics.arcade.collide(boss, player1, collideWithBoss);
+		game.physics.arcade.collide(boss, player2, collideWithBoss);
 		game.physics.arcade.collide(player1, bossBullets, hitPlayer);
 		game.physics.arcade.collide(player2, bossBullets, hitPlayer);
 		
@@ -195,6 +203,8 @@ gameStates.level12.prototype = {
 		if(updateTimer >= 10) {
 			player1ScoreText.setText('P1: ' + player1Score);
 			player2ScoreText.setText('P2: ' + player2Score);
+			player1HealthText.setText('P1HP: ' + player1HP);
+			player2HealthText.setText('P2HP: ' + player2HP);
 			updateTimer = 0;
 		}
 		
@@ -204,17 +214,33 @@ gameStates.level12.prototype = {
         moveChar();
         shootBullet();    
 		
-		if(bossShootTimer > 20) {
+		if(bossShootTimer > 7) {
 			bossShootTimer = 0;
 			bossShoot();
 		}
-
-        if (bossHP <= 50) {
+		if(boss.body.velocity.y >= 20) {
+			boss.body.velocity.y -= 1;
+		}
+		if(boss.body.velocity.y <= 100) {
+			boss.body.velocity.y += 20;
+		}
+		if(player1HP <= 0 || player2HP <= 0) {
+			player1HealthText.setText('P1HP: ' + player1HP);
+			player2HealthText.setText('P2HP: ' + player2HP);
+			lossText = game.add.text(350, 300, 'You Lose', { fontSize: '64px', fill: '#000' });
+			var levelComplete = game.add.audio('levelComplete', .1, false);
+			levelComplete.loop = false;
+            levelComplete.play();
+            levelComplete.totalDuration = .2;
+            game.state.start('level12');
+		}
+        if (bossHP <= 0) {
             var levelComplete = game.add.audio('levelComplete', .1, false);
+			winText = game.add.text(350, 300, 'You Win!', { fontSize: '64px', fill: '#000' });
             levelComplete.loop = false;
             levelComplete.play();
             levelComplete.totalDuration = .2;
-            game.state.start('level1');
+            game.state.start('menu');
         }    
     }
 }

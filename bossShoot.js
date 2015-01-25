@@ -9,9 +9,9 @@ function bossShoot(){
     shoot.totalDuration = .2;
     //Shoot();
     console.log("Boss Shooting");
-	var bulletSpeed = 800;
+	var bulletSpeed = 400;
 	var xPos = game.world.width * Math.random();
-	var yPos = boss.y;
+	var yPos = boss.y + 20;
     var bullet = bossBullets.create(xPos, yPos, 'bullet');
     bullet.body.velocity.y += bulletSpeed;
 }
