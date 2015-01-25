@@ -96,12 +96,10 @@ function moveChar(){
             }
         }
         else{							// If player1 doesn't press a button/at rest
-                player1.body.drag.set(500, 500);
+                player1.body.drag.set(700, 700);
                 player1.animations.stop();
             }
     }
-    
-
 
     // Player 2 Movement
     var Ikey = game.input.keyboard.addKey(Phaser.Keyboard.I);
