@@ -12,9 +12,11 @@
     <script type="text/javascript" src="js/destroyBullet.js"></script>
     <script type="text/javascript" src="js/hitExit.js"></script>
     <script type="text/javascript" src="shootBullet.js"></script>
+    <script type="text/javascript" src="js/hitPlayer.js"></script>
     <script type="text/javascript" src="levels/level1.js"></script>
     <script type="text/javascript" src="levels/level2.js"></script>
     <script type="text/javascript" src="levels/level3.js"></script>
+    <script type="text/javascript" src="levels/level4.js"></script>
     <script type="text/javascript" src="levels/menu.js"></script>
 	<script type="text/javascript" src="levels/level9.js"></script>
 	<script type="text/javascript" src="levels/level10.js"></script>
@@ -35,6 +37,7 @@ game.state.add('menu', gameStates.menu);
 game.state.add('level1', gameStates.level1);
 game.state.add('level2', gameStates.level2);
 game.state.add('level3', gameStates.level3);
+game.state.add('level4', gameStates.level4);
 game.state.add('level9', gameStates.level9);
 game.state.add('level10', gameStates.level10);
 game.state.add('level11', gameStates.level11);
@@ -60,6 +63,9 @@ var player2_dir = 'down';
 var platforms;
 var cursors;
 
+var player1Score = 0;
+var player2Score = 0;
+
 var stars;
 var score = 0;
 var scoreText;
@@ -69,7 +75,7 @@ var scoreText;
 var exits;
 var buttons;
 
-
+var isDead = false;
 
 </script>
 

@@ -17,6 +17,8 @@ gameStates.level1.prototype = {
         game.load.audio('death', 'assets/sounds/death.mp3');
         game.load.audio('interact', 'assets/sounds/interact.mp3');
         game.load.audio('levelComplete', 'assets/sounds/levelComplete.mp3');
+        game.load.audio('main_menu', 'assets/sounds/main_menu.mp3');
+        game.load.audio('main_menu_select', 'assets/sounds/main_menu_select.mp3');
         game.load.audio('song', 'assets/sounds/song.mp3');
         game.load.audio('shoot', 'assets/sounds/shoot.mp3');
         game.load.audio('moving', 'assets/sounds/moving.mp3');
@@ -70,7 +72,8 @@ gameStates.level1.prototype = {
         var exit = exits.create(400, 400, 'exit');
 
         //  The score
-        scoreText = game.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+        scoreText = game.add.text(16, 16, 'Player 1 Score: ' + player1Score, { fontSize: '32px', fill: '#000' });
+		scoreText = game.add.text(game.world.width - 260, 16, 'Player 2 Score: ' + player2Score, { fontSize: '32px', fill: '#000' });
 
         //  Our controls.
         cursors = game.input.keyboard.createCursorKeys();
@@ -83,6 +86,8 @@ gameStates.level1.prototype = {
         game.physics.arcade.collide(player1, player2);
         game.physics.arcade.collide(p1bullets, player2, destroyBullet);
         game.physics.arcade.collide(p2bullets, player1, destroyBullet);
+        game.physics.arcade.collide(p1bullets, player2, hitPlayer);
+        game.physics.arcade.collide(p2bullets, player1, hitPlayer);
 
         //  Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
       
@@ -92,14 +97,18 @@ gameStates.level1.prototype = {
         // Changes level after short delay
         if(p1Touched == true && p2Touched == true){
             levelTimer++;
-            console.log(levelTimer);
             if( levelTimer >= levelDelay){
-            p1Touched = false;
-            p2Touched = false;
-
-            levelTimer = 0;
-            game.state.start('level2');
-            
+    			player1Score += 50;
+    			player2Score += 50;
+                p1Touched = false;
+                p2Touched = false;
+                levelTimer = 0;
+                
+                var levelComplete = game.add.audio('levelComplete', .1, false);
+                levelComplete.loop = false;
+                levelComplete.play();
+                levelComplete.totalDuration = .2;
+                game.state.start('level2');
             }
         }
         

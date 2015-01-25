@@ -60,7 +60,10 @@ gameStates.level5.prototype = {
         player1.body.collideWorldBounds = true;
         player2.body.collideWorldBounds = true;
 
-        //  Our controls
+        //  The score
+        scoreText = game.add.text(16, 16, 'Player 1 Score: ' + player1Score, { fontSize: '32px', fill: '#000' });
+		scoreText = game.add.text(game.world.width - 260, 16, 'Player 2 Score: ' + player2Score, { fontSize: '32px', fill: '#000' });
+
         cursors = game.input.keyboard.createCursorKeys();
         
     },
@@ -74,16 +77,20 @@ gameStates.level5.prototype = {
         game.physics.arcade.overlap(player1, exits, hitExit, touchedExit, this);
         game.physics.arcade.overlap(player2, exits, hitExit, touchedExit, this);
 
-                // Changes level after short delay
+        // Changes level after short delay
         if(p1Touched == true || p2Touched == true){
             levelTimer++;
             if( levelTimer >= levelDelay){
-            p1Touched = false;
-            p2Touched = false;
-
-            levelTimer = 0;
-            game.state.start('menu');
+                p1Touched = false;
+                p2Touched = false;
+                levelTimer = 0;
+                game.state.start('menu');
             }
+
+            var levelComplete = game.add.audio('levelComplete', .1, false);
+            levelComplete.loop = false;
+            levelComplete.play();
+            levelComplete.totalDuration = .2;
         }
         
 

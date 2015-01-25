@@ -77,7 +77,8 @@ gameStates.level10.prototype = {
         exit = exits.create(400, 400, 'exit');
 
         //  The score
-        scoreText = game.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+        scoreText = game.add.text(16, 16, 'Player 1 Score: 0', { fontSize: '32px', fill: '#000' });
+		scoreText = game.add.text(game.world.width - 260, 16, 'Player 2 Score: 0', { fontSize: '32px', fill: '#000' });
 
         //  Our controls.
 		lightTimer = 0;
@@ -130,13 +131,15 @@ gameStates.level10.prototype = {
 
         if(p1Touched == true && p2Touched == true){
             levelTimer++;
-            //console.log(levelTimer);
             if( levelTimer >= levelDelay){
-            p1Touched = false;
-            p2Touched = false;
-            levelTimer = 0;
-            game.state.start('level11');
-            
+                p1Touched = false;
+                p2Touched = false;
+                levelTimer = 0;
+                var levelComplete = game.add.audio('levelComplete', .1, false);
+                levelComplete.loop = false;
+                levelComplete.play();
+                levelComplete.totalDuration = .2;
+                game.state.start('level11');
             }
         }
         p1shootTimer++;

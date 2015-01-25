@@ -84,7 +84,8 @@ gameStates.level11.prototype = {
         //var exit = exits.create(400, 400, 'exit');
 
         //  The score
-        scoreText = game.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+        scoreText = game.add.text(16, 16, 'Player 1 Score: ' + player1Score, { fontSize: '32px', fill: '#000' });
+		scoreText = game.add.text(game.world.width - 260, 16, 'Player 2 Score: ' + player2Score, { fontSize: '32px', fill: '#000' });
 
         //  Our controls.
         cursors = game.input.keyboard.createCursorKeys();
@@ -112,12 +113,13 @@ gameStates.level11.prototype = {
         
         if(buttonActivated == true){
             if(doorMade == false){
-            var exitDoor;
-            exitDoor = exits.create(300, 10, 'exit');
-            doorMade == true;
+                var exitDoor;
+                exitDoor = exits.create(300, 10, 'exit');
+                doorMade == true;
             }
             buttonActivated = false;
         }
+
         p1shootTimer++;
         p2shootTimer++;
 		movementTimer++;
@@ -125,22 +127,24 @@ gameStates.level11.prototype = {
 			movementType = Math.floor((Math.random() * 4));
 			movementTimer = 0;
 		}
+
         moveCharInverted(movementType);
         shootBullet();
         pushblock.body.velocity.x = 0;
         pushblock.body.velocity.y = 0;
 
-        if(p1Touched == true && p2Touched == true){
-            levelTimer++;
-            //console.log(levelTimer);
+            if(p1Touched == true && p2Touched == true){
+                levelTimer++;
             if( levelTimer >= levelDelay){
-            p1Touched = false;
-            p2Touched = false;
-            levelTimer = 0;
-            game.state.start('level1');
-            
+                p1Touched = false;
+                p2Touched = false;
+                levelTimer = 0;
+                var levelComplete = game.add.audio('levelComplete', .1, false);
+                levelComplete.loop = false;
+                levelComplete.play();
+                levelComplete.totalDuration = .2;
+                game.state.start('menu');
             }
-        }
     }
 }
 

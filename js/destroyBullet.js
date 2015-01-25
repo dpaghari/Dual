@@ -1,6 +1,6 @@
 function destroyBullet (player, bullet) {
     
-    // Removes the star from the screen
+    // Removes the bullet from the screen
     bullet.kill();
 
     score += 500;
