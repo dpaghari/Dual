@@ -141,7 +141,7 @@ gameStates.level6.prototype = {
             levelComplete.loop = false;
             levelComplete.play();
             levelComplete.totalDuration = .2;
-            game.state.start('level9');
+            game.state.start('level7');
             
             }
         }
