@@ -122,7 +122,7 @@ gameStates.level2.prototype = {
                 doorMade = false;
             }
         }
-        console.log(buttonActivated);
+        //console.log(buttonActivated);
 
 
         if(p1Touched == true || p2Touched == true){
