@@ -42,11 +42,6 @@ gameStates.level1.prototype = {
         this.scale.pageAlignVertically = true;
         this.scale.setScreenSize(true);
         
-        //  The platforms group contains the ground and the 2 ledges we can jump on
-        platforms = game.add.group();
-
-        //  We will enable physics for any object that is created in this group
-        platforms.enableBody = true;
 
 
         // The player and its settings
@@ -64,13 +59,11 @@ gameStates.level1.prototype = {
         player2.body.collideWorldBounds = true;
 
         //  Finally some stars to collect
-        stars = game.add.group();
         p1bullets = game.add.group();
         p2bullets = game.add.group();
         exits = game.add.group();
 
         //  We will enable physics for any star that is created in this group
-        stars.enableBody = true;
         p1bullets.enableBody = true;
         p2bullets.enableBody = true;
         exits.enableBody = true;
@@ -85,14 +78,11 @@ gameStates.level1.prototype = {
     },
 
     update : function() {
-    
-        var delay = 1000;
 
         //  Collide the player and the stars with the platforms
-        game.physics.arcade.collide(player1, platforms);
-        game.physics.arcade.collide(player2, platforms);
+      
         game.physics.arcade.collide(player1, player2);
-        game.physics.arcade.collide(stars, platforms);
+        
         game.physics.arcade.collide(p1bullets, player2, destroyBullet);
         game.physics.arcade.collide(p2bullets, player1, destroyBullet);
 
@@ -101,10 +91,21 @@ gameStates.level1.prototype = {
         game.physics.arcade.overlap(player1, exits, hitExit, touchedExit, this);
         game.physics.arcade.overlap(player2, exits, hitExit, touchedExit, this);
         
-        if (game.time.now - timeCheck > delay) {
+        // Changes level after short delay
+        if(p1Touched == true && p2Touched == true){
+            levelTimer++;
+            console.log(levelTimer);
+            if( levelTimer >= levelDelay){
             p1Touched = false;
             p2Touched = false;
+<<<<<<< HEAD
             game.state.start('level1');
+=======
+            levelTimer = 0;
+            game.state.start('level2');
+            
+            }
+>>>>>>> 8bc523e0bc815f201887abc33deeabaabbaf02f0
         }
         
 
