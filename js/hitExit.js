@@ -5,7 +5,6 @@ function hitExit (player, exit) {
     levelComplete.totalDuration = .2;
 
 	console.log ('Go to Level 2');
-<<<<<<< HEAD
     if (player == player1)
         p1Touched = true;
     else
@@ -22,9 +21,5 @@ function touchedExit (player, exit) {
         if (p2Touched == true)
             return false;
     }
-=======
-	exit.kill();
 
-    game.state.start('level2');
->>>>>>> origin/master
 }
