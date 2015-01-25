@@ -17,11 +17,10 @@
     <script type="text/javascript" src="levels/level2.js"></script>
     <script type="text/javascript" src="levels/level3.js"></script>
     <script type="text/javascript" src="levels/level4.js"></script>
+    <script type="text/javascript" src="levels/menu.js"></script>
 	<script type="text/javascript" src="levels/level9.js"></script>
 	<script type="text/javascript" src="levels/level10.js"></script>
 	<script type="text/javascript" src="levels/level11.js"></script>
-
-
     <style type="text/css">
         body {
             margin: 0;
@@ -32,8 +31,9 @@
 
 <script type="text/javascript">
 // Create Game Object
-var game = new Phaser.Game(800, 600, Phaser.AUTO, '', gameStates.level1);
+var game = new Phaser.Game(800, 600, Phaser.AUTO, '', gameStates.menu);
 
+game.state.add('menu', gameStates.menu);
 game.state.add('level1', gameStates.level1);
 game.state.add('level2', gameStates.level2);
 game.state.add('level3', gameStates.level3);
@@ -66,6 +66,8 @@ var cursors;
 var stars;
 var score = 0;
 var scoreText;
+
+        var box = new Phaser.Rectangle(0, 0, game.width/2, game.height/2);
 
 var exits;
 var buttons;
