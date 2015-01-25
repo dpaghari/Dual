@@ -129,6 +129,18 @@ gameStates.level10.prototype = {
 			exit.x = game.world.width * Math.random();
 			exit.y = game.world.height * Math.random(); 
 		}
+
+        if(p1Touched == true && p2Touched == true){
+            levelTimer++;
+            console.log(levelTimer);
+            if( levelTimer >= levelDelay){
+            p1Touched = false;
+            p2Touched = false;
+            levelTimer = 0;
+            game.state.start('level11');
+            
+            }
+        }
         p1shootTimer++;
         p2shootTimer++;
         moveChar();
