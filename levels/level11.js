@@ -19,7 +19,7 @@ gameStates.level11.prototype = {
         game.load.image('exit', 'assets/exit.png');
         game.load.image('player1', 'assets/player1.png');
         game.load.image('player2', 'assets/player2.png');
-        game.load.image('pushblock', 'assets/firstaid.png');
+        game.load.image('pushblock', 'assets/pushblock.png');
         game.load.image('button', 'assets/diamond.png');
 
     },
