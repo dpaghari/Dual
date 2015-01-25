@@ -57,7 +57,6 @@ gameStates.level4.prototype = {
         block2 = game.add.sprite(200, 250, 'block');
         block3 = game.add.sprite(200, 350, 'block');
         block4 = game.add.sprite(200, 550, 'block');
-
         block5 = game.add.sprite(500, 50, 'block');
         block6 = game.add.sprite(500, 250, 'block');
         block7 = game.add.sprite(500, 350, 'block');
@@ -118,8 +117,22 @@ gameStates.level4.prototype = {
         game.physics.arcade.collide(player2, platforms);
         game.physics.arcade.collide(player1, player2);
         game.physics.arcade.collide(stars, platforms);
-        game.physics.arcade.collide(p1bullets, player2, destroyBullet);
-        game.physics.arcade.collide(p2bullets, player1, destroyBullet);
+        game.physics.arcade.collide(p1bullets, block1, hitBlock);
+        game.physics.arcade.collide(p2bullets, block1, hitBlock);
+        game.physics.arcade.collide(p1bullets, block2, hitBlock);
+        game.physics.arcade.collide(p2bullets, block2, hitBlock);
+        game.physics.arcade.collide(p1bullets, block3, hitBlock);
+        game.physics.arcade.collide(p2bullets, block3, hitBlock);
+        game.physics.arcade.collide(p1bullets, block4, hitBlock);
+        game.physics.arcade.collide(p2bullets, block4, hitBlock);
+        game.physics.arcade.collide(p1bullets, block5, hitBlock);
+        game.physics.arcade.collide(p2bullets, block5, hitBlock);
+        game.physics.arcade.collide(p1bullets, block6, hitBlock);
+        game.physics.arcade.collide(p2bullets, block6, hitBlock);
+        game.physics.arcade.collide(p1bullets, block7, hitBlock);
+        game.physics.arcade.collide(p2bullets, block7, hitBlock);
+        game.physics.arcade.collide(p1bullets, block8, hitBlock);
+        game.physics.arcade.collide(p2bullets, block8, hitBlock);
 
         game.physics.arcade.collide(player1, block1);
         game.physics.arcade.collide(player2, block1);
