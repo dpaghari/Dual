@@ -1,3 +1,7 @@
+var p1Plat;
+var p2Plat;
+var numPlayers;
+
 gameStates.level6 = function(){};
 
 gameStates.level6.prototype = {
@@ -5,30 +9,23 @@ gameStates.level6.prototype = {
     // Preload all assets
     preload : function() {
 
-        game.load.image('background', 'assets/background.jpg');
+        game.load.image('background', 'assets/darkness.png');
         game.load.image('bullet', 'assets/bullet.png');
         game.load.image('player1', 'assets/player1.png');
         game.load.image('player2', 'assets/player2.png');
-        game.load.image('pushblock', 'assets/pushblock.png');
-        game.load.image('button', 'assets/diamond.png');
-
-        game.load.audio('collect', 'assets/sounds/collect.mp3');
-        game.load.audio('death', 'assets/sounds/death.mp3');
-        game.load.audio('interact', 'assets/sounds/interact.mp3');
-        game.load.audio('levelComplete', 'assets/sounds/levelComplete.mp3');
-        game.load.audio('song', 'assets/sounds/song.mp3');
-        game.load.audio('shoot', 'assets/sounds/shoot.mp3');
-        game.load.audio('moving', 'assets/sounds/moving.mp3');     
- 
+        game.load.image('lvl6platforms', 'assets/lvl6platforms.png');
     },
 
     create : function() {
+        numPlayers = 2;
 
         //  We're going to be using physics, so enable the Arcade Physics system
         game.physics.startSystem(Phaser.Physics.ARCADE);
 
         //  A simple background for our game
         game.add.sprite(0, 0, 'background');
+        p1Plat = game.add.sprite(game.world.width/2-300, game.world.height/2 -50, 'lvl6platforms');
+        p2Plat = game.add.sprite(game.world.width/2+150, game.world.height/2 -50, 'lvl6platforms');
 
         //Adjust screen size
         this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
@@ -37,8 +34,8 @@ gameStates.level6.prototype = {
         this.scale.setScreenSize(true);
 
         // The player and its settings
-        player1 = game.add.sprite(0, game.world.height - 150, 'player1');
-        player2 = game.add.sprite(500, game.world.height - 150, 'player2');
+        player1 = game.add.sprite(p1Plat.x + p1Plat.width/2, p1Plat.y + p1Plat.height/2, 'player1');
+        player2 = game.add.sprite(p2Plat.x + p2Plat.width/2, p2Plat.y + p2Plat.height/2, 'player2');
 
         //  We need to enable physics on the player
         game.physics.arcade.enable(player1);
@@ -59,12 +56,14 @@ gameStates.level6.prototype = {
         p1bullets.enableBody = true;
         p2bullets.enableBody = true;
         //  The score
-        scoreText = game.add.text(16, 16, 'Player 1 Score: ' + player1Score, { fontSize: '32px', fill: '#000' });
-		scoreText = game.add.text(game.world.width - 260, 16, 'Player 2 Score: ' + player2Score, { fontSize: '32px', fill: '#000' });
+        scoreText = game.add.text(16, 16, 'P1: ' + player1Score, { fontSize: '32px', fill: '#000' });
+		scoreText = game.add.text(game.world.width - 160, 16, 'P2: ' + player2Score, { fontSize: '32px', fill: '#000' });
 
     },
 
     update : function() {
+
+        checkPlayerPositions();
   
         game.physics.arcade.collide(player1, player2);
         game.physics.arcade.collide(p1bullets, player2, destroyBullet);
@@ -74,7 +73,59 @@ gameStates.level6.prototype = {
         p2shootTimer++;
         moveChar();
         shootBullet();
+
+        if(numPlayers < 2){
+            var levelComplete = game.add.audio('levelComplete', .1, false);
+            levelComplete.loop = false;
+            levelComplete.play();
+            levelComplete.totalDuration = .2;
+            game.state.start('level9');
+        }
         
     }
+
 }
 
+function checkPlayerPositions(){
+
+
+    if(player1.x > p1Plat.x + p1Plat.width){
+        player1.kill();
+        numPlayers--;
+    }
+
+    else if(player1.x < p1Plat.x){
+        player1.kill();
+        numPlayers--;
+    }
+
+    else if(player1.y > p1Plat.y + p1Plat.height){
+        player1.kill();
+        numPlayers--;
+    }
+    else if(player1.y < p1Plat.y){
+        player1.kill();
+        numPlayers--;
+    }
+
+    if(player2.x > p2Plat.x + p2Plat.width){
+        player2.kill();
+        numPlayers--;
+    }
+
+    else if(player2.x < p2Plat.x){
+        player2.kill();
+        numPlayers--;
+    }
+
+    else if(player2.y > p2Plat.y + p2Plat.height){
+        player2.kill();
+        numPlayers--;
+    }
+    else if(player2.y < p2Plat.y){
+        player2.kill();
+        numPlayers--;
+    }
+
+
+}

@@ -1,9 +1,15 @@
-gameStates.level4 = function(){};
+gameStates.level12 = function(){};
 var player1ScoreText;
 var player2ScoreText;
 var updateTimer;
+var player1HP;
+var player2HP;
+var bossHP;
+var boss;
+var bossBullets;
+var bossShootTimer;
 
-gameStates.level4.prototype = {
+gameStates.level12.prototype = {
 
     // Preload all assets
     preload : function() {
@@ -17,7 +23,7 @@ gameStates.level4.prototype = {
         game.load.image('player2', 'assets/player2.png');
         game.load.image('player1_tank', 'assets/player1_tank.png');
         game.load.image('player2_tank', 'assets/player2_tank.png');
-        game.load.image('pushblock', 'assets/pushblock.png');
+        game.load.image('pushblock', 'assets/firstaid.png');
         game.load.image('block', 'assets/block.png');
 
         game.load.audio('collect', 'assets/sounds/collect.mp3');
@@ -34,6 +40,10 @@ gameStates.level4.prototype = {
 		updateTimer = 0;
         //  We're going to be using physics, so enable the Arcade Physics system
         game.physics.startSystem(Phaser.Physics.ARCADE);
+		player1HP = 10;
+		player2HP = 10;
+		bossHP = 100;
+		bossShootTimer = 0;
 
         //  A simple background for our game
         game.add.sprite(0, 0, 'background');
@@ -54,9 +64,10 @@ gameStates.level4.prototype = {
         // The player and its settings
         player1 = game.add.sprite(20, game.world.height - 325, 'player1_tank');
         player2 = game.add.sprite(750, game.world.height - 325, 'player2_tank');
+		boss = game.add.sprite(350, game.world.height - 100, 'player2_tank');
         //player1.body.polygon.rotate.angle*Math.PI/180;
         //player1.body.polygon.translate 0, player1.height;
-
+		/*
         block1 = game.add.sprite(200, 50, 'block');
         block2 = game.add.sprite(200, 250, 'block');
         block3 = game.add.sprite(200, 350, 'block');
@@ -65,6 +76,7 @@ gameStates.level4.prototype = {
         block6 = game.add.sprite(500, 250, 'block');
         block7 = game.add.sprite(500, 350, 'block');
         block8 = game.add.sprite(500, 550, 'block');
+		*/
 
         // Place the exit door in the world
         //exit = game.add.sprite(150, 5, 'exit');
@@ -72,7 +84,8 @@ gameStates.level4.prototype = {
         //  We need to enable physics on the player
         game.physics.arcade.enable(player1);
         game.physics.arcade.enable(player2);
-
+		game.physics.arcade.enable(boss);
+		/*
         game.physics.arcade.enable(block1);
         game.physics.arcade.enable(block2);
         game.physics.arcade.enable(block3);
@@ -81,10 +94,12 @@ gameStates.level4.prototype = {
         game.physics.arcade.enable(block6);
         game.physics.arcade.enable(block7);
         game.physics.arcade.enable(block8);
-
+		*/
         player1.body.collideWorldBounds = true;
         player2.body.collideWorldBounds = true;
-
+		boss.body.collideWorldBounds = true;
+	
+		/*
         block1.body.immovable = true;
         block2.body.immovable = true;
         block3.body.immovable = true;
@@ -93,22 +108,25 @@ gameStates.level4.prototype = {
         block6.body.immovable = true;
         block7.body.immovable = true;
         block8.body.immovable = true;
+		*/
 
         //  Finally some stars to collect
         stars = game.add.group();
         p1bullets = game.add.group();
         p2bullets = game.add.group();
+		bossBullets = game.add.group();
         exits = game.add.group();
 
         //  We will enable physics for any star that is created in this group
         stars.enableBody = true;
         p1bullets.enableBody = true;
         p2bullets.enableBody = true;
+		bossBullets.enableBody = true;
         exits.enableBody = true;
 
         //  The score
-        player1ScoreText = game.add.text(16, 16, 'P1: ' + player1Score, { fontSize: '32px', fill: '#000' });
-		player2ScoreText = game.add.text(game.world.width - 160, 16, 'P2: ' + player2Score, { fontSize: '32px', fill: '#000' });
+        player1ScoreText = game.add.text(16, 16, 'Player 1 Score: ' + player1Score, { fontSize: '32px', fill: '#000' });
+		player2ScoreText = game.add.text(game.world.width - 160, 16, 'Player 2 Score: ' + player2Score, { fontSize: '32px', fill: '#000' });
 
         //  Our controls.
         cursors = game.input.keyboard.createCursorKeys();
@@ -123,6 +141,13 @@ gameStates.level4.prototype = {
         game.physics.arcade.collide(stars, platforms);
         game.physics.arcade.collide(player1, p2bullets, destroyBullet);
         game.physics.arcade.collide(player2, p1bullets, destroyBullet);
+		
+		game.physics.arcade.collide(boss, p1bullets, hitBoss);
+		game.physics.arcade.collide(boss, p2bullets, hitBoss);
+		game.physics.arcade.collide(player1, bossBullets, hitPlayer);
+		game.physics.arcade.collide(player2, bossBullets, hitPlayer);
+		
+		/*
         game.physics.arcade.collide(p1bullets, block1, hitBlock);
         game.physics.arcade.collide(p2bullets, block1, hitBlock);
         game.physics.arcade.collide(p1bullets, block2, hitBlock);
@@ -156,6 +181,7 @@ gameStates.level4.prototype = {
         game.physics.arcade.collide(player2, block7);
         game.physics.arcade.collide(player1, block8);
         game.physics.arcade.collide(player2, block8);
+		*/
 
         //  Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
         
@@ -167,22 +193,23 @@ gameStates.level4.prototype = {
         */
 		updateTimer++;
 		if(updateTimer >= 10) {
-			player1ScoreText.setText('Player 1 Score: ' + player1Score);
-			player2ScoreText.setText('Player 2 Score: ' + player2Score);
+			player1ScoreText.setText('P1: ' + player1Score);
+			player2ScoreText.setText('P2: ' + player2Score);
 			updateTimer = 0;
 		}
 		
         p1shootTimer++;
         p2shootTimer++;
+		bossShootTimer++;
         moveChar();
         shootBullet();    
 
-        if (player1Score >= 200 || player2Score >= 200) {
+        if (bossHP <= 50) {
             var levelComplete = game.add.audio('levelComplete', .1, false);
             levelComplete.loop = false;
             levelComplete.play();
             levelComplete.totalDuration = .2;
-            game.state.start('level5');
+            game.state.start('level1');
         }    
     }
 }

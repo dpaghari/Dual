@@ -1,6 +1,8 @@
 var buttonActivated;
 var doorMade;
 var exitDoor;
+var randX;
+var randY;
 gameStates.level2 = function(){};
 
 gameStates.level2.prototype = {
@@ -18,7 +20,7 @@ gameStates.level2.prototype = {
         game.load.image('player1', 'assets/player1.png');
         game.load.image('player2', 'assets/player2.png');
         game.load.image('pushblock', 'assets/pushblock.png');
-        game.load.image('button', 'assets/diamond.png');
+        game.load.image('button', 'assets/switch.png');
         
         game.load.audio('collect', 'assets/sounds/collect.mp3');
         game.load.audio('death', 'assets/sounds/death.mp3');
@@ -27,8 +29,6 @@ gameStates.level2.prototype = {
         game.load.audio('song', 'assets/sounds/song.mp3');
         game.load.audio('shoot', 'assets/sounds/shoot.mp3');
         game.load.audio('moving', 'assets/sounds/moving.mp3');
-        game.load.image('button', 'assets/switch.png');
-
     },
 
     create : function() {
@@ -92,8 +92,8 @@ gameStates.level2.prototype = {
         //var exit = exits.create(400, 400, 'exit');
 
         //  The score
-        scoreText = game.add.text(16, 16, 'Player 1 Score: ' + player1Score, { fontSize: '32px', fill: '#000' });
-		scoreText = game.add.text(game.world.width - 260, 16, 'Player 2 Score: ' + player2Score, { fontSize: '32px', fill: '#000' });
+        scoreText = game.add.text(16, 16, 'P1: ' + player1Score, { fontSize: '32px', fill: '#000' });
+		scoreText = game.add.text(game.world.width - 160, 16, 'P2: ' + player2Score, { fontSize: '32px', fill: '#000' });
 
         //  Our controls.
         cursors = game.input.keyboard.createCursorKeys();
@@ -117,11 +117,12 @@ gameStates.level2.prototype = {
         game.physics.arcade.overlap(player2, exits, hitExit, touchedExit, this);
         
         if(buttonActivated == true){
-      
+        randX = Math.random() * 700;
+        randY = Math.random() * 500;
 
             if(doorMade == false){
             
-            exitDoor = exits.create(400, 50, 'exit');
+            exitDoor = exits.create(randX, randY, 'exit');
             doorMade = true;
             }
             buttonActivated = false;
