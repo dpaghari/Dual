@@ -121,7 +121,7 @@ gameStates.level9.prototype = {
 		}
 		 if(p1Touched == true && p2Touched == true){
             levelTimer++;
-            console.log(levelTimer);
+            //console.log(levelTimer);
             if( levelTimer >= levelDelay){
             p1Touched = false;
             p2Touched = false;

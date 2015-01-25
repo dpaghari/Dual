@@ -121,7 +121,7 @@ gameStates.level10.prototype = {
 			lightTimer = 0;
 			darkness = game.add.sprite(0, 0, 'darkness');
 		} else if(lightTimer > 120 && dark == true) {
-			console.log("Lights On");
+			//console.log("Lights On");
 			dark = false;
 			lightTimer = 0;
 			darkness.kill();
@@ -132,7 +132,7 @@ gameStates.level10.prototype = {
 
         if(p1Touched == true && p2Touched == true){
             levelTimer++;
-            console.log(levelTimer);
+            //console.log(levelTimer);
             if( levelTimer >= levelDelay){
             p1Touched = false;
             p2Touched = false;

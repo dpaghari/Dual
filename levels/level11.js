@@ -41,10 +41,10 @@ gameStates.level11.prototype = {
 		movementType = 1;
         
         //  The platforms group contains the ground and the 2 ledges we can jump on
-        platforms = game.add.group();
+        //platforms = game.add.group();
 
         //  We will enable physics for any object that is created in this group
-        platforms.enableBody = true;
+        //platforms.enableBody = true;
 
 
         // The player and its settings
@@ -96,10 +96,10 @@ gameStates.level11.prototype = {
     update : function() {
 
          //  Collide the player and the stars with the platforms
-        game.physics.arcade.collide(player1, platforms);
-        game.physics.arcade.collide(player2, platforms);
+        //game.physics.arcade.collide(player1, platforms);
+        //game.physics.arcade.collide(player2, platforms);
         game.physics.arcade.collide(player1, player2);
-        game.physics.arcade.collide(stars, platforms);
+        //game.physics.arcade.collide(stars, platforms);
         game.physics.arcade.collide(p1bullets, player2, destroyBullet);
         game.physics.arcade.collide(p2bullets, player1, destroyBullet);
         game.physics.arcade.collide(player1, pushblock);
@@ -132,7 +132,7 @@ gameStates.level11.prototype = {
 
              if(p1Touched == true && p2Touched == true){
             levelTimer++;
-            console.log(levelTimer);
+            //console.log(levelTimer);
             if( levelTimer >= levelDelay){
             p1Touched = false;
             p2Touched = false;
