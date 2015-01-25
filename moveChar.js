@@ -13,6 +13,9 @@ function moveChar(){
     // Parameters: song, volume (0-1), loop (boolean)
     var moving = game.add.audio('moving', .05, false);
 
+    /* 
+    * Current implementation of rotation
+    
     Wkey.onDown.add(function(Wkey) {
         // Set Anchor to the center of your sprite
         player1.anchor.setTo(1, 1);
@@ -39,6 +42,7 @@ function moveChar(){
 
     Akey.onDown.add(function(Akey) {
     }, this);
+    */
 
     if (p1Touched == false) {
 
@@ -134,6 +138,9 @@ function moveChar(){
 	var Kkey = game.input.keyboard.addKey(Phaser.Keyboard.K);
 	var Lkey = game.input.keyboard.addKey(Phaser.Keyboard.L);
 
+    /* 
+    * Current implementation of rotation
+
     Ikey.onDown.add(function(Ikey) {
         // Set Anchor to the center of your sprite
         player2.anchor.setTo(1, 1);
@@ -157,6 +164,7 @@ function moveChar(){
         player2.scale.y = 1;
 
     }, this);
+    */
 
     if (p2Touched == false) {
         if (Jkey.isDown)				// Move Left
