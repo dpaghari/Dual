@@ -25,6 +25,7 @@ function touchedExit (player, exit) {
 }
 
 function blockExit(){
-game.state.start('level2');
-
+    //game.state.start('level3');
+    buttonActivated = true;
 }
+
