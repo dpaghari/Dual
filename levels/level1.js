@@ -85,6 +85,8 @@ gameStates.level1.prototype = {
     },
 
     update : function() {
+    
+        var delay = 1000;
 
         //  Collide the player and the stars with the platforms
         game.physics.arcade.collide(player1, platforms);
@@ -99,7 +101,7 @@ gameStates.level1.prototype = {
         game.physics.arcade.overlap(player1, exits, hitExit, touchedExit, this);
         game.physics.arcade.overlap(player2, exits, hitExit, touchedExit, this);
         
-        if (game.time.now - timeCheck > 2000) {
+        if (game.time.now - timeCheck > delay) {
             p1Touched = false;
             p2Touched = false;
             game.state.start('level2');
