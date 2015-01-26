@@ -83,8 +83,7 @@ gameStates.level1.prototype = {
         p2bullets.enableBody = true;
         p1exits.enableBody = true;
         p2exits.enableBody = true;
-        //var exit = exits.create(400, 400, 'exit');
-          //p1exit
+
         p1exit = p1exits.create(100, 100, 'p1exit');
         p1exit.animations.add('active', [0, 1, 2, 3, 4], 10, true);
         

@@ -16,13 +16,12 @@ gameStates.level2.prototype = {
         game.load.image('ground', 'assets/ground.png');
         game.load.image('star', 'assets/star.png');
         game.load.image('bullet', 'assets/bullet.png');
-        game.load.image('exit', 'assets/exit.png');
+        game.load.spritesheet('exit', 'assets/exit.png', 45, 45);
         game.load.image('player1', 'assets/player1.png');
         game.load.image('player2', 'assets/player2.png');
         game.load.image('pushblock', 'assets/pushblock.png');
         game.load.image('button', 'assets/switch.png');
         game.load.image('clear', 'assets/clear.png');
-        
         game.load.audio('collect', 'assets/sounds/collect.mp3');
         game.load.audio('death', 'assets/sounds/death.mp3');
         game.load.audio('interact', 'assets/sounds/interact.mp3');
@@ -71,6 +70,10 @@ gameStates.level2.prototype = {
         exits.enableBody = true;
         buttons.enableBody = true;
 
+        exitDoor = exits.create(-100, -100, 'exit');
+        exitDoor.animations.add('active', [0, 1, 2, 3, 4], 10, true);
+        
+        
         var button = buttons.create(400, 400, 'button');
 
         // The player and its settings
@@ -110,6 +113,7 @@ gameStates.level2.prototype = {
     },
 
     update : function() {
+        exitDoor.animations.play('active');
 
          //  Collide the player and the stars with the platforms
         game.physics.arcade.collide(player1, platforms);
@@ -130,15 +134,17 @@ gameStates.level2.prototype = {
         randY = Math.random() * 500;
 
             if(doorMade == false){
-            
-            exitDoor = exits.create(randX, randY, 'exit');
-            doorMade = true;
+
+                exitDoor.x = randX;
+                exitDoor.y = randY;
+                doorMade = true;
             }
             buttonActivated = false;
         }
         else{
             if(doorMade == true){
-                exitDoor.destroy();
+                exitDoor.x = -100;
+                exitDoor.y = -100;
                 doorMade = false;
             }
         }
