@@ -216,8 +216,7 @@ gameStates.level3.prototype = {
             }
             
             if( levelTimer >= levelDelay){
-                player1Score += 50;
-                player2Score += 50;
+              
                 p1Touched = false;
                 p2Touched = false;
                 levelTimer = 0;
