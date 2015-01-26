@@ -6,7 +6,7 @@ gameStates.level5.prototype = {
     preload : function() {
 
         game.load.image('background', 'assets/backgrounds/White.jpg');
-        game.load.image('exit', 'assets/exit.png');
+        game.load.spritesheet('exit', 'assets/exit.png', 45, 45);
         game.load.image('player1', 'assets/player1.png');
         game.load.image('player2', 'assets/player2.png');
         game.load.image('block', 'assets/block.png');
@@ -41,6 +41,7 @@ gameStates.level5.prototype = {
         exits = game.add.group();
         exits.enableBody = true;
         exit = exits.create(600, 250, 'exit');
+        exit.animations.add('active', [0, 1, 2, 3, 4], 10, true);
         
         //Assign it so we can reference it 
         // Parameters: song, volume (0-1), loop (boolean)
@@ -94,7 +95,7 @@ gameStates.level5.prototype = {
     },
 
     update : function() {
-
+        exit.animations.play('active');
         //  Collide the players
         game.physics.arcade.collide(player1, player2, stap);
         player1.body.blocked.player2 = true;
@@ -163,8 +164,7 @@ gameStates.level5.prototype = {
                 clear.body.acceleration.y = 1000;
             }
 
-            
-            levelTimer++;
+           
             if ( levelTimer == 60 ) {
                 var levelComplete = game.add.audio('levelComplete', .1, false);
                 levelComplete.loop = false;

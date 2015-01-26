@@ -10,7 +10,7 @@ gameStates.level10.prototype = {
         game.load.image('ground', 'assets/ground.png');
         game.load.image('star', 'assets/star.png');
         game.load.image('bullet', 'assets/bullet.png');
-        game.load.image('exit', 'assets/exit.png');
+        game.load.spritesheet('exit', 'assets/exit.png', 45, 45);
         game.load.image('player1', 'assets/player1.png');
         game.load.image('player2', 'assets/player2.png');
         game.load.image('pushblock', 'assets/pushblock.png');
@@ -73,6 +73,7 @@ gameStates.level10.prototype = {
         p2bullets.enableBody = true;
         exits.enableBody = true;
         exit = exits.create(400, 400, 'exit');
+        exit.animations.add('active', [0, 1, 2, 3, 4], 10, true);
 
         //  The score
         scoreText = game.add.text(100, 16, 'P1: ' + player1Score, { fontSize: '32px', fill: '#FFF'});
@@ -92,7 +93,7 @@ gameStates.level10.prototype = {
     },
 
     update : function() {
-
+        exit.animations.play('active');
          //  Collide the player and the stars with the platforms
         
         game.physics.arcade.collide(player1, player2);

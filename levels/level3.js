@@ -16,7 +16,7 @@ gameStates.level3.prototype = {
         game.load.image('ground', 'assets/ground.png');
         game.load.image('star', 'assets/star.png');
         game.load.image('bullet', 'assets/bullet.png');
-        game.load.image('exit', 'assets/exit.png');
+        game.load.spritesheet('exit', 'assets/exit.png', 45, 45);
         game.load.image('player1', 'assets/player1.png');
         game.load.image('player2', 'assets/player2.png');
         game.load.image('pushblock', 'assets/pushblock.png');
@@ -74,6 +74,11 @@ gameStates.level3.prototype = {
         buttons.enableBody = true;
         blocks.enableBody = true;
 
+        
+        exitDoor = exits.create(-100, -100, 'exit');
+        exitDoor.animations.add('active', [0, 1, 2, 3, 4], 10, true);
+        
+        
         // The player and its settings
         player1 = game.add.sprite(0, game.world.height - 150, 'player1');
         player2 = game.add.sprite(500, game.world.height - 150, 'player2');
@@ -138,7 +143,7 @@ gameStates.level3.prototype = {
     },
 
     update : function() {
-
+        exitDoor.animations.play('active');
          //  Collide the player and the stars with the platforms
         game.physics.arcade.collide(player1, platforms);
         game.physics.arcade.collide(player2, platforms);
@@ -162,14 +167,16 @@ gameStates.level3.prototype = {
 
             if(doorMade == false){
             
-            exitDoor = exits.create(randX, randY, 'exit');
-            doorMade = true;
+                exitDoor.x = randX;
+                exitDoor.y = randY;
+                doorMade = true;
             }
             buttonActivated = false;
         }
         else{
             if(doorMade == true){
-                exitDoor.destroy();
+                exitDoor.x = -100;
+                exitDoor.y = -100;
                 doorMade = false;
             }
         }
