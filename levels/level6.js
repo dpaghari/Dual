@@ -36,9 +36,14 @@ gameStates.level6.prototype = {
 
         //  A simple background for our game
         game.add.sprite(0, 0, 'background');
-        p1Plat = game.add.sprite(game.world.width/2-300, game.world.height/2 -50, 'lvl6platforms');
-        p2Plat = game.add.sprite(game.world.width/2+150, game.world.height/2 -50, 'lvl6platforms');
-
+        p1Plat = game.add.sprite((game.world.width/2)-300, (game.world.height/2) -90, 'lvl6platforms');
+        p2Plat = game.add.sprite((game.world.width/2)+100, (game.world.height/2) -90, 'lvl6platforms');
+        /*
+        p1Plat.scale.x = 1.3;
+        p1Plat.scale.y = 1.3;
+        p2Plat.scale.x = 1.3;
+        p2Plat.scale.y = 1.3;
+        */
         //Adjust screen size
         this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         this.scale.pageAlignHorizontally = true;
@@ -46,8 +51,8 @@ gameStates.level6.prototype = {
         this.scale.setScreenSize(true);
 
         // The player and its settings
-        player1 = game.add.sprite(p1Plat.x + p1Plat.width/2, p1Plat.y + p1Plat.height/2, 'player1');
-        player2 = game.add.sprite(p2Plat.x + p2Plat.width/2, p2Plat.y + p2Plat.height/2, 'player2');
+        player1 = game.add.sprite(p1Plat.x + (p1Plat.width/2)-20, p1Plat.y + (p1Plat.height/2)-20, 'player1');
+        player2 = game.add.sprite(p2Plat.x + (p2Plat.width/2)-20, p2Plat.y + (p2Plat.height/2)-20, 'player2');
 
         //  We need to enable physics on the player
         game.physics.arcade.enable(player1);
@@ -135,40 +140,40 @@ gameStates.level6.prototype = {
 function checkPlayerPositions(){
 
 
-    if(player1.x > p1Plat.x + p1Plat.width){
+    if(player1.x > p1Plat.x + p1Plat.width + 30){
         player1.kill();
         numPlayers--;
     }
 
-    else if(player1.x < p1Plat.x){
+    else if(player1.x < p1Plat.x - 30){
         player1.kill();
         numPlayers--;
     }
 
-    else if(player1.y > p1Plat.y + p1Plat.height){
+    else if(player1.y > p1Plat.y + p1Plat.height + 30){
         player1.kill();
         numPlayers--;
     }
-    else if(player1.y < p1Plat.y){
+    else if(player1.y < p1Plat.y - 30){
         player1.kill();
         numPlayers--;
     }
 
-    if(player2.x > p2Plat.x + p2Plat.width){
+    if(player2.x > p2Plat.x + p2Plat.width + 30){
         player2.kill();
         numPlayers--;
     }
 
-    else if(player2.x < p2Plat.x){
+    else if(player2.x < p2Plat.x - 30){
         player2.kill();
         numPlayers--;
     }
 
-    else if(player2.y > p2Plat.y + p2Plat.height){
+    else if(player2.y > p2Plat.y + p2Plat.height + 30){
         player2.kill();
         numPlayers--;
     }
-    else if(player2.y < p2Plat.y){
+    else if(player2.y < p2Plat.y - 30){
         player2.kill();
         numPlayers--;
     }

@@ -1,7 +1,7 @@
 function moveChar(){
 
     var accel = 200;
-    var speed = 200;
+    var speed = 175;
 	// Player 1 Movement
 	
 	var Wkey = game.input.keyboard.addKey(Phaser.Keyboard.W);
