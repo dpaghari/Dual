@@ -33,7 +33,7 @@ gameStates.menu.prototype = {
         game_start.loop = false;
         game_start.play();
 
-        game.state.start('level1');
+        game.state.start('level4');
     },
     update : function() {
 
